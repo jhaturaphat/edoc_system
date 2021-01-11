@@ -1,3 +1,17 @@
+or create a new repository on the command line
+echo "# DUCPH" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add origin git@github.com:jhaturaphat/DUCPH.git
+git push -u origin master
+                
+or push an existing repository from the command line
+git remote add origin git@github.com:jhaturaphat/DUCPH.git
+git branch -M master
+git push -u origin master
+
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
