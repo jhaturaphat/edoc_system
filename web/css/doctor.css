@@ -1,0 +1,137 @@
+.content {
+    text-align: center;
+}
+div.content img{
+    float: left;
+    width: 100px;
+}
+
+.form-g{
+    display: flex;
+    color: #051078;
+}
+.form-ctl {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 4%;
+} 
+.input-g{
+    position: relative;
+}
+.input-g i{
+    position: absolute;
+    top: 5px;
+    right: 2px;
+}
+.input-g input{ 
+    width: 100%;
+    outline: 1px solid #051078;
+    border: none;
+    font-size: 25px;
+    align-items: baseline;
+}
+.input-g input::placeholder {
+    font-size: medium;
+  }
+.s-filter{
+    position: relative;
+    width: 90%; 
+    margin: 0 auto;
+}
+.s-filter-item{
+    background-color: #ffeff9;
+}
+.s-filter-item ul{
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding-inline-start: 0em; 
+    margin-block-start: 0em;
+    margin-block-end: 0em;    
+}   
+.s-filter-item li{   
+    display: inline-block;   
+    width: 90px; 
+    padding-left: 15px;
+}
+.s-filter-item ul:first-child{
+    padding-top: 15px;
+}
+.s-filter-item ul:last-child{
+    padding-top: 10px;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+.s-filter-item button{   
+    float: right;
+    margin: 0px 10px 10px 10px;
+    background-color: #fa79c9;
+    border: none;
+    color: white;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+.s-filter-item button:hover{
+    background-color: #f760bd;
+}
+
+/* ส่วนของ หมอ */
+.doctor{
+    width: 95%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.card-x{
+    position: relative;
+    width: 80%;   
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+.card-x img {
+    position: inherit;
+    margin: 0 auto;
+    width: 100%;    
+    padding: 0;
+}
+
+.card-x .profile{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 70px;    
+    bottom: 9%;
+    background-color:black;  
+    text-align: center;  
+    opacity: 0.5;
+    transition: all .5s;
+}
+.card-x img:hover ~ .profile, .card-x .profile:hover{
+    display: block;
+}
+
+
+
+@media only screen and (max-width: 480px) and (min-width: 320px){
+    .form-g{
+        display: grid;
+        width: 90%;
+    }
+    .form-ctl {
+        width: 100%;        
+        padding: 5px 4%;
+    } 
+    .content{
+        display: grid;
+    }
+    .content img{
+        margin: 0 auto;
+    }
+    .doctor{
+        grid-template-columns: 1fr;
+    }
+}
