@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\models\Doctor */
 
-$this->title = $model->id;
+$this->title = $model->prefix.' '.$model->fname_th.' '.$model->lname_th;
 $this->params['breadcrumbs'][] = ['label' => 'แพทย์', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

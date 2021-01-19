@@ -85,9 +85,10 @@ class DoctorController extends Controller
         && $docHasTimePeri->load(Yii::$app->request->post())
         && $docHasWorkDate->load(Yii::$app->request->post())) { 
 
-            // echo "<pre>";
-            // print_r(Yii::$app->request->bodyParams);            
-            // echo "</pre>";
+            echo "<pre>";
+            //print_r(Yii::$app->request->bodyParams);     
+            print_r($docHasBranch);       
+            echo "</pre>";
 
             $docProfile->imageFile = UploadedFile::getInstance($docProfile, 'imageFile');  
             //เริ่มต้น Transaction mysql
@@ -116,7 +117,8 @@ class DoctorController extends Controller
                     'doctor_has_work_date',['doctor_id', 'work_date_id'], $batchQuery2
                 )->execute();
 
-                $transaction->commit();           
+                //$transaction->commit(); 
+                $transaction->rollBack();          
 
             } catch (\Exception $e) {
                 $flag = false;
@@ -130,8 +132,8 @@ class DoctorController extends Controller
             }
 
             if($flag){
-                $docProfile->upload();
-                return $this->redirect(['view', 'id' => $model->id]);
+                //$docProfile->upload();
+                //return $this->redirect(['view', 'id' => $model->id]);
             }  
         }
 

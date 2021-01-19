@@ -20,7 +20,7 @@ use app\modules\models\TimePeriod;
 
     <div class="row">
         <div class="col-md-6">
-        <?php /*echo $form->field($docProfile, 'image')->widget(FileInput::classname(), [
+        <?php /*echo $form->field($docProfile, 'imageFile')->widget(FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
         'pluginOptions' => [
             'browseClass' => 'btn btn-info',
@@ -56,11 +56,11 @@ use app\modules\models\TimePeriod;
 
         <?php echo $form->field($docHasBranch, 'branch_id')->dropdownList(Branch::getDropDownList(),['prompt' => '--- เลือกสาขา ---']) ?>
 
-        <?php //echo $form->field($model, 'detail')->textarea(['rows' => 4]) ?>
+        <?php echo $form->field($model, 'detail')->textarea(['rows' => 4]) ?>
 
-        <?php //echo $form->field($docHasWorkDate, 'work_date_id[]')->checkBoxList(WorkDate::getcheckBoxList(), ['itemOptions' => ['labelOptions'=> ['style'=> 'margin-right: 15px']]]) ?>        
+        <?php echo $form->field($docHasWorkDate, 'work_date_id[]')->checkBoxList(WorkDate::getcheckBoxList(), ['itemOptions' => ['labelOptions'=> ['style'=> 'margin-right: 15px']]]) ?>        
 
-        <?php //echo $form->field($docHasTimePeri, 'time_period_id[]')->checkBoxList(TimePeriod::getcheckBoxList(), ['itemOptions' => ['labelOptions'=> ['style'=> 'margin-right: 15px']]]) ?>    
+        <?php echo $form->field($docHasTimePeri, 'time_period_id[]')->checkBoxList(TimePeriod::getcheckBoxList(), ['itemOptions' => ['labelOptions'=> ['style'=> 'margin-right: 15px']]]) ?>    
     </div>   
 
     <div class="form-group">

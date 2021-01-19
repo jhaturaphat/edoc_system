@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\models\DoctorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Doctors';
+$this->title = 'แพทย์';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctor-index">
