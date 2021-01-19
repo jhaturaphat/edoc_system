@@ -20,12 +20,12 @@ class AppAssetIndex extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'css/doctor.css',
-        'css/footer.css',
-        'css/mobile.css',
-        'css/slider.css',
-        'css/style.css'
+        'css/index/site.css',
+        'css/index/doctor.css',
+        'css/index/footer.css',
+        'css/index/mobile.css',
+        'css/index/slider.css',
+        'css/index/style.css'
     ];
     public $js = [
         'js/lib/FontAwesome.js'

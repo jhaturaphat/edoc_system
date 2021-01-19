@@ -5,18 +5,50 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name' => 'โรงพยาบาลสมเด็จพระยุพราชเดชอุดม',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'th_TH',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
     'modules' => [
+        'backend' => [
+            'class' => 'app\modules\backend\Doctor',
+        ],
+        'user' => [            
+            'class' => 'dektrium\user\Module',
+            'enableUnconfirmedLogin' => true,
+            'confirmWithin' => 21600,
+            'cost' => 12,
+            'admins' => ['admin'] // ผู้ใช้สูงสุด            
+        ],
         'admin' => [
-            'class' => 'app\modules\admin\Doctor',
+            'class' => 'mdm\admin\Module',
+            'layout' => 'left-menu',
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    //'userClassName' => 'app\models\User',
+                    'userClassName' => 'dektrium\user\models\User', 
+                    //เรียกใช้โมเดล user ของ dektrium
+                    //'idField' => 'id'
+                ]
+            ]
+                ],
+        'menus' => [
+            'assignment' => [
+                'label' => 'Grand Access' // change label
+            ],
+            'route' => null, // disable menu
         ],
     ],
-    'components' => [ 
+    'components' => [    
+        'authManager' => [
+            //'class' =>  'yii\rbac\PhpManager',
+            'class' =>  'yii\rbac\DbManager',
+        ],     
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'QIXz6QTIUhQO_klnPMuksO2O4rzm1bAB',
@@ -25,7 +57,8 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            //'identityClass' => 'app\models\User',
+            'identityClass' => 'dektrium\user\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -57,6 +90,14 @@ $config = [
         ],
         */
     ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            '*',
+            //'backend/*',
+            'some-controller/some-action',
+        ]
+        ],
     'params' => $params,
 ];
 

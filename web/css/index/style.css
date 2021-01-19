@@ -144,6 +144,10 @@ li{
 .show{
     display: block;
 }
+.nav-menu .right-login{
+    text-align: right;
+    margin-right: 15px;
+}
 .nav-menu .dropdown-menu{ 
     display: none;   
     position: absolute;
@@ -172,6 +176,8 @@ li{
 .nav-menu li:hover > .dropdown-menu{      
     display: block;    
 }
+
+
 
 /* menu-buttom */
 .menu-buttom {

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\modules\models;
 
 use Yii;
 
@@ -21,7 +21,7 @@ use Yii;
  * @property TimePeriod[] $timePeriods
  * @property DoctorHasWorkDate[] $doctorHasWorkDates
  * @property WorkDate[] $workDates
- * @property Profile[] $profiles
+ * @property DoctorProfile[] $doctorProfiles
  */
 class Doctor extends \yii\db\ActiveRecord
 {
@@ -40,6 +40,7 @@ class Doctor extends \yii\db\ActiveRecord
     {
         return [
             [['detail'], 'string'],
+            [['prefix', 'fname_th', 'lname_th', 'fname_en', 'lname_en'], 'required'],
             [['prefix', 'fname_th', 'lname_th', 'fname_en', 'lname_en'], 'string', 'max' => 45],
         ];
     }
@@ -52,10 +53,10 @@ class Doctor extends \yii\db\ActiveRecord
         return [
             'id' => 'รหัสแพทย์',
             'prefix' => 'คำนำหน้า',
-            'fname_th' => 'ชื่ออภาษาไทย',
-            'lname_th' => 'นามสกุลภาษาไทย',
-            'fname_en' => 'ชื่อภาษาอังกฤษ',
-            'lname_en' => 'นามสกุลภาษาอังกฤษ',
+            'fname_th' => 'ชื่อ(ภาษาไทย)',
+            'lname_th' => 'นามสกุล(ภาษาไทย)',
+            'fname_en' => 'ชื่อ(ภาษาอังกฤษ)',
+            'lname_en' => 'นามสกุล(ภาษาอังกฤษ)',
             'detail' => 'รายละเอียด',
         ];
     }
@@ -121,11 +122,11 @@ class Doctor extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Profiles]].
+     * Gets query for [[DoctorProfiles]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProfiles()
+    public function getDoctorProfiles()
     {
         return $this->hasMany(DoctorProfile::className(), ['doctor_id' => 'id']);
     }

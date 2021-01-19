@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Doctor */
+/* @var $model app\modules\models\Doctor */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Doctors', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'แพทย์', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'fname_en',
             'lname_en',
             'detail:ntext',
+            'doctorProfiles.email'
         ],
     ]) ?>
 

@@ -1,18 +1,18 @@
 <?php
 
-namespace app\modules\admin\controllers;
+namespace app\modules\backend\controllers;
 
 use Yii;
-use app\models\Doctor;
-use app\models\DoctorSearch;
+use app\modules\models\DoctorProfile;
+use app\modules\models\DoctorProfileSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DoctorController implements the CRUD actions for Doctor model.
+ * DoctorProfileController implements the CRUD actions for DoctorProfile model.
  */
-class DoctorController extends Controller
+class DoctorProfileController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class DoctorController extends Controller
     }
 
     /**
-     * Lists all Doctor models.
+     * Lists all DoctorProfile models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DoctorSearch();
+        $searchModel = new DoctorProfileSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * Displays a single Doctor model.
+     * Displays a single DoctorProfile model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class DoctorController extends Controller
     }
 
     /**
-     * Creates a new Doctor model.
+     * Creates a new DoctorProfile model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Doctor();
+        $model = new DoctorProfile();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * Updates an existing Doctor model.
+     * Updates an existing DoctorProfile model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * Deletes an existing Doctor model.
+     * Deletes an existing DoctorProfile model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class DoctorController extends Controller
     }
 
     /**
-     * Finds the Doctor model based on its primary key value.
+     * Finds the DoctorProfile model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Doctor the loaded model
+     * @return DoctorProfile the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Doctor::findOne($id)) !== null) {
+        if (($model = DoctorProfile::findOne($id)) !== null) {
             return $model;
         }
 

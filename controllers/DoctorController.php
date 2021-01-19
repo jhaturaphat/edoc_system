@@ -6,7 +6,7 @@ class DoctorController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $this->layout = 'index';
+        $this->layout = 'layout';
         return $this->render('index');
     }
 
