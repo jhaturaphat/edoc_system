@@ -85,11 +85,11 @@ class DoctorController extends Controller
         && $docHasTimePeri->load(Yii::$app->request->post())
         && $docHasWorkDate->load(Yii::$app->request->post())) { 
 
-            echo "<pre>";
+            //echo "<pre>";
             //print_r(Yii::$app->request->bodyParams);     
-            var_dump($docHasWorkDate);       
-            echo "</pre>";
-            exit();
+            //var_dump($docHasWorkDate);       
+            //echo "</pre>";
+            //exit();
 
             $docProfile->imageFile = UploadedFile::getInstance($docProfile, 'imageFile');  
             //เริ่มต้น Transaction mysql
@@ -190,17 +190,23 @@ class DoctorController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
-    {
-        
-        $oldImage = $this->findDoctorProfile($id);
-        echo '<pre>';
-        var_dump($oldImage);
-        echo '</pre>';
-        echo @$oldImage->image;
-        exit();
+    {        
+        $oldImage = $this->findDoctorProfile($id);        
         $transaction = Yii::$app->db->beginTransaction();
-        if($this->findModel($id)->delete()){
-            unlink($oldImage->image);
+        try{
+            if($this->findModel($id)->delete()){
+                if(unlink($oldImage->image)){
+                    $transaction->commit(); 
+                }else{
+                    $transaction->rollBack();
+                }
+            }
+        } catch (\Exception $e) {            
+            $transaction->rollBack();            
+            throw $e;
+        } catch (\Throwable $e) {
+            $transaction->rollBack();            
+            throw $e;
         }
 
         return $this->redirect(['index']);
@@ -275,7 +281,7 @@ class DoctorController extends Controller
      */
     protected function findDoctorHasWorkDate($id)
     {
-        if (($model = DoctorHasWorkDate::find()->where(['doctor_id' => $id])->one()) !== null) {
+        if (($model = DoctorHasWorkDate::find()->where(['doctor_id' => $id])->all()) !== null) {
             return $model;
         }
 

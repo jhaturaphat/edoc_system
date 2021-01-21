@@ -19,7 +19,7 @@ use app\modules\models\TimePeriod;
     ]); ?>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
         <?php 
         echo $form->field($docProfile, 'imageFile')->widget(FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
@@ -31,7 +31,7 @@ use app\modules\models\TimePeriod;
         ]); 
         ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
         <div class="row">
             <div class="col-md-4">
             <?= $form->field($model, 'prefix')->textInput(['maxlength' => true]) ?>
@@ -63,11 +63,10 @@ use app\modules\models\TimePeriod;
 
         <?= 
         $model->isNewRecord ?           
-         $form->field($docHasWorkDate, 'work_date_id')->checkBoxList(WorkDate::getcheckBoxList(), ['itemOptions' => ['labelOptions'=> ['style'=> 'margin-right: 15px']]]) 
+         $form->field($docHasWorkDate, 'work_date_id')->checkBoxList(WorkDate::getcheckBoxList(), ['itemOptions' => ['labelOptions'=> ['style'=> 'margin-right: 15px']]])
         : 
-        //$form->field($docHasWorkDate, 'work_date_id')->checkBoxList(WorkDate::getcheckBoxList(), ['itemOptions' => ['labelOptions'=> ['style'=> 'margin-right: 15px']]]) 
-        $form->field($docHasWorkDate, 'work_date_id')->activeCheckboxList(WorkDate::getcheckBoxList(), ['itemOptions' => ['labelOptions'=> ['style'=> 'margin-right: 15px']]]) 
-            
+        $form->field($docHasWorkDate, 'work_date_id')->checkBoxList(WorkDate::getcheckBoxList(), ['itemOptions' => ['labelOptions'=> ['style'=> 'margin-right: 15px']]]) 
+                
         ?>
         <?php
             echo $form->field($docHasTimePeri, 'time_period_id')->checkBoxList(TimePeriod::getcheckBoxList(), ['itemOptions' => ['labelOptions'=> ['style'=> 'margin-right: 15px']]]) ; 
