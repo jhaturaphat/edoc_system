@@ -21,7 +21,7 @@ use Yii;
  * @property TimePeriod[] $timePeriods
  * @property DoctorHasWorkDate[] $doctorHasWorkDates
  * @property WorkDate[] $workDates
- * @property Profile[] $profiles
+ * @property DoctorProfile[] $doctorProfiles
  */
 class Doctor extends \yii\db\ActiveRecord
 {
@@ -121,11 +121,11 @@ class Doctor extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Profiles]].
+     * Gets query for [[DoctorProfiles]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProfiles()
+    public function getDoctorProfiles()
     {
         return $this->hasMany(DoctorProfile::className(), ['doctor_id' => 'id']);
     }

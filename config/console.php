@@ -13,10 +13,13 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
     ],
-    'components' => [
+    'components' => [ 
+        'assetManager' => [
+            
+        ],        
         'authManager' => [
             //'class' =>  'yii\rbac\PhpManager',
-            'class' =>  'yii\rbac\DbManager',
+            'class' =>  'yii\rbac\DbManager',            
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

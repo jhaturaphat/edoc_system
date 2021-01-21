@@ -1,3 +1,13 @@
+<?php
+use kartik\typeahead\TypeaheadBasic;
+use kartik\typeahead\Typeahead;
+use yii\web\JsExpression;
+
+use app\models\Branch;
+
+
+Yii::$app->params['bsDependencyEnabled'] = false; // do not load bootstrap assets for a specific asset bundle
+?>
 <section>
         <div class="slider-doctor">            
             <img src="<?= Yii::getAlias('@web') ?>/img/image-contents/slide-หมอ.png" width="100%"> 
@@ -12,7 +22,19 @@
                 <div class="form-ctl">
                     <label for="special">ค้นหาสาขาที่เชี่ยวชาญ</label>
                     <div class="input-g">
-                        <input type="text" placeholder="">
+                        <!-- <input type="text" placeholder=""> -->
+                        <?php
+                            echo TypeaheadBasic::widget([
+                                'model' => $branch, 
+                                'attribute' => 'name_th',
+                                'data' => Branch::getTypeaHead(),  //function นี้ถูกสร้างใน models
+                                'options' => ['placeholder' => 'Filter as you type ...'],
+                                'pluginOptions' => ['highlight'=>true],
+                                'pluginEvents' => [                                    
+                                    "typeahead:selected" => "function() { console.log('typeahead:selected'); }",
+                                ]
+                            ]);
+                        ?> 
                         <i class="fas fa-search"></i>
                     </div>                    
                 </div>
@@ -42,7 +64,7 @@
                         <li><input type="checkbox" name="" id="all"><label for="all">ทุกเวลา</label></li>
                         <li><input type="checkbox" name="" id="morning"><label for="morning">ช่วงเช้า</label></li>
                         <li><input type="checkbox" name="" id="afternoon"><label for="afternoon">ช่วงบ่าย</label></li>     
-                        <button>ค้นหา</button>                             
+                        <button id="search">ค้นหา</button>                             
                     </ul>    
                 </div>
             </div>   
@@ -98,3 +120,12 @@
             </div>
         </div>
     </section>
+
+    <?php
+    $this->registerJs(<<<JS
+        $('#search').on('click', function(e) { 
+            e.preventDefault();            
+            alert( '' ); 
+        });
+    JS
+    );
