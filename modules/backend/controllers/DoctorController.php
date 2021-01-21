@@ -87,8 +87,9 @@ class DoctorController extends Controller
 
             echo "<pre>";
             //print_r(Yii::$app->request->bodyParams);     
-            print_r($docHasBranch);       
+            var_dump($docHasWorkDate);       
             echo "</pre>";
+            exit();
 
             $docProfile->imageFile = UploadedFile::getInstance($docProfile, 'imageFile');  
             //เริ่มต้น Transaction mysql
@@ -96,13 +97,14 @@ class DoctorController extends Controller
             $transaction = Yii::$app->db->beginTransaction();
             try{
                 $model->save();
-                $docProfile->doctor_id = $model->id; $docProfile->save();
+                $docProfile->doctor_id = $model->id;
+                $docProfile->image = 'images/doctors/'. $docProfile->imageFile->baseName . '.'. $docProfile->imageFile->extension;
+                $docProfile->save();
                 $docHasBranch->doctor_id = $model->id; $docHasBranch->save();
                 //สร้างรูปแบบเตรียมข้อมูล insert ลงตาราง doctor_has_time_period
                 $batchQuery1 = array();
                 foreach($docHasTimePeri->time_period_id as $key => $val){
-                    if(!empty($val)) $batchQuery1[] = [$model->id, $val];
-                                        
+                    if(!empty($val)) $batchQuery1[] = [$model->id, $val];                                        
                 }   
                 Yii::$app->db->createCommand()->batchInsert(
                     'doctor_has_time_period',['doctor_id', 'time_period_id'], $batchQuery1
@@ -117,8 +119,8 @@ class DoctorController extends Controller
                     'doctor_has_work_date',['doctor_id', 'work_date_id'], $batchQuery2
                 )->execute();
 
-                //$transaction->commit(); 
-                $transaction->rollBack();          
+                $transaction->commit(); 
+                //$transaction->rollBack();          
 
             } catch (\Exception $e) {
                 $flag = false;
@@ -132,8 +134,9 @@ class DoctorController extends Controller
             }
 
             if($flag){
-                //$docProfile->upload();
-                //return $this->redirect(['view', 'id' => $model->id]);
+                if($docProfile->upload()){
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }  
         }
 
@@ -160,15 +163,14 @@ class DoctorController extends Controller
         $docProfile = $this->findDoctorProfile($id);
         $docHasBranch = $this->findDoctorHasBranch($id);
         $docHasTimePeri = $this->findDoctorHasTimePeriod($id);
-        $docHasWorkDate = $this->findDoctorHasWorkDate($id);
-
+        $docHasWorkDate = $this->findDoctorHasWorkDate($id); 
 
         if ($model->load(Yii::$app->request->post())) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         echo '<br><pre>';
-        print_r($docHasBranch);
+        print_r($docHasWorkDate);
         echo '</pre>';
         return $this->render('update', [
             'model' => $model,
@@ -177,6 +179,7 @@ class DoctorController extends Controller
             'docHasTimePeri' => $docHasTimePeri,
             'docHasWorkDate' => $docHasWorkDate
         ]);
+        
     }
 
     /**
@@ -188,7 +191,17 @@ class DoctorController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        
+        $oldImage = $this->findDoctorProfile($id);
+        echo '<pre>';
+        var_dump($oldImage);
+        echo '</pre>';
+        echo @$oldImage->image;
+        exit();
+        $transaction = Yii::$app->db->beginTransaction();
+        if($this->findModel($id)->delete()){
+            unlink($oldImage->image);
+        }
 
         return $this->redirect(['index']);
     }
@@ -217,7 +230,7 @@ class DoctorController extends Controller
      */
     protected function findDoctorProfile($id)
     {
-        if (($model = DoctorProfile::find()->where(['doctor_id' => $id])->all()) !== null) {
+        if (($model = DoctorProfile::find()->where(['doctor_id' => $id])->one()) !== null) {
             return $model;
         }
 
@@ -232,7 +245,7 @@ class DoctorController extends Controller
      */
     protected function findDoctorHasBranch($id)
     {
-        if (($model = DoctorHasBranch::find()->where(['doctor_id' => $id])->all()) !== null) {
+        if (($model = DoctorHasBranch::find()->where(['doctor_id' => $id])->one()) !== null) {
             return $model;
         }
 
@@ -262,7 +275,7 @@ class DoctorController extends Controller
      */
     protected function findDoctorHasWorkDate($id)
     {
-        if (($model = DoctorHasWorkDate::find()->where(['doctor_id' => $id])->all()) !== null) {
+        if (($model = DoctorHasWorkDate::find()->where(['doctor_id' => $id])->one()) !== null) {
             return $model;
         }
 
