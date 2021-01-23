@@ -4,6 +4,8 @@ use kartik\typeahead\Typeahead;
 use yii\web\JsExpression;
 
 use app\models\Branch;
+use app\models\WorkDate;
+use app\models\TimePeriod;
 
 
 Yii::$app->params['bsDependencyEnabled'] = false; // do not load bootstrap assets for a specific asset bundle
@@ -17,7 +19,7 @@ Yii::$app->params['bsDependencyEnabled'] = false; // do not load bootstrap asset
             กรุณาเลือกสาขาวิชาที่เชี่ยวชาญเพื่อแสดงรายชื่อแพทย์ตามสาขาวิชาที่เชี่ยวชาญนั้นๆ หรือในกรณีที่ท่านทราบชื่อแพทย์<br>
             ท่านสามารถเลือกแพทย์ได้จากรายชื่อด้านล่าง
         </div>
-        <form action="">          
+        <form action="" id="form-search">          
             <div class="form-g">
                 <div class="form-ctl">
                     <label for="special">ค้นหาสาขาที่เชี่ยวชาญ</label>
@@ -28,8 +30,8 @@ Yii::$app->params['bsDependencyEnabled'] = false; // do not load bootstrap asset
                                 'model' => $branch, 
                                 'attribute' => 'name_th',
                                 'data' => Branch::getTypeaHead(),  //function นี้ถูกสร้างใน models
-                                'options' => ['placeholder' => 'Filter as you type ...'],
-                                'pluginOptions' => ['highlight'=>true],
+                                'options' => ['placeholder' => ''],
+                                'pluginOptions' => ['highlight'=>true], 
                                 'pluginEvents' => [                                    
                                     "typeahead:selected" => "function() { console.log('typeahead:selected'); }",
                                 ]
@@ -51,73 +53,25 @@ Yii::$app->params['bsDependencyEnabled'] = false; // do not load bootstrap asset
                 <div class="s-filter-item">   
                     <ul>
                         <li>วันทำงาน</li>
-                        <li><input type="checkbox" name="" id="mon"><label for="mon">จันทร์</label></li>
-                        <li><input type="checkbox" name="" id="tue"><label for="tue">อังคาร</label></li>
-                        <li><input type="checkbox" name="" id="wed"><label for="wed">พุธ</label></li>
-                        <li><input type="checkbox" name="" id="thu"><label for="thu">พฤหัสบดี</label></li>
-                        <li><input type="checkbox" name="" id="fri"><label for="fri">ศุกร์</label></li>
-                        <li><input type="checkbox" name="" id="sat"><label for="sat">เสาร์</label></li>
-                        <li><input type="checkbox" name="" id="sun"><label for="sun">อาทิตย์</label></li>
+                        <li><input type="checkbox" name="mon" id="mon"><label for="mon">จันทร์</label></li>
+                        <li><input type="checkbox" name="tue" id="tue"><label for="tue">อังคาร</label></li>
+                        <li><input type="checkbox" name="wed" id="wed"><label for="wed">พุธ</label></li>
+                        <li><input type="checkbox" name="thu" id="thu"><label for="thu">พฤหัสบดี</label></li>
+                        <li><input type="checkbox" name="fri" id="fri"><label for="fri">ศุกร์</label></li>
+                        <li><input type="checkbox" name="sat" id="sat"><label for="sat">เสาร์</label></li>
+                        <li><input type="checkbox" name="sun" id="sun"><label for="sun">อาทิตย์</label></li>
                     </ul>
                     <ul>
-                        <li>เวลาตรวจ</li>
-                        <li><input type="checkbox" name="" id="all"><label for="all">ทุกเวลา</label></li>
-                        <li><input type="checkbox" name="" id="morning"><label for="morning">ช่วงเช้า</label></li>
-                        <li><input type="checkbox" name="" id="afternoon"><label for="afternoon">ช่วงบ่าย</label></li>     
+                        <li>เวลาตรวจ</li>                        
+                        <li><input type="checkbox" name="morning" id="morning"><label for="morning">ช่วงเช้า</label></li>
+                        <li><input type="checkbox" name="afternoon" id="afternoon"><label for="afternoon">ช่วงบ่าย</label></li>     
                         <button id="search">ค้นหา</button>                             
                     </ul>    
                 </div>
             </div>   
         </form>
-        <div class="doctor">
-            <div class="card-x"> 
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอทิพวัลย์.jpg" alt="">               
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอกัลยาณี.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอครองแก้ว.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอดารณี.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอพนัสบดี.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอสุวิทย์.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมออดิศักดิ์.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอธิติมา.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
+        <div class="doctor" id="card-doctor">
+            <!-- https://www.youtube.com/watch?v=QIYY3QWm0eE -->
         </div>
     </section>
 
@@ -125,7 +79,8 @@ Yii::$app->params['bsDependencyEnabled'] = false; // do not load bootstrap asset
     $this->registerJs(<<<JS
         $('#search').on('click', function(e) { 
             e.preventDefault();            
-            alert( '' ); 
+            let data = $('#form-search').serialize();
+            console.log(data);
         });
     JS
     );

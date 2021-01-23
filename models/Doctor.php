@@ -121,6 +121,16 @@ class Doctor extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[DoctorProfile]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    static function getDoctorProfile()
+    {
+        return $this->hasOne(DoctorProfile::className(), ['doctor_id' => 'id']);
+    }
+
+    /**
      * Gets query for [[DoctorProfiles]].
      *
      * @return \yii\db\ActiveQuery
