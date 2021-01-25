@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Url;
 use kartik\typeahead\TypeaheadBasic;
 use kartik\typeahead\Typeahead;
 use yii\web\JsExpression;
@@ -43,7 +44,7 @@ Yii::$app->params['bsDependencyEnabled'] = false; // do not load bootstrap asset
                 <div class="form-ctl">
                     <label for="special">ค้นหารายชื่อแพทย์</label>
                     <div class="input-g">
-                        <input type="text" placeholder="">
+                        <input type="text" placeholder="" id="doctor">
                         <i class="fas fa-search"></i>
                     </div>  
                 </div>
@@ -53,18 +54,18 @@ Yii::$app->params['bsDependencyEnabled'] = false; // do not load bootstrap asset
                 <div class="s-filter-item">   
                     <ul>
                         <li>วันทำงาน</li>
-                        <li><input type="checkbox" name="mon" id="mon"><label for="mon">จันทร์</label></li>
-                        <li><input type="checkbox" name="tue" id="tue"><label for="tue">อังคาร</label></li>
-                        <li><input type="checkbox" name="wed" id="wed"><label for="wed">พุธ</label></li>
-                        <li><input type="checkbox" name="thu" id="thu"><label for="thu">พฤหัสบดี</label></li>
-                        <li><input type="checkbox" name="fri" id="fri"><label for="fri">ศุกร์</label></li>
-                        <li><input type="checkbox" name="sat" id="sat"><label for="sat">เสาร์</label></li>
-                        <li><input type="checkbox" name="sun" id="sun"><label for="sun">อาทิตย์</label></li>
+                        <li><input type="checkbox" name="work_date" id="mon" value="mon"><label for="mon">จันทร์</label></li>
+                        <li><input type="checkbox" name="work_date" id="tue" value="tue"><label for="tue">อังคาร</label></li>
+                        <li><input type="checkbox" name="work_date" id="wed" value="wed"><label for="wed">พุธ</label></li>
+                        <li><input type="checkbox" name="work_date" id="thu" value="thu"><label for="thu">พฤหัสบดี</label></li>
+                        <li><input type="checkbox" name="work_date" id="fri" value="fri"><label for="fri">ศุกร์</label></li>
+                        <li><input type="checkbox" name="work_date" id="sat" value="sat"><label for="sat">เสาร์</label></li>
+                        <li><input type="checkbox" name="work_date" id="sun" value="sun"><label for="sun">อาทิตย์</label></li>
                     </ul>
                     <ul>
                         <li>เวลาตรวจ</li>                        
-                        <li><input type="checkbox" name="morning" id="morning"><label for="morning">ช่วงเช้า</label></li>
-                        <li><input type="checkbox" name="afternoon" id="afternoon"><label for="afternoon">ช่วงบ่าย</label></li>     
+                        <li><input type="checkbox" name="time_period" id="morning" value="morning"><label for="morning">ช่วงเช้า</label></li>
+                        <li><input type="checkbox" name="time_period" id="afternoon" value="afternoon"><label for="afternoon">ช่วงบ่าย</label></li>     
                         <button id="search">ค้นหา</button>                             
                     </ul>    
                 </div>
@@ -78,9 +79,16 @@ Yii::$app->params['bsDependencyEnabled'] = false; // do not load bootstrap asset
     <?php
     $this->registerJs(<<<JS
         $('#search').on('click', function(e) { 
-            e.preventDefault();            
-            let data = $('#form-search').serialize();
-            console.log(data);
-        });
+            e.preventDefault();  
+            let branch = $("#branch-name_th").val();   
+            let doctor = $("#doctor").val();              
+            let work_date = $("input[name='work_date']:checked").map(function(){return $(this).val();}).get();
+            let time_period = $("input[name='time_period']:checked").map(function(){return $(this).val();}).get();
+            
+            $.post("index.php?r=doctor/default-search",{branch:branch, doctor:doctor,work_date:work_date, time_period:time_period })
+            .done(function(data){
+                $("#card-doctor").html(data);
+            });          
+        }); // End on click
     JS
     );

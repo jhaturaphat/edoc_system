@@ -1,4 +1,10 @@
-<div class="card-x"> 
+    <?php
+    echo '<pre>';
+    print_r($model);
+    echo '</pre>';
+    ?>
+
+    <div class="card-x">     
                 <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอทิพวัลย์.jpg" alt="">               
                 <div class="profile">
                     <a href="#">ดูโปรไฟล์</a>
