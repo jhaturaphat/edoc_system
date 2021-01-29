@@ -78,6 +78,7 @@ Yii::$app->params['bsDependencyEnabled'] = false; // do not load bootstrap asset
 
     <?php
     $this->registerJs(<<<JS
+        $("#card-doctor").load("index.php?r=doctor/default-search",{branch:'', doctor:'',work_date:'', time_period:'' });   
         $('#search').on('click', function(e) { 
             e.preventDefault();  
             let branch = $("#branch-name_th").val();   
@@ -85,6 +86,9 @@ Yii::$app->params['bsDependencyEnabled'] = false; // do not load bootstrap asset
             let work_date = $("input[name='work_date']:checked").map(function(){return $(this).val();}).get();
             let time_period = $("input[name='time_period']:checked").map(function(){return $(this).val();}).get();
             
+            if(branch === ""){
+                alert("ข้อมูลไม่ครบ กรอกข้อมูลสาขาที่เชี่ยวชาญ"); return;
+            }
             $.post("index.php?r=doctor/default-search",{branch:branch, doctor:doctor,work_date:work_date, time_period:time_period })
             .done(function(data){
                 $("#card-doctor").html(data);

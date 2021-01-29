@@ -1,54 +1,60 @@
-    <?php
-    echo '<pre>';
-    print_r($model);
-    echo '</pre>';
-    ?>
+   
 
-    <div class="card-x">     
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอทิพวัลย์.jpg" alt="">               
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอกัลยาณี.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอครองแก้ว.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอดารณี.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอพนัสบดี.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอสุวิทย์.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมออดิศักดิ์.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
-            <div class="card-x">
-                <img src="<?= Yii::getAlias('@web') ?>/images/doctor/หมอธิติมา.jpg" alt="">
-                <div class="profile">
-                    <a href="#">ดูโปรไฟล์</a>
-                </div>
-            </div>
+    
+    <?php
+        foreach($model as $item){
+    ?>
+    <div class="card-x">   
+        <img  id="show_profile" src="<?= Yii::getAlias('@web') ?>/<?= $item['image'] ?>" alt="">               
+        <div class="profile">
+            <ul> วันทีออกตรวจ
+                <?php foreach($item['work_date'] as $val){ ?>
+                <li><?= $val['name'] ?></li>
+                <?php } ?>
+            </ul>
+        </div>
+    </div> 
+    <?php
+        }        
+    ?>  
+
+<?php 
+ //print_r($model);
+$this->registerJs(<<<JS
+    
+JS
+);
+?>
+
+<script>
+    $(function(){
+       $("#show_profile").click(function(){
+        console.log($(this).attr('src'));
+       });
+    })
+</script>
+
+
+<style scoped>
+    .card-x .profile {    
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 9%;
+    background-color: #FFFFFF;
+    text-align: center;
+    opacity: 0.9;
+    transition: all .5s;
+}
+    .card-x > .profile ul{  
+        /* text-align: left; */
+        color: #000;           
+        padding: 0;   
+    }
+    .card-x > .profile ul li{
+        color: #000;
+        padding: 0px 0 0 15px;
+        text-align: left;
+    }
+</style>
