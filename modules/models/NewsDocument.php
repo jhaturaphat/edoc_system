@@ -8,19 +8,20 @@ use Yii;
  * This is the model class for table "news_document".
  *
  * @property int $id รหัส
- * @property string|null $path ไฟล์อัพโหลด
+ * @property string $path ไฟล์อัพโหลด
  * @property string $title หัวข้อ
- * @property string|null $detail รายละเอียด
+ * @property string $detail รายละเอียด
  * @property string|null $create_at
  * @property string|null $update_at
  * @property int $news_type_id
- * @property string|null $public
+ * @property string $public
  *
  * @property NewsType $newsType
  */
 class NewsDocument extends \yii\db\ActiveRecord
 {
-    public $file = null;
+
+    public $File = null;
     /**
      * {@inheritdoc}
      */
@@ -35,13 +36,13 @@ class NewsDocument extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'news_type_id'], 'required'],
+            [['path', 'title', 'detail', 'news_type_id','public'], 'required'],
+            [['detail', 'public'], 'string'],
             [['create_at', 'update_at'], 'safe'],
             [['news_type_id'], 'integer'],
-            [['public'], 'string'],
-            [['path', 'title', 'detail'], 'string', 'max' => 45],
+            [['path', 'title'], 'string', 'max' => 255],
             [['news_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => NewsType::className(), 'targetAttribute' => ['news_type_id' => 'id']],
-            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf, doc, docx, xls, xlsx, ptt, pttx'],
+            [['File'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf'],
         ];
     }
 
@@ -57,9 +58,8 @@ class NewsDocument extends \yii\db\ActiveRecord
             'detail' => 'รายละเอียด',
             'create_at' => 'Create At',
             'update_at' => 'Update At',
-            'news_type_id' => 'ประเภทประชาสัมพันธ์',
-            'public' => 'เผยแพร่',
-            
+            'news_type_id' => 'ประเภท',
+            'public' => 'การเผยแพร่',
         ];
     }
 
@@ -73,15 +73,29 @@ class NewsDocument extends \yii\db\ActiveRecord
         return $this->hasOne(NewsType::className(), ['id' => 'news_type_id']);
     }
 
-
-    public function upload()
+    public function upload($path = null)
     {        
-        if(!empty($this->imageFile)) {              
-            //path อยู่ที่ web/images/doctors/
-            $this->imageFile->saveAs('images/news-document/'. $this->imageFile->baseName . '.'. $this->imageFile->extension);               
-            return true;
+        //echo $path; exit;
+        if(!empty($this->File) && is_dir($path)) {
+            //. $this->File->baseName . '.'. $this->File->extension              
+                $this->File->saveAs($path. $this->File->baseName . '.'. $this->File->extension); 
+                return true;
         }else{
             return false;
+        }
+    }
+
+    static function Createfolder($path = 'documents/news-document'){
+        
+        if(!is_dir($path)) mkdir($path, '0777');  //ถ้ายังไม่ได้สร้างโฟล์เดอร์ ก็สร้าง Folder news-document
+        $year = date("Y")+543;
+        //ถ้ายังไม่ได้สร้างโฟล์เดอร์ ก็สร้าง Folder ปีขึ้นมา
+        if(!is_dir($path.'/'.$year)){ 
+            mkdir($path.'/'.$year, '0777');
+            echo "Create Folder";
+            return $path.'/'.$year.'/';
+        }else{
+            return $path.'/'.$year.'/';
         }
     }
 }

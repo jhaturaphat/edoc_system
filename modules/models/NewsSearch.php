@@ -7,9 +7,9 @@ use yii\data\ActiveDataProvider;
 use app\modules\models\NewsDocument;
 
 /**
- * NewsDocumentSearch represents the model behind the search form of `app\modules\models\NewsDocument`.
+ * NewsSearch represents the model behind the search form of `app\modules\models\NewsDocument`.
  */
-class NewsDocumentSearch extends NewsDocument
+class NewsSearch extends NewsDocument
 {
     /**
      * {@inheritdoc}

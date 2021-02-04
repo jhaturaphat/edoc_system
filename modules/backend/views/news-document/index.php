@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\models\NewsDocumentSearch */
+/* @var $searchModel app\modules\models\NewsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'News Documents';
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'path',
             'title',
-            'detail',
+            'detail:ntext',
             'create_at',
             //'update_at',
             //'news_type_id',

@@ -3,8 +3,9 @@
 namespace app\modules\backend\controllers;
 
 use Yii;
+use yii\web\UploadedFile;
 use app\modules\models\NewsDocument;
-use app\modules\models\NewsDocumentSearch;
+use app\modules\models\NewsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,7 +36,7 @@ class NewsDocumentController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new NewsDocumentSearch();
+        $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -65,9 +66,29 @@ class NewsDocumentController extends Controller
     public function actionCreate()
     {
         $model = new NewsDocument();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $transaction = Yii::$app->db->beginTransaction();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->File = UploadedFile::getInstance($model, 'File');
+            $model->path = $model::Createfolder().$model->File->baseName . '.'. $model->File->extension;
+            try{
+                if($model->save(FALSE)){  
+                    if($model->upload($model::Createfolder())){
+                        $transaction->commit(); 
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }else{
+                        $transaction->rollBack();
+                        throw new \yii\web\HttpException(404, 'ไม่สามารถบันทึกไฟล์ได้');
+                    }            
+                }  
+            } catch (\Exception $e) {
+                $flag = false;
+                $transaction->rollBack();                
+                throw $e;
+            } catch (\Throwable $e) {
+                $transaction->rollBack();
+                $flag = false;
+                throw $e;
+            }          
         }
 
         return $this->render('create', [

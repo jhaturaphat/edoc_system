@@ -100,7 +100,8 @@ class DoctorController extends Controller
                 $docProfile->doctor_id = $model->id;
                 $docProfile->image = 'images/doctors/'. $docProfile->imageFile->baseName . '.'. $docProfile->imageFile->extension;
                 $docProfile->save();
-                $docHasBranch->doctor_id = $model->id; $docHasBranch->save();
+                $docHasBranch->doctor_id = $model->id; 
+                $docHasBranch->save();
                 //สร้างรูปแบบเตรียมข้อมูล insert ลงตาราง doctor_has_time_period
                 $batchQuery1 = array();
                 foreach($docHasTimePeri->time_period_id as $key => $val){
@@ -124,8 +125,7 @@ class DoctorController extends Controller
 
             } catch (\Exception $e) {
                 $flag = false;
-                $transaction->rollBack();
-                
+                $transaction->rollBack();                
                 throw $e;
             } catch (\Throwable $e) {
                 $transaction->rollBack();
