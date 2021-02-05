@@ -106,10 +106,28 @@ class NewsDocumentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $old = $model->path;
+        $transaction = Yii::$app->db->beginTransaction();
+    try{
+        if ($model->load(Yii::$app->request->post()) ) {  //&& $model->save()
+            $model->File = UploadedFile::getInstance($model, 'File');
+            $model->path = $model::Createfolder().$model->File->baseName . '.'. $model->File->extension;
+            if($model->save()){
+                if(Yii::$app->Utility->DeleteFile($old) && $model->upload($model::Createfolder())){
+                    $transaction->commit();
+                }else{
+                    $transaction->rollBack();
+                }
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
+    }catch(\Exception $e){
+        $transaction->rollBack();                
+        throw $e;
+    }catch(\Throwable $e){
+        $transaction->rollBack();                
+        throw $e;
+    }
 
         return $this->render('update', [
             'model' => $model,
@@ -125,7 +143,27 @@ class NewsDocumentController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        
+        $transaction = Yii::$app->db->beginTransaction();
+        try{
+        $oldFile = $this->findModel($id);  //เก็บข้อมูลเดิมไว้ก่อน
+            if($this->findModel($id)->delete()){
+                if(Yii::$app->Utility->DeleteFile($oldFile->path)){ //ตรวจสอบว่าไฟล์มีอยู่จริง
+                    $transaction->commit(); 
+                }else{                    
+                    $transaction->rollBack();
+                }                
+            }
+        } catch (\Exception $e) {
+            $flag = false;
+            $transaction->rollBack();                
+            throw $e;
+        } catch (\Throwable $e) {
+            $transaction->rollBack();
+            $flag = false;
+            throw $e;
+        } 
+        
 
         return $this->redirect(['index']);
     }

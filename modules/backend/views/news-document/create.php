@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\models\NewsDocument */
 
-$this->title = 'Create News Document';
-$this->params['breadcrumbs'][] = ['label' => 'News Documents', 'url' => ['index']];
+$this->title = 'สร้าง ข่าวประชาสัมพันธ์';
+$this->params['breadcrumbs'][] = ['label' => 'ข่าวประชาสัมพันธ์', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="news-document-create">

@@ -45,6 +45,7 @@ $config = [
         ],
     ],
     'components' => [ 
+        'Utility' => ['class' => 'app\components\Utility'],
         'assetManager' => [
             
         ],   

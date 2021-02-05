@@ -195,7 +195,7 @@ class DoctorController extends Controller
         $transaction = Yii::$app->db->beginTransaction();
         try{
             if($this->findModel($id)->delete()){
-                if(unlink($oldImage->image)){
+                if(@unlink($oldImage->image)){
                     $transaction->commit(); 
                 }else{
                     $transaction->rollBack();

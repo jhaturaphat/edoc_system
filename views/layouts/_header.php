@@ -30,7 +30,7 @@
             </div>
             <div class="nav-menu" id="nav-menu"> 
                 <ul>                    
-                    <li class=""><a href="">ข่าวประชาสัมพันธ์</a>
+                    <li class=""><a href="<?= Url::toRoute('/news-document')?>">ข่าวประชาสัมพันธ์</a>
                         <ul class="dropdown-menu">
                             <li><a href="">ข่าวทั่วไป</a></li>
                             <li><a href="">สมัครงาน</a></li>

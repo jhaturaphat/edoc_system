@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\models\NewsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'News Documents';
+$this->title = 'ข่าวประชาสัมพันธ์';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="news-document-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create News Document', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('สร้าง ข่าวประชาสัมพันธ์', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
