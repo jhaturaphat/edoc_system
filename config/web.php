@@ -99,7 +99,7 @@ $config = [
         'allowActions' => [
             '*',
             //'backend/*',
-            'some-controller/some-action',
+            //'some-controller/some-action',
         ]
         ],
     'params' => $params,

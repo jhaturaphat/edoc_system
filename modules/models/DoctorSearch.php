@@ -4,12 +4,12 @@ namespace app\modules\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\models\NewsDocument;
+use app\modules\models\Doctor;
 
 /**
- * DoctorSearch represents the model behind the search form of `app\modules\models\NewsDocument`.
+ * DoctorSearch represents the model behind the search form of `app\modules\models\Doctor`.
  */
-class DoctorSearch extends NewsDocument
+class DoctorSearch extends Doctor
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class DoctorSearch extends NewsDocument
     public function rules()
     {
         return [
-            [['id', 'news_type_id'], 'integer'],
-            [['path', 'title', 'detail', 'create_at', 'update_at', 'public'], 'safe'],
+            [['id'], 'integer'],
+            [['prefix', 'fname_th', 'lname_th', 'fname_en', 'lname_en', 'detail'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class DoctorSearch extends NewsDocument
      */
     public function search($params)
     {
-        $query = NewsDocument::find();
+        $query = Doctor::find();
 
         // add conditions that should always apply here
 
@@ -59,15 +59,14 @@ class DoctorSearch extends NewsDocument
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'create_at' => $this->create_at,
-            'update_at' => $this->update_at,
-            'news_type_id' => $this->news_type_id,
         ]);
 
-        $query->andFilterWhere(['like', 'path', $this->path])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'detail', $this->detail])
-            ->andFilterWhere(['like', 'public', $this->public]);
+        $query->andFilterWhere(['like', 'prefix', $this->prefix])
+            ->andFilterWhere(['like', 'fname_th', $this->fname_th])
+            ->andFilterWhere(['like', 'lname_th', $this->lname_th])
+            ->andFilterWhere(['like', 'fname_en', $this->fname_en])
+            ->andFilterWhere(['like', 'lname_en', $this->lname_en])
+            ->andFilterWhere(['like', 'detail', $this->detail]);
 
         return $dataProvider;
     }

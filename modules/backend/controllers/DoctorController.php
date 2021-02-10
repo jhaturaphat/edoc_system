@@ -59,6 +59,7 @@ class DoctorController extends Controller
      */
     public function actionView($id)
     {
+        //print_r( $this->findModel($id)); exit;
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -169,9 +170,9 @@ class DoctorController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        echo '<br><pre>';
-        print_r($docHasWorkDate);
-        echo '</pre>';
+        // echo '<br><pre>';
+        // print_r($docHasWorkDate);
+        // echo '</pre>';
         return $this->render('update', [
             'model' => $model,
             'docProfile' => $docProfile,
