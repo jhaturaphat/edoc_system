@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\NewsDocument;
+
 class NewsDocumentController extends \yii\web\Controller
 {
     public function actionIndex()

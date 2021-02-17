@@ -40,6 +40,7 @@ class NewsType extends \yii\db\ActiveRecord
         return [
             'id' => 'รหัส',
             'name' => 'ประเภทข่าว',
+            'active' => 'Active'
         ];
     }
 
