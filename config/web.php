@@ -87,9 +87,9 @@ $config = [
         'db' => $db,
         'hosxp' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=192.168.231.11;dbname=dud_hosxp', //maybe other dbms such as psql,...
+            'dsn' => 'mysql:host=192.168.0.0;dbname=dud_hosxp', //maybe other dbms such as psql,...
             'username' => 'select',
-            'password' => 'select@11443',
+            'password' => '',
         ],
         /*
         'urlManager' => [

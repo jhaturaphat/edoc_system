@@ -24,7 +24,7 @@ class AppAssetIndex extends AssetBundle
         'css/index/doctor.css',
         'css/index/footer.css',
         'css/index/mobile.css',
-        'css/index/slider.css',
+        //'css/index/slider.css',
         'css/index/style.css'
     ];
     public $js = [

@@ -1,4 +1,7 @@
 <!-- footer -->
+<?php
+    use yii\helpers\Url;
+?>
 <footer>
     <div class="ft-title">
         <div class="phone-number">
@@ -31,7 +34,7 @@
         </ul>
         <ul>
             บริการผู้ป่วย
-            <li><a href="#">ค้นหาแพทย์</a></li>
+            <li><a href="<?= Url::toRoute('/doctor')?>">ค้นหาแพทย์</a></li>
             <li><a href="#">ตารางออกตรวจ</a></li>
             <li><a href="#">ห้องพิเศษ</a></li>
             <li><a href="#">สิทธิผู้ป่วย</a></li>
