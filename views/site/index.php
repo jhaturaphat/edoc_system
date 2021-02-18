@@ -33,7 +33,7 @@ OwlCarouselWidget::begin([
 <div class="item-class"><img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde1.png" alt="Image 1"></div>
 <div class="item-class"><img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde2.png" alt="Image 2"></div>
 <div class="item-class"><img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde3.png" alt="Image 3"></div>
-<div class="item-class"><img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde1.png" alt="Image 4"></div>
+<div class="item-class"><img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde4.jpg" alt="Image 4"></div>
 <?php OwlCarouselWidget::end(); ?>
 
 <div class="menu-buttom">

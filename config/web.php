@@ -99,9 +99,7 @@ $config = [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            '*',
-            //'backend/*',
-            //'some-controller/some-action',
+            '*',            
         ]
         ],
     'params' => $params,

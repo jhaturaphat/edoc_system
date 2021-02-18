@@ -3,6 +3,7 @@
 namespace app\modules\backend\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use app\modules\models\NewsType;
 use app\modules\models\NewsTypeSearch;
 use yii\web\Controller;
@@ -24,6 +25,17 @@ class NewsTypeController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => [],
+                'rules' => [                    
+                    [
+                        'allow' => true,
+                        'actions' => ['index','view','create','update','delete'],
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

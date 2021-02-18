@@ -3,6 +3,7 @@
 namespace app\modules\backend\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 use app\modules\models\NewsDocument;
 use app\modules\models\NewsSearch;
@@ -25,6 +26,17 @@ class NewsDocumentController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => [],
+                'rules' => [                    
+                    [
+                        'allow' => true,
+                        'actions' => ['index','view','create','update','delete'],
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
