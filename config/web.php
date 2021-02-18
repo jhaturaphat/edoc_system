@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$hosxp = require __DIR__ . '/hosxp.php';
 
 $config = [
     'id' => 'basic',
@@ -85,12 +86,7 @@ $config = [
             ],
         ],
         'db' => $db,
-        'hosxp' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=192.168.0.0;dbname=dud_hosxp', //maybe other dbms such as psql,...
-            'username' => 'select',
-            'password' => '',
-        ],
+        'hosxp' => $hosxp,
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
