@@ -8,7 +8,7 @@
                 <i id="bar-menu" class="fas fa-bars"></i>
             </div>
             <div class="banner"> 
-                <div>
+                <div class="animate">
                     <a href="<?= Url::home()?>">
                         <img src="<?= Yii::getAlias('@web') ?>/img/icon/logo.png">
                     </a>
@@ -68,7 +68,12 @@
                 </ul>
                 <ul>
                     <li class="right-login">
-                        <a href="<?= Url::toRoute('/user/security/login')?>">Login</a>
+                    
+                    <?php if(Yii::$app->user->isGuest) {?>
+                        <a href="<?= Url::toRoute('user/security/login')?>">Login</a>
+                    <?php } else { ?>
+                        <a href="<?= Url::toRoute('user/security/logout')?>">Logout(<?= Yii::$app->user->identity->username ?>)</a>
+                    <?php } ?>
                     </li>
                 </ul>
             </div>
@@ -76,3 +81,7 @@
         </div>
     </nav> 
     </section>  
+
+<?php
+	$this->registerJs("jQuery('.animate, .nav-menu, .search, .right-login').animateCss('fadeInRight')");
+?>

@@ -15,6 +15,8 @@ AppAssetIndex::register($this);
 <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/web/img/icon-system/logo.ico"> 
+    <link href="<?= Yii::getAlias('@web') ?>/img/icon/logo.png" rel="apple-touch-icon"> 
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -22,7 +24,7 @@ AppAssetIndex::register($this);
 <body>
 <?php $this->beginBody() ?>
   
-<?= $this->render('_header.php') ?>          
+<?= $this->render('navbar.php') ?>          
     
 <?= $content ?>
 

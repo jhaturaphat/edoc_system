@@ -2,39 +2,8 @@
     use yii\helpers\Url;
     use kv4nt\owlcarousel\OwlCarouselWidget;
  ?>
-<!-- slider picture -->
-<!-- <div class="slider">
-        <figure>
-            <img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde1.png" alt="">
-            <img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde2.png" alt="">
-            <img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde3.png" alt="">
-            <img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde1.png" alt="">
-        </figure>
-</div> -->
-<?php
-OwlCarouselWidget::begin([
-    'container' => 'div',
-    'containerOptions' => [
-        'id' => 'container-id',
-        'class' => 'container-class'
-    ],
-    'pluginOptions'    => [
-        'autoplay'          => true,
-        'autoplayTimeout'   => 6000,
-        'items'             => 1,
-        'loop'              => true,
-        'itemsDesktop'      => [1199, 3],
-        'itemsDesktopSmall' => [979, 3],
-        'smartSpeed'        => 1200        
-    ]
-]);
-?>
-.
-<div class="item-class"><img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde1.png" alt="Image 1"></div>
-<div class="item-class"><img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde2.png" alt="Image 2"></div>
-<div class="item-class"><img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde3.png" alt="Image 3"></div>
-<div class="item-class"><img src="<?= Yii::getAlias('@web') ?>/img/image-contents/silde4.jpg" alt="Image 4"></div>
-<?php OwlCarouselWidget::end(); ?>
+
+<?= $this->render('@app/views/layouts/_slider') ?>       
 
 <div class="menu-buttom">
     <div class="ducph">
@@ -59,6 +28,14 @@ OwlCarouselWidget::begin([
     </div>
 </div>
 <!-- Conten ทั่วไป -->
+
+<!-- <body>
+    <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>  
+    <div class="fb-post" 
+    data-href="https://www.facebook.com/prd.detudom/posts/3701712789896062/"
+    data-width="720"></div>
+</body> -->
+
 <section id="two">
     <div class="conten-service">
         <div class="service-box">
@@ -124,4 +101,5 @@ OwlCarouselWidget::begin([
     </div>
     
 </section>
+
 

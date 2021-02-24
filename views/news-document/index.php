@@ -16,9 +16,13 @@ foreach(NewsType::findAll(['active'=>'YES']) as $item){
 }
 
 //print_r($tabs);
+?>
+<div>
+<?php
 echo TabsX::widget([
     'items'=>$tabs,
     'position'=>TabsX::POS_ABOVE,
     'bordered'=>true,
     'encodeLabels'=>false
-]);
+]);?>
+</div>
