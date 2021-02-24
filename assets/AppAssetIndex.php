@@ -24,10 +24,11 @@ class AppAssetIndex extends AssetBundle
         'css/index/doctor.css',
         'css/index/footer.css',
         'css/index/mobile.css',        
-        'css/index/style.css'
+        'css/index/style.css',
+        'css/index/banner.css'
     ];
     public $js = [
-        'script.js',
+        'js/script.js',
         'js/lib/FontAwesome.js'
     ];
     public $depends = [

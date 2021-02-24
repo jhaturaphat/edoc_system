@@ -1,6 +1,20 @@
-html,
-body {
-    height: 100%;
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400&display=swap');
+@font-face {
+    font-family: "modern";
+    src: url("../SB-MODERN.TTF");
+}
+
+
+html ,body{
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit','Kanit',sans-serif;   
+    font-size: 1rem; 
+    color: #3e66b0;     
+  -webkit-overflow-scrolling: touch; 
 }
 
 .wrap {
