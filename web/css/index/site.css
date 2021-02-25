@@ -127,3 +127,27 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+/* Overide boostrap */
+
+@media (min-width: 1200px){
+    .container {
+        width: 95% !important;
+    }
+}
+@media (min-width: 992px){
+    .container {
+        width: 970px;
+    } 
+}
+@media (min-width: 768px){
+    .container {
+        width: 750px;
+    }
+}
+.container {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}

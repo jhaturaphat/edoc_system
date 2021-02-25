@@ -23,7 +23,7 @@ AppAssetIndex::register($this);
 <body>
 <?php $this->beginBody() ?>
   
-<?= $this->render('_header.php') ?>    
+<?= $this->render('_navbar.php') ?>    
 <?= $this->render('_slider.php') ?>         
 
 <?php Pjax::begin() ?>

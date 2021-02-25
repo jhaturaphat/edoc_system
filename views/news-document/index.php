@@ -6,7 +6,7 @@ use app\models\NewsType;
 
 <?php
 $tabs = array();
-
+// $this->render('@app/views/hosxp-dashboard/dashboard') 
 foreach(NewsType::findAll(['active'=>'YES']) as $item){
     $tab['label'] = $item['name'];
     $tab['content'] = $this->render('tab-one',[
@@ -17,12 +17,19 @@ foreach(NewsType::findAll(['active'=>'YES']) as $item){
 
 //print_r($tabs);
 ?>
-<div>
-<?php
-echo TabsX::widget([
-    'items'=>$tabs,
-    'position'=>TabsX::POS_ABOVE,
-    'bordered'=>true,
-    'encodeLabels'=>false
-]);?>
+<div class="container">
+   
+<div class="panel panel-default">
+    <div class="panel-heading">Panel heading without title</div>
+        <div class="panel-body">  
+            <?php
+            echo TabsX::widget([
+                'items'=>$tabs,
+                'position'=>TabsX::POS_ABOVE,
+                'bordered'=>true,
+                'encodeLabels'=>false
+            ]);?>
+        </div>
+</div>
+ 
 </div>

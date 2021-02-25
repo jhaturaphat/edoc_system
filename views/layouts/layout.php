@@ -24,7 +24,7 @@ AppAssetIndex::register($this);
 <body>
 <?php $this->beginBody() ?>
   
-<?= $this->render('navbar.php') ?>          
+<?= $this->render('_navbar.php') ?>          
     
 <?= $content ?>
 

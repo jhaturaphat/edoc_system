@@ -53,10 +53,10 @@ class NewsDocument extends \yii\db\ActiveRecord
             'path' => 'ไฟล์อัพโหลด',
             'title' => 'หัวข้อ',
             'detail' => 'รายละเอียด',
-            'create_at' => 'Create At',
-            'update_at' => 'Update At',
-            'news_type_id' => 'News Type ID',
-            'public' => 'Public',
+            'create_at' => 'วันที่สร้าง',
+            'update_at' => 'วันที่อัพเดท',
+            'news_type_id' => 'ประเภทข่าว',
+            'public' => 'แผยแพร่',
         ];
     }
 
