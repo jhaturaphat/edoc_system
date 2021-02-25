@@ -38,14 +38,19 @@
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],
         'items' => [
-            ['label' => 'Home', 'items' => [
-                ['label' => 'Level 1 - Dropdown A', 'url' => '#'],
-                 '<li class="divider"></li>',
-                 '<li class="dropdown-header">Dropdown Header</li>',
-                ['label' => 'Level 1 - Dropdown B', 'url' => '#'],
+            ['label' => 'ข่าวประชาสัมพันธ์', 'items' => [
+                ['label' => 'ข่าวทั่วไป', 'url' => '#'],                 
+                ['label' => 'สมัครงาน', 'url' => '#'],
             ]],
-            ['label' => 'About', 'url' => ['/']],
-            ['label' => 'Contact', 'url' => ['/']],
+            ['label' => 'บริการผู้ป่วย', 'url' => ['/']],
+            ['label' => 'บริการของเรา', 'url' => ['/']],
+            ['label' => 'เกี่ยวกับ รพ.', 'url' => ['/']],            
+        ],
+    ]);
+
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => [            
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/user/security/login']]
             ) : (
