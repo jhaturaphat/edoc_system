@@ -43,7 +43,7 @@ footer{
     width: 100%;
 }
 .ft-menu-item li{    
-    font-size: 14px;
+    font-size: 16px;
     border-bottom: 1px solid #d0d0d0;
     width: 80%;
     padding-top: 10px;
@@ -52,7 +52,7 @@ footer{
     text-decoration: none;
 }
 .ft-bottom{
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-align: center;
     background-color: #fa79c9;
     color: #fff;

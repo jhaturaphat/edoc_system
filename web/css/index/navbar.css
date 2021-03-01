@@ -1,5 +1,5 @@
 
-/* Overide boostrap3 */
+/* Overide boostrap4 */
 .nav{
     padding-left: 30px !important;
 }
@@ -7,29 +7,34 @@
     border-bottom: 5px solid #fa79c9;
     margin-bottom: -5px !important;  /* ต้องกำหนด margin-bottom -5px ด้วยตอนกำหนด hover */
 }
-.navbar >div > ul > li > a:hover{
-    color: #3e66b0 !important;
+.navbar >div > ul > li > div > a{
+    transition: all .2s linear !important;
 }
-.navbar{
+.navbar >div > ul > li > div > a:hover{
+    background-color: #ffffff;
+    color: #3e66b0 !important;    
+    font-size: larger;    
+}
+/* .navbar{
     margin-bottom: 0 !important;
     border: 0 !important;
-}
-.navbar-default {
+} */
+/* .navbar-default {
     background-color: #ffffff !important;
     border-color: #ffffff !important;
     font-size: 18px !important;
-}
-.navbar-default .navbar-nav > li > a {
+} */
+/* .navbar-default .navbar-nav > li > a {
     color: #3e66b0;
-}
-.navbar-default .navbar-nav > .open > a{
+} */
+/* .navbar-default .navbar-nav > .open > a{
     color: #3e66b0 !important;
     background-color: #ffffff !important;
-}
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+} */
+/* .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
     color: #3e66b0 !important;
     background-color: #ffffff !important;
-}
+} */
 .dropdown-menu{
     border: 0 !important;
 }
@@ -37,8 +42,7 @@
     font-size: 15px !important;
     color: #3e66b0 !important;
 }
-
-/* Login */
-.navbar-right{
-    margin-right: 10px !important;
+dropdown-menu:hover{
+    display: block;
 }
+

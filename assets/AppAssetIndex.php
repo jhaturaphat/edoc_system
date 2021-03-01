@@ -35,7 +35,7 @@ class AppAssetIndex extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset', //ไม่ใช้ Bootstrap comment ไว้
+        'yii\bootstrap4\BootstrapAsset', //ไม่ใช้ Bootstrap comment ไว้
         'simialbi\yii2\animatecss\AnimateCssPluginAsset', 
     ];
 }

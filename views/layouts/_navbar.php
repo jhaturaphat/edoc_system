@@ -1,7 +1,7 @@
 <?php
     use yii\helpers\Url;
-    use yii\bootstrap\Nav;
-    use yii\bootstrap\NavBar;
+    use yii\bootstrap4\Nav;
+    use yii\bootstrap4\NavBar;
 ?>
 <div class="header">    
     <div class="banner"> 
@@ -32,11 +32,11 @@
         'brandUrl' => Yii::$app->homeUrl,
         'renderInnerContainer' => false,
         'options' => [
-            'class' => 'row navbar-default',
+            'class' => 'row navbar navbar-expand-lg navbar-light bg-light sticky-top ',
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-left'],
+        'options' => ['class' => 'navbar-nav navbar-left h5'],
         'items' => [
             ['label' => 'ข่าวประชาสัมพันธ์', 'items' => [
                 ['label' => 'ข่าวทั่วไป', 'url' => '#'],                 
@@ -69,7 +69,7 @@
     ]);
 
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'navbar-nav navbar-right h5'],
         'items' => [            
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/user/security/login']]
@@ -86,4 +86,9 @@
         ],
     ]);
     NavBar::end();
+
+    $this->registerJs("
+    jQuery('.animate').animateCss('bounceInUp');
+    jQuery('.navbar-nav, .search').animateCss('fadeInRight');    
+    ");
     ?>

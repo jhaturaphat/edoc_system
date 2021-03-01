@@ -16,7 +16,9 @@ $dataProvider = new ActiveDataProvider([
     echo GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => new NewsDocumentSearch(),
+        'options' =>['style' => 'width: 95%'],
         'pager' => ['class' => yii\widgets\LinkPager::className(), 'firstPageLabel' => Yii::t('app', 'First'), 'lastPageLabel' => Yii::t('app', 'Last'),],
+        'caption' => 'อ่านทั้งหมด'.$id,
         'tableOptions' => ['class' => 'table table-striped table-bordered table-hover'],
         'headerRowOptions' => ['class' => 'x'],
         'columns' => [

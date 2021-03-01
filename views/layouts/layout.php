@@ -3,10 +3,11 @@
 #http://dixonsatit.github.io/2015/06/20/create-theme-yii2.html
 use app\widgets\Alert;
 use app\assets\AppAssetIndex;
-use yii\widgets\Breadcrumbs;
+use yii\bootstrap4\Breadcrumbs;
 use yii\helpers\Html;
 
 AppAssetIndex::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

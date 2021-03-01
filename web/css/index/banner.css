@@ -14,7 +14,7 @@
     align-items:flex-start;
 }   
 .banner .link-logo{
-    width: 300px;
+    width: 400px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: relative;
@@ -28,10 +28,11 @@
 .banner .link-logo a:first-child{
     top: 50%;
     font-size: 0.7rem;
+    /* text-decoration: underline; */
 }
 .banner .link-logo a:last-child{
     bottom: 50%;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 .banner div:first-child{
