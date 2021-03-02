@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\models;
+namespace app\modules\backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\models\NewsDocument;
+use app\modules\backend\models\DoctorProfile;
 
 /**
- * NewsSearch represents the model behind the search form of `app\modules\models\NewsDocument`.
+ * DoctorProfileSearch represents the model behind the search form of `app\modules\models\DoctorProfile`.
  */
-class NewsSearch extends NewsDocument
+class DoctorProfileSearch extends DoctorProfile
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class NewsSearch extends NewsDocument
     public function rules()
     {
         return [
-            [['id', 'news_type_id'], 'integer'],
-            [['path', 'title', 'detail', 'create_at', 'update_at', 'public'], 'safe'],
+            [['id', 'doctor_id'], 'integer'],
+            [['email', 'mobile', 'sub_special', 'avatar', 'image', 'birth_day'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class NewsSearch extends NewsDocument
      */
     public function search($params)
     {
-        $query = NewsDocument::find();
+        $query = DoctorProfile::find();
 
         // add conditions that should always apply here
 
@@ -59,15 +59,15 @@ class NewsSearch extends NewsDocument
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'create_at' => $this->create_at,
-            'update_at' => $this->update_at,
-            'news_type_id' => $this->news_type_id,
+            'doctor_id' => $this->doctor_id,
         ]);
 
-        $query->andFilterWhere(['like', 'path', $this->path])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'detail', $this->detail])
-            ->andFilterWhere(['like', 'public', $this->public]);
+        $query->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'mobile', $this->mobile])
+            ->andFilterWhere(['like', 'sub_special', $this->sub_special])
+            ->andFilterWhere(['like', 'avatar', $this->avatar])
+            ->andFilterWhere(['like', 'image', $this->image])
+            ->andFilterWhere(['like', 'birth_day', $this->birth_day]);
 
         return $dataProvider;
     }

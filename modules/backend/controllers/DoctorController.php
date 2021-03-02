@@ -8,14 +8,14 @@ use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 use yii\db\Transaction;
 use yii\base\Exception;
-use app\modules\models\Doctor;
-use app\modules\models\DoctorSearch;
+use app\modules\backend\models\Doctor;
+use app\modules\backend\models\DoctorSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\modules\models\DoctorProfile;
-use app\modules\models\DoctorHasBranch;
-use app\modules\models\DoctorHasTimePeriod;
-use app\modules\models\DoctorHasWorkDate;
+use app\modules\backend\models\DoctorProfile;
+use app\modules\backend\models\DoctorHasBranch;
+use app\modules\backend\models\DoctorHasTimePeriod;
+use app\modules\backend\models\DoctorHasWorkDate;
 use yii\web\Request;
 /**
  * DoctorController implements the CRUD actions for Doctor model.

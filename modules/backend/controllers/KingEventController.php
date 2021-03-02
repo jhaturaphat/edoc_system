@@ -1,18 +1,18 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\backend\controllers;
 
 use Yii;
-use app\models\NewsDocument;
-use app\models\NewsDocumentSearch;
+use app\models\backend\KingEvent;
+use app\models\backend\KingEventSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * NewsDocumentController implements the CRUD actions for NewsDocument model.
+ * KingEventController implements the CRUD actions for KingEvent model.
  */
-class NewsDocumentController extends Controller
+class KingEventController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,15 +30,14 @@ class NewsDocumentController extends Controller
     }
 
     /**
-     * Lists all NewsDocument models.
+     * Lists all KingEvent models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $this->layout = 'layout2'; //สั่งให้ rander บน layout2.php ใน /views/layout/layout2.php        
-        $searchModel = new NewsDocumentSearch();
+        $searchModel = new KingEventSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -46,7 +45,7 @@ class NewsDocumentController extends Controller
     }
 
     /**
-     * Displays a single NewsDocument model.
+     * Displays a single KingEvent model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,13 +58,13 @@ class NewsDocumentController extends Controller
     }
 
     /**
-     * Creates a new NewsDocument model.
+     * Creates a new KingEvent model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new NewsDocument();
+        $model = new KingEvent();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -77,7 +76,7 @@ class NewsDocumentController extends Controller
     }
 
     /**
-     * Updates an existing NewsDocument model.
+     * Updates an existing KingEvent model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -97,7 +96,7 @@ class NewsDocumentController extends Controller
     }
 
     /**
-     * Deletes an existing NewsDocument model.
+     * Deletes an existing KingEvent model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -111,15 +110,15 @@ class NewsDocumentController extends Controller
     }
 
     /**
-     * Finds the NewsDocument model based on its primary key value.
+     * Finds the KingEvent model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return NewsDocument the loaded model
+     * @return KingEvent the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = NewsDocument::findOne($id)) !== null) {
+        if (($model = KingEvent::findOne($id)) !== null) {
             return $model;
         }
 

@@ -37,5 +37,6 @@ class AppAssetIndex extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap4\BootstrapAsset', //ไม่ใช้ Bootstrap comment ไว้
         'simialbi\yii2\animatecss\AnimateCssPluginAsset', 
+        'rmrevin\yii\fontawesome\CdnProAssetBundle'
     ];
 }

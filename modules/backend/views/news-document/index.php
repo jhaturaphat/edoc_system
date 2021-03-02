@@ -36,7 +36,34 @@ $this->params['breadcrumbs'][] = $this->title;
             //'news_type_id',
             //'public',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            'template'=>'{view} {update} {delete}',
+                //'visible'=> Yii::$app->user->isGuest ? false : true,
+                'contentOptions'=>[
+                    'noWrap' => true
+                ],
+                'buttons' => [
+                    'update' =>  function($url,$model) {
+                        return Html::a('<i class="fas fa-edit"></i>', $url, [
+                            'title' => Yii::t('app', 'update')
+                        ]);
+                    },
+                    'view' =>  function($url,$model) {
+                        return Html::a('<i class="fas fa-eye"></i>', $url, [
+                            'title' => Yii::t('app', 'view')
+                        ]);
+                    },
+                    'delete' => function($url,$model) {
+                        return Html::a('<i class="fas fa-trash"></i>', $url, [
+                            'title' => Yii::t('app', 'delete'),                            
+                            'data' => [
+                                'confirm' => 'Are you sure you want to delete this item?',
+                                'method' => 'post',
+                            ],
+                        ]);
+                    }
+                ],
+            ],
         ],
     ]); ?>
 

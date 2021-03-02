@@ -19,8 +19,7 @@ foreach(NewsType::findAll(['active'=>'YES']) as $item){
 ?>
 <div class="container">
    
-<div class="panel panel-default">
-    <div class="panel-heading">Panel heading without title</div>
+<div class="panel panel-default">    
         <div class="panel-body">  
             <?php
             echo TabsX::widget([

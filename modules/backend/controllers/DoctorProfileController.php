@@ -4,8 +4,8 @@ namespace app\modules\backend\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use app\modules\models\DoctorProfile;
-use app\modules\models\DoctorProfileSearch;
+use app\modules\backend\models\DoctorProfile;
+use app\modules\backend\models\DoctorProfileSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

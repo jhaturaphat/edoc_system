@@ -5,9 +5,9 @@
 
 use app\widgets\Alert;
 use yii\helpers\Html;
-use yii\bootstrap4\Nav;
-use yii\bootstrap4\NavBar;
-use yii\bootstrap4\Breadcrumbs;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -32,15 +32,28 @@ AppAsset::register($this);
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse',
+            'class' => 'row navbar-inverse',
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            //['label' => 'About', 'url' => ['/site/about'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'จัดหมวดหมู่', 'items' => [
+                ['label' => 'ข่าวประชาสัมพันธ์', 'url' => ['/backend/news-type']],
+                ['label' => 'xxxx'],
+                ['label' => 'xxxx'],
+                ['label' => 'xxxx'],
+            ], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'จัดการเว็ปไชต์', 'items' => [
+                ['label' => 'แพทย์', 'url' => ['/backend/doctor']],
+                ['label' => 'ข่าวประชาสัมพันธ์', 'url' => ['/backend/news-document']],                
+                ['label' => 'กิจกรรมเฉลิมพระเกียรติ', 'url' => ['/backend/king-event']],                
+            ], 'visible' => !Yii::$app->user->isGuest],            
+            ['label' => 'Administrator', 'items' => [
+                ['label' => 'จัดการผู้ใช้งาน', 'url' => ['/user/admin/index']],
+                ['label' => 'จัดการสิทธิ์', 'url' => ['/admin']],
+            ], 'visible' => !Yii::$app->user->isGuest],            
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/user/security/login']]
             ) : (

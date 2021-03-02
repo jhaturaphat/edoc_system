@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\models;
+namespace app\modules\backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\models\NewsType;
+use app\modules\backend\models\NewsDocument;
 
 /**
- * NewsTypeSearch represents the model behind the search form of `app\modules\models\NewsType`.
+ * NewsSearch represents the model behind the search form of `app\modules\models\NewsDocument`.
  */
-class NewsTypeSearch extends NewsType
+class NewsSearch extends NewsDocument
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class NewsTypeSearch extends NewsType
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['id', 'news_type_id'], 'integer'],
+            [['path', 'title', 'detail', 'create_at', 'update_at', 'public'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class NewsTypeSearch extends NewsType
      */
     public function search($params)
     {
-        $query = NewsType::find();
+        $query = NewsDocument::find();
 
         // add conditions that should always apply here
 
@@ -59,9 +59,15 @@ class NewsTypeSearch extends NewsType
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'create_at' => $this->create_at,
+            'update_at' => $this->update_at,
+            'news_type_id' => $this->news_type_id,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'path', $this->path])
+            ->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'detail', $this->detail])
+            ->andFilterWhere(['like', 'public', $this->public]);
 
         return $dataProvider;
     }

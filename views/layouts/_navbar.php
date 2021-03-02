@@ -1,5 +1,6 @@
 <?php
     use yii\helpers\Url;
+    use yii\helpers\Html;
     use yii\bootstrap4\Nav;
     use yii\bootstrap4\NavBar;
 ?>
@@ -39,8 +40,8 @@
         'options' => ['class' => 'navbar-nav navbar-left h5'],
         'items' => [
             ['label' => 'ข่าวประชาสัมพันธ์', 'items' => [
-                ['label' => 'ข่าวทั่วไป', 'url' => '#'],                 
-                ['label' => 'สมัครงาน', 'url' => '#'],
+                ['label' => 'ข่าวทั่วไป', 'url' => ['/news-document']],                 
+                ['label' => 'สมัครงาน', 'url' => ['/news-document']],
                 ['label' => 'จัดซื้อจัดจ้าง', 'url' => ['/news-document']],
                 ['label' => 'กิจกรรมเฉลิมพระเกียรติ', 'url' => '#'],
             ]],
@@ -69,7 +70,7 @@
     ]);
 
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right h5'],
+        'options' => ['class' => 'navbar-nav navbar-left h5'],
         'items' => [            
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/user/security/login']]
@@ -77,8 +78,8 @@
                 '<li>'
                 . Html::beginForm(['/user/security/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
+                    'ออก (' . Yii::$app->user->identity->username . ')',
+                    ['class' => 'btn btn-success logout']
                 )
                 . Html::endForm()
                 . '</li>'

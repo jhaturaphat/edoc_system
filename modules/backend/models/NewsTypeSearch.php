@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\models;
+namespace app\modules\backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\models\Doctor;
+use app\modules\backend\models\NewsType;
 
 /**
- * DoctorSearch represents the model behind the search form of `app\modules\models\Doctor`.
+ * NewsTypeSearch represents the model behind the search form of `app\modules\models\NewsType`.
  */
-class DoctorSearch extends Doctor
+class NewsTypeSearch extends NewsType
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class DoctorSearch extends Doctor
     {
         return [
             [['id'], 'integer'],
-            [['prefix', 'fname_th', 'lname_th', 'fname_en', 'lname_en', 'detail'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class DoctorSearch extends Doctor
      */
     public function search($params)
     {
-        $query = Doctor::find();
+        $query = NewsType::find();
 
         // add conditions that should always apply here
 
@@ -61,12 +61,7 @@ class DoctorSearch extends Doctor
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'prefix', $this->prefix])
-            ->andFilterWhere(['like', 'fname_th', $this->fname_th])
-            ->andFilterWhere(['like', 'lname_th', $this->lname_th])
-            ->andFilterWhere(['like', 'fname_en', $this->fname_en])
-            ->andFilterWhere(['like', 'lname_en', $this->lname_en])
-            ->andFilterWhere(['like', 'detail', $this->detail]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

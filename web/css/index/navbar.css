@@ -7,6 +7,9 @@
     border-bottom: 5px solid #fa79c9;
     margin-bottom: -5px !important;  /* ต้องกำหนด margin-bottom -5px ด้วยตอนกำหนด hover */
 }
+.navbar >div > ul > li > a {
+    color: #3e66b0 !important;
+}
 .navbar >div > ul > li > div > a{
     transition: all .2s linear !important;
 }
@@ -15,34 +18,14 @@
     color: #3e66b0 !important;    
     font-size: larger;    
 }
-/* .navbar{
-    margin-bottom: 0 !important;
-    border: 0 !important;
-} */
-/* .navbar-default {
-    background-color: #ffffff !important;
-    border-color: #ffffff !important;
-    font-size: 18px !important;
-} */
-/* .navbar-default .navbar-nav > li > a {
-    color: #3e66b0;
-} */
-/* .navbar-default .navbar-nav > .open > a{
-    color: #3e66b0 !important;
-    background-color: #ffffff !important;
-} */
-/* .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-    color: #3e66b0 !important;
-    background-color: #ffffff !important;
-} */
+.navbar-light .navbar-nav .nav-link {
+    color: rgb(73 138 204);
+}
 .dropdown-menu{
     border: 0 !important;
 }
 .dropdown-menu > li > a{
     font-size: 15px !important;
     color: #3e66b0 !important;
-}
-dropdown-menu:hover{
-    display: block;
 }
 
