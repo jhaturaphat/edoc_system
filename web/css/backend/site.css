@@ -1,0 +1,4 @@
+/* Overide navbar  */
+.navbar > div > div > ul{
+    display: inline-flex;
+}

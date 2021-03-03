@@ -13,6 +13,8 @@ git branch -M master <br>
 git push -u origin master <br>
 <br>
 
+ให้สร้าง ไฟล์ hosxp.php ใน /config/hosxp.php แล้ว copy โค๊ดทั้งหมดมาจาก db.php วางใน hosxp.php ไฟล์ แก้ไข้ ตัวแปรเชื่อมต่อใหม่ให้เป็นฐานข้อมูลข้อง hosxp
+
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">

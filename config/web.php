@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$hosxp = require __DIR__ . '/hosxp.php';
 
 $config = [
     'id' => 'basic',
@@ -45,6 +46,7 @@ $config = [
         ],
     ],
     'components' => [ 
+        'Utility' => ['class' => 'app\components\Utility'],
         'assetManager' => [
             
         ],   
@@ -84,6 +86,7 @@ $config = [
             ],
         ],
         'db' => $db,
+        'hosxp' => $hosxp,
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -96,9 +99,7 @@ $config = [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            '*',
-            //'backend/*',
-            'some-controller/some-action',
+            '*'        
         ]
         ],
     'params' => $params,
