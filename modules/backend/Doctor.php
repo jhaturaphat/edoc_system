@@ -18,7 +18,10 @@ class Doctor extends \yii\base\Module
     public function init()
     {
         parent::init();
-
+        \Yii::$app->assetManager->bundles['yii\\bootstrap4\\BootstrapAsset'] = [
+            'css' => [],
+            'js' => []
+        ];
         // custom initialization code goes here
     }
 }

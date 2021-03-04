@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\KingEvent */
@@ -10,19 +12,33 @@ use yii\widgets\ActiveForm;
 
 <div class="king-event-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'title')->textarea(['rows' => 6]) ?>
+    <?php 
+        echo $form->field($model, 'img_event')->widget(FileInput::classname(), [
+            'options' => [
+                'multiple' => true,
+                'accept' => 'image/*'                                     
+            ],              
+            'pluginOptions' => [  
+                'uploadUrl' => true,                       
+                'maxFileCount' => 15,       
+                'overwriteInitial' => true,
+                'initialPreviewAsData'=>true,
+                'browseClass' => 'btn btn-info',                
+                'showRemove' => true,
+                'showUpload' => false, 
+                'maxFileSize'=>2800
+            ],
+            'pluginEvents' => [
+                
+            ]
+        ]); 
+        ?>
+
+    <?= $form->field($model, 'title')->textInput() ?>
 
     <?= $form->field($model, 'detail')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'create_at')->textInput() ?>
-
-    <?= $form->field($model, 'user_post')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'user_update')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'view_count')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

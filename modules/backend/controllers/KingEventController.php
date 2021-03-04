@@ -3,8 +3,8 @@
 namespace app\modules\backend\controllers;
 
 use Yii;
-use app\models\backend\KingEvent;
-use app\models\backend\KingEventSearch;
+use app\models\KingEvent;
+use app\models\KingEventSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -105,7 +105,6 @@ class KingEventController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 

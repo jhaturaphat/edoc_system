@@ -17,6 +17,7 @@ use Yii;
  */
 class KingEvent extends \yii\db\ActiveRecord
 {
+    public $img_event;
     /**
      * {@inheritdoc}
      */
@@ -32,10 +33,8 @@ class KingEvent extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'detail'], 'required'],
-            [['title', 'detail'], 'string'],
-            [['create_at'], 'safe'],
-            [['view_count'], 'integer'],
-            [['user_post', 'user_update'], 'string', 'max' => 255],
+            [['title', 'detail'], 'string'],            
+            [['img_event'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -52,6 +51,32 @@ class KingEvent extends \yii\db\ActiveRecord
             'user_post' => 'คนโพสต์',
             'user_update' => 'คนแก้ไขโพสต์',
             'view_count' => 'จำนวนการเข้าชม',
+            'img_event' => 'อัพโหลดรูปภาพ',
         ];
+    }
+
+    public function upload($path = null)
+    {        
+        //echo $path; exit;
+        if(!empty($this->img_event) && is_dir($path)) {
+            //. $this->File->baseName . '.'. $this->File->extension              
+                $this->img_event->saveAs($path. $this->img_event->baseName . '.'. $this->img_event->extension); 
+                return true;
+        }else{
+            return false;
+        }
+    }
+
+    static function CreateFolderKingEvent($id){
+        $path = 'images/king-event';
+        if(!is_dir($path)) mkdir($path, '0777');  //ถ้ายังไม่ได้สร้างโฟล์เดอร์ ก็สร้าง king-event
+        $thumbnail = "img-".$id."-".date("dmY_His");
+        //ถ้ายังไม่ได้สร้างโฟล์เดอร์ ก็สร้าง Folder ปีขึ้นมา
+        if(!is_dir($path.'/'.$thumbnail)){ 
+            mkdir($path.'/'.$thumbnail, '0777');            
+            return $path.'/'.$thumbnail.'/';
+        }else{
+            return $path.'/'.$thumbnail.'/';
+        }
     }
 }

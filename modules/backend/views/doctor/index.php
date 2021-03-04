@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'pager' => ['class' => yii\bootstrap4\LinkPager::className(), 'firstPageLabel' => Yii::t('app', 'First'), 'lastPageLabel' => Yii::t('app', 'Last'),],        
+        //'pager' => ['class' => yii\bootstrap4\LinkPager::className(), 'firstPageLabel' => Yii::t('app', 'First'), 'lastPageLabel' => Yii::t('app', 'Last'),],        
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             //'id',
