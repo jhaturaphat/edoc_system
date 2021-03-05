@@ -3,11 +3,16 @@
 namespace app\modules\backend\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
+use yii\web\UploadedFile;
+use yii\db\Transaction;
+use yii\base\Exception;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+
 use app\models\KingEvent;
 use app\models\KingEventSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * KingEventController implements the CRUD actions for KingEvent model.
@@ -66,10 +71,36 @@ class KingEventController extends Controller
     {
         $model = new KingEvent();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())){
+            $model->img_event = UploadedFile::getInstances($model, 'img_event'); 
+            $model->folder_img = $model::CreateFolderKingEvent();
+            $transaction = Yii::$app->db->beginTransaction();
+            try{
+                if($model->save(FALSE)){
+                    if($model->upload($model->folder_img)){
+                        $transaction->commit(); 
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }else{
+                        $transaction->rollBack();
+                        throw new \yii\web\HttpException(404, 'ไม่สามารถบันทึกไฟล์ได้');
+                    } 
+                    $transaction->commit();                
+                }
+            }catch (\Exception $e) {
+                $flag = false;
+                $transaction->rollBack();                
+                throw $e;
+            } catch (\Throwable $e) {
+                $transaction->rollBack();
+                $flag = false;
+                throw $e;
+            }
         }
 
+       
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //     return $this->redirect(['view', 'id' => $model->id]);
+        // }
         return $this->render('create', [
             'model' => $model,
         ]);

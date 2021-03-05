@@ -34,7 +34,7 @@ class KingEvent extends \yii\db\ActiveRecord
         return [
             [['title', 'detail'], 'required'],
             [['title', 'detail'], 'string'],            
-            [['img_event'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['img_event'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 15],
         ];
     }
 
@@ -56,21 +56,24 @@ class KingEvent extends \yii\db\ActiveRecord
     }
 
     public function upload($path = null)
-    {        
-        //echo $path; exit;
+    { 
         if(!empty($this->img_event) && is_dir($path)) {
-            //. $this->File->baseName . '.'. $this->File->extension              
-                $this->img_event->saveAs($path. $this->img_event->baseName . '.'. $this->img_event->extension); 
+                foreach($this->img_event as $file){
+                    if(!$file->saveAs($path. $file->baseName . '.'. $file->extension)){
+                        array_map( 'unlink', array_filter((array) glob($path."/*") ) ); //ลบข้อมูลภาพในโฟล์เดอร์นี้ทั้งหมดถ้ามี Error
+                        return false;
+                    }
+                }
                 return true;
         }else{
             return false;
         }
     }
 
-    static function CreateFolderKingEvent($id){
+    static function CreateFolderKingEvent(){ 
         $path = 'images/king-event';
         if(!is_dir($path)) mkdir($path, '0777');  //ถ้ายังไม่ได้สร้างโฟล์เดอร์ ก็สร้าง king-event
-        $thumbnail = "img-".$id."-".date("dmY_His");
+        $thumbnail = "img-".date("dmY_His");
         //ถ้ายังไม่ได้สร้างโฟล์เดอร์ ก็สร้าง Folder ปีขึ้นมา
         if(!is_dir($path.'/'.$thumbnail)){ 
             mkdir($path.'/'.$thumbnail, '0777');            

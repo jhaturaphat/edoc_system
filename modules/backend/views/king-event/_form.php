@@ -15,7 +15,7 @@ use yii\helpers\Url;
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?php 
-        echo $form->field($model, 'img_event')->widget(FileInput::classname(), [
+        echo $form->field($model, 'img_event[]')->widget(FileInput::classname(), [
             'options' => [
                 'multiple' => true,
                 'accept' => 'image/*'                                     
@@ -23,8 +23,8 @@ use yii\helpers\Url;
             'pluginOptions' => [  
                 'uploadUrl' => true,                       
                 'maxFileCount' => 15,       
-                'overwriteInitial' => true,
-                'initialPreviewAsData'=>true,
+                // 'overwriteInitial' => true,
+                // 'initialPreviewAsData'=>true,
                 'browseClass' => 'btn btn-info',                
                 'showRemove' => true,
                 'showUpload' => false, 
