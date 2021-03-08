@@ -3,16 +3,19 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\helpers\Url;
-
+use app\assets\AppAssetLightbox;
 /* @var $this yii\web\View */
 /* @var $model app\models\KingEvent */
+
+
+AppAssetLightbox::register($this);
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'กิจกรรมเฉลิมพระเกียรติ', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="king-event-view">
+<div class="king-event-view container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -45,73 +48,31 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <!-- The Gallery as lightbox dialog, should be a document body child element -->
-<div
-  id="blueimp-gallery"
-  class="blueimp-gallery"
-  aria-label="image gallery"
-  aria-modal="true"
-  role="dialog"
->
-  <div class="slides" aria-live="polite"></div>
-  <h3 class="title"></h3>
-  <a
-    class="prev"
-    aria-controls="blueimp-gallery"
-    aria-label="previous slide"
-    aria-keyshortcuts="ArrowLeft"
-  ></a>
-  <a
-    class="next"
-    aria-controls="blueimp-gallery"
-    aria-label="next slide"
-    aria-keyshortcuts="ArrowRight"
-  ></a>
-  <a
-    class="close"
-    aria-controls="blueimp-gallery"
-    aria-label="close"
-    aria-keyshortcuts="Escape"
-  ></a>
-  <a
-    class="play-pause"
-    aria-controls="blueimp-gallery"
-    aria-label="play slideshow"
-    aria-keyshortcuts="Space"
-    aria-pressed="false"
-    role="button"
-  ></a>
-  <ol class="indicator"></ol>
-</div>
+
 
 
 <?php 
 //'.Yii::getAlias('@web').$model->folder_img.$imgName.'
 $imgFiles = \yii\helpers\FileHelper::findFiles(Yii::getAlias('@web').str_replace("/" , "\\" ,$model->folder_img) ,['only'=>['*.*']]);
-echo '<div id="links">';
+echo '<div class="container">';
+echo '<div id="my-light-boox" class="row no-gutters">';
 foreach($imgFiles as $files)
    {
         $explodeImg = explode('\\', $files);
         $imgName = end($explodeImg);
-        echo '<a href="'.Yii::getAlias('@web').$model->folder_img.$imgName.'" title="Banana">
-        <img src="'.Yii::getAlias('@web').$model->folder_img.$imgName.'" alt="Banana" />
-      </a>';
+        echo '<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a data-lightbox="mygallery" href="'.Yii::getAlias('@web').$model->folder_img.$imgName.'">
+        <img src="'.Yii::getAlias('@web').$model->folder_img.$imgName.'" class="art img-fluid">
+        </a>
+        </div>';
     }
 
 ?>
+<?php
+echo '</div>';
 echo '</div>';
 
 
-
-<script>
-  document.getElementById('links').onclick = function (event) {
-    event = event || window.event
-    var target = event.target || event.srcElement
-    var link = target.src ? target.parentNode : target
-    var options = { index: link, event: event }
-    var links = this.getElementsByTagName('a')
-    blueimp.Gallery(links, options)
-  }
-</script>
 
 
 

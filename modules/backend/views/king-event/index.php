@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 $this->title = 'กิจกรรมเฉลิมพระเกียรติ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="king-event-index">
+<div class="king-event-index container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

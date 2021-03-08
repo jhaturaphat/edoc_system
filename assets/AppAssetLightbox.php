@@ -11,14 +11,16 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAssetVenobox extends AssetBundle
+class AppAssetLightbox extends AssetBundle
 {
-    public $sourcePath  = '@vendor/nicolafranchini/venobox';
+    public $baseUrl = '@web';
     
     public $css = [
-        'venobox/venobox.min.css',
+        'css/lightbox.min.css',
+        'css/lightbox-style.css',
     ];
     public $js = [
-        'venobox/venobox.min.js',
+        'js/lib/lightbox-plus-jquery.min.js',
+        'js/lib/popper.min.js',
     ];    
 }
