@@ -67,7 +67,9 @@ foreach($imgFiles as $files)
         </div>';
     }
 
-?>
+    
+
+?> 
 <?php
 echo '</div>';
 echo '</div>';

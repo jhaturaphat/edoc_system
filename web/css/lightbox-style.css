@@ -26,6 +26,6 @@
     margin-left: 0;
  }
  .img-fluid {
-    max-width: 300px;
-    height: auto;
+    max-width: 300px !important;
+    height: auto !important;
 }

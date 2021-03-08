@@ -135,8 +135,17 @@ class KingEventController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-        return $this->redirect(['index']);
+        $model = $this->findModel($id);
+        if($model::DelImgAll($model->folder_img)){
+            $model->delete();
+            return $this->redirect(['index']);
+        }        
+    }
+
+    
+    public function actionDeleteItem()
+    {
+       echo $_POST['key'];
     }
 
     /**

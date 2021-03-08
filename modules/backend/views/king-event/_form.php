@@ -20,18 +20,20 @@ use yii\helpers\Url;
                 'multiple' => true,
                 'accept' => 'image/*'                                     
             ],              
-            'pluginOptions' => [  
+            'pluginOptions' => [      
+                'initialPreview' =>  $model->isNewRecord ? null : $model::getThumnail($model),   
+                'initialPreviewConfig' => $model->isNewRecord ? null : $model::getPreviews($model),   
                 'uploadUrl' => true,                       
                 'maxFileCount' => 15,       
-                // 'overwriteInitial' => true,
-                // 'initialPreviewAsData'=>true,
+                'overwriteInitial' => true,
+                'initialPreviewAsData'=>true,
                 'browseClass' => 'btn btn-info',                
                 'showRemove' => true,
                 'showUpload' => false, 
                 'maxFileSize'=>2800
             ],
             'pluginEvents' => [
-                
+                'delete' => "function(e){console.log(e)}"
             ]
         ]); 
         ?>

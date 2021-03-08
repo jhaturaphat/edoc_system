@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "king_event".
@@ -70,6 +71,24 @@ class KingEvent extends \yii\db\ActiveRecord
         }
     }
 
+    static function DelFolder($path = null){
+        if(is_dir($path)){            
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    static function DelImgAll($path = null){
+        if(is_dir($path)){
+            array_map('unlink', array_filter((array) glob($path."/*") ) ); //ลบข้อมูลภาพในโฟล์เดอร์นี้ทั้งหมดถ้ามี
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     static function CreateFolderKingEvent(){ 
         $path = 'images/king-event';
         if(!is_dir($path)) mkdir($path, '0777');  //ถ้ายังไม่ได้สร้างโฟล์เดอร์ ก็สร้าง king-event
@@ -81,5 +100,33 @@ class KingEvent extends \yii\db\ActiveRecord
         }else{
             return $path.'/'.$thumbnail.'/';
         }
+    }
+
+    static function getThumnail($model){
+        $imgFiles = \yii\helpers\FileHelper::findFiles(Yii::getAlias('@web').str_replace("/" , "\\" ,$model->folder_img) ,['only'=>['*.*']]);
+        $arr = [];
+        foreach($imgFiles as $files)
+        {
+            $explodeImg = explode('\\', $files);
+            $imgName = end($explodeImg);
+            $arr[] = Yii::getAlias('@web').$model->folder_img.$imgName;
+        }
+        return $arr;
+    }
+    static function getPreviews($model){
+        $imgFiles = \yii\helpers\FileHelper::findFiles(Yii::getAlias('@web').str_replace("/" , "\\" ,$model->folder_img) ,['only'=>['*.*']]);
+        $arr = [];        
+        foreach($imgFiles as $files)
+        {
+            $explodeImg = explode('\\', $files);
+            $imgName = end($explodeImg);
+            $initPre['caption'] = $imgName;
+            $initPre['url'] = 'index.php?r=/backend/king-event/delete-item'; //Delete Url
+            $initPre['key'] = Yii::getAlias('@web').$model->folder_img.$imgName; 
+            $initPre['downloadUrl'] = Yii::getAlias('@web').$model->folder_img.$imgName;            
+            $initPre['size'] = getimagesize($model->folder_img.$imgName)[0];
+            $arr[] = $initPre;
+        }
+        return $arr;
     }
 }
