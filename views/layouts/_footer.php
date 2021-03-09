@@ -1,9 +1,12 @@
 <!-- footer -->
+<?php
+    use yii\helpers\Url;
+?>
 <footer>
     <div class="ft-title">
         <div class="phone-number">
             <ul>
-                <li><img src="assets/img/icon/phone.png" alt=""></li>
+                <li><img src="<?= Yii::getAlias('@web') ?>/img/icon/phone.png" alt=""></li>
                 <li>
                     <label for="">Call Center</label>
                     <label for="">045-3611334</label>
@@ -14,8 +17,8 @@
             <ul>
                 <li>ติดตามข่าวสารโรงพยาบาลสมเด็จพระยุพราชเดชอุดม</li>
                 <li>
-                    <img src="assets/img/icon/facebook-icon.png" alt="">
-                    <img src="assets/img/icon/youtube-icon.png" alt="">
+                    <img src="<?= Yii::getAlias('@web') ?>/img/icon/facebook-icon.png" alt="">
+                    <img src="<?= Yii::getAlias('@web') ?>/img/icon/youtube-icon.png" alt="">
                 </li>
             </ul>            
         </div>
@@ -31,7 +34,7 @@
         </ul>
         <ul>
             บริการผู้ป่วย
-            <li><a href="#">ค้นหาแพทย์</a></li>
+            <li><a href="<?= Url::toRoute('/doctor')?>">ค้นหาแพทย์</a></li>
             <li><a href="#">ตารางออกตรวจ</a></li>
             <li><a href="#">ห้องพิเศษ</a></li>
             <li><a href="#">สิทธิผู้ป่วย</a></li>

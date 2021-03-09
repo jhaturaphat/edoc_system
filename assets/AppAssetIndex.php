@@ -20,18 +20,23 @@ class AppAssetIndex extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'css/index/style.css',
+        'css/index/banner.css',
+        'css/index/navbar.css',
         'css/index/site.css',
         'css/index/doctor.css',
         'css/index/footer.css',
-        'css/index/mobile.css',
-        'css/index/slider.css',
-        'css/index/style.css'
+        'css/index/mobile.css'      
+        
     ];
     public $js = [
+        'js/script.js',
         'js/lib/FontAwesome.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        //'yii\bootstrap\BootstrapAsset', //ไม่ใช้ Bootstrap comment ไว้
+        'yii\bootstrap4\BootstrapAsset', //ไม่ใช้ Bootstrap comment ไว้
+        'simialbi\yii2\animatecss\AnimateCssPluginAsset', 
+        'rmrevin\yii\fontawesome\CdnProAssetBundle'
     ];
 }

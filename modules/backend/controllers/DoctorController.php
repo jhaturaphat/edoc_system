@@ -3,18 +3,19 @@
 namespace app\modules\backend\controllers;
 
 use Yii;
+use yii\web\Controller;
+use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 use yii\db\Transaction;
 use yii\base\Exception;
-use app\modules\models\Doctor;
-use app\modules\models\DoctorSearch;
-use yii\web\Controller;
+use app\modules\backend\models\Doctor;
+use app\modules\backend\models\DoctorSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\modules\models\DoctorProfile;
-use app\modules\models\DoctorHasBranch;
-use app\modules\models\DoctorHasTimePeriod;
-use app\modules\models\DoctorHasWorkDate;
+use app\modules\backend\models\DoctorProfile;
+use app\modules\backend\models\DoctorHasBranch;
+use app\modules\backend\models\DoctorHasTimePeriod;
+use app\modules\backend\models\DoctorHasWorkDate;
 use yii\web\Request;
 /**
  * DoctorController implements the CRUD actions for Doctor model.
@@ -31,6 +32,17 @@ class DoctorController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => [],
+                'rules' => [                    
+                    [
+                        'allow' => true,
+                        'actions' => ['index','view','create','update','delete'],
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
@@ -59,6 +71,7 @@ class DoctorController extends Controller
      */
     public function actionView($id)
     {
+        //print_r( $this->findModel($id)); exit;
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -100,7 +113,8 @@ class DoctorController extends Controller
                 $docProfile->doctor_id = $model->id;
                 $docProfile->image = 'images/doctors/'. $docProfile->imageFile->baseName . '.'. $docProfile->imageFile->extension;
                 $docProfile->save();
-                $docHasBranch->doctor_id = $model->id; $docHasBranch->save();
+                $docHasBranch->doctor_id = $model->id; 
+                $docHasBranch->save();
                 //สร้างรูปแบบเตรียมข้อมูล insert ลงตาราง doctor_has_time_period
                 $batchQuery1 = array();
                 foreach($docHasTimePeri->time_period_id as $key => $val){
@@ -124,8 +138,7 @@ class DoctorController extends Controller
 
             } catch (\Exception $e) {
                 $flag = false;
-                $transaction->rollBack();
-                
+                $transaction->rollBack();                
                 throw $e;
             } catch (\Throwable $e) {
                 $transaction->rollBack();
@@ -169,9 +182,9 @@ class DoctorController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        echo '<br><pre>';
-        print_r($docHasWorkDate);
-        echo '</pre>';
+        // echo '<br><pre>';
+        // print_r($docHasWorkDate);
+        // echo '</pre>';
         return $this->render('update', [
             'model' => $model,
             'docProfile' => $docProfile,
@@ -195,7 +208,7 @@ class DoctorController extends Controller
         $transaction = Yii::$app->db->beginTransaction();
         try{
             if($this->findModel($id)->delete()){
-                if(unlink($oldImage->image)){
+                if(@unlink($oldImage->image)){
                     $transaction->commit(); 
                 }else{
                     $transaction->rollBack();

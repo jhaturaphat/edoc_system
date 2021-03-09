@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
-use app\modules\models\Branch;
-use app\modules\models\WorkDate;
-use app\modules\models\TimePeriod;
+use app\modules\backend\models\Branch;
+use app\modules\backend\models\WorkDate;
+use app\modules\backend\models\TimePeriod;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\models\Doctor */

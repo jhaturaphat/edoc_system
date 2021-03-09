@@ -9,7 +9,6 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -32,20 +31,33 @@ AppAsset::register($this);
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse',
+            'class' => 'row navbar-inverse',
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            //['label' => 'About', 'url' => ['/site/about'], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'จัดหมวดหมู่', 'items' => [
+                ['label' => 'ข่าวประชาสัมพันธ์', 'url' => ['/backend/news-type']],
+                ['label' => 'xxxx'],
+                ['label' => 'xxxx'],
+                ['label' => 'xxxx'],
+            ], 'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'จัดการเว็ปไชต์', 'items' => [
+                ['label' => 'แพทย์', 'url' => ['/backend/doctor']],
+                ['label' => 'ข่าวประชาสัมพันธ์', 'url' => ['/backend/news-document']],                
+                ['label' => 'กิจกรรมเฉลิมพระเกียรติ', 'url' => ['/backend/king-event']],                
+            ], 'visible' => !Yii::$app->user->isGuest],            
+            ['label' => 'Administrator', 'items' => [
+                ['label' => 'จัดการผู้ใช้งาน', 'url' => ['/user/admin/index']],
+                ['label' => 'จัดการสิทธิ์', 'url' => ['/admin']],
+            ], 'visible' => !Yii::$app->user->isGuest],            
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Login', 'url' => ['/user/security/login']]
             ) : (
                 '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
+                . Html::beginForm(['/user/security/logout'], 'post')
                 . Html::submitButton(
                     'Logout (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
@@ -59,14 +71,14 @@ AppAsset::register($this);
     ?>
 
 
-    <div class="container"> 
-    
+    <div class="container">     
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>   
+        <?= Alert::widget() ?>        
     </div>
+    
+    <?= $content ?>   
 </div>
 <footer class="footer">
     <div class="container">

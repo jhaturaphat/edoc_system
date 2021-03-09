@@ -20,7 +20,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        'css/backend/site.css',
     ];
     public $js = [
         
@@ -28,5 +28,7 @@ class AppAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'simialbi\yii2\animatecss\AnimateCssPluginAsset', 
+        'rmrevin\yii\fontawesome\CdnProAssetBundle'
     ];
 }

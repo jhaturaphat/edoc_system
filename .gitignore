@@ -32,3 +32,10 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 ~$RBAC Hierarchy.pptx
+
+#hosxp
+/config/hosxp.php
+
+/web/images/king-event/*
+
+web_hospital.mwb*
