@@ -8,9 +8,11 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\KingEvent */
 /* @var $form yii\widgets\ActiveForm */
+
+app\assets\AppAssetLightbox::register($this);
 ?>
 
-<div class="king-event-form container">
+<div class="king-event-form ">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
@@ -20,18 +22,22 @@ use yii\helpers\Url;
                 'multiple' => true,
                 'accept' => 'image/*'                                     
             ],              
-            'pluginOptions' => [      
-                'initialPreview' =>  $model->isNewRecord ? null : $model::getThumnail($model),   
-                'initialPreviewConfig' => $model->isNewRecord ? null : $model::getPreviews($model),   
+            'pluginOptions' => [  
+                'enableResumableUpload'=> true, //
+                'overwriteInitial' => false,   
+                //'initialPreview' =>  $model->isNewRecord ? [] : $model::getThumnail($model), ยังใช้งานไม่ได้ไว้ Update  ที่หลัง
+                //'initialPreviewConfig' => $model->isNewRecord ? [] : $model::getPreviews($model),   ยังใช้งานไม่ได้ไว้ Update  ที่หลัง
                 'uploadUrl' => true,                       
-                'maxFileCount' => 15,       
-                'overwriteInitial' => true,
+                'maxFileCount' => 15,     
                 'initialPreviewAsData'=>true,
                 'browseClass' => 'btn btn-info',                
                 'showRemove' => true,
                 'showUpload' => false, 
-                'maxFileSize'=>2800
-            ],
+                'maxFileSize'=>2800,
+                'uploadExtraData' => [
+                    'uploadToken' => Yii::$app->request->csrfParam, // for access control / security                     
+                ],
+            ],            
             'pluginEvents' => [
                 'delete' => "function(e){console.log(e)}"
             ]
@@ -47,5 +53,31 @@ use yii\helpers\Url;
     </div>
 
     <?php ActiveForm::end(); ?>
+
+    <?php 
+    if(!$model->isNewRecord){
+        //'.Yii::getAlias('@web').$model->folder_img.$imgName.'
+        $imgFiles = \yii\helpers\FileHelper::findFiles(Yii::getAlias('@web').str_replace("/" , "\\" ,$model->folder_img) ,['only'=>['*.*']]);
+        echo '<div class="container">';
+        echo '<div id="my-light-boox" class="row no-gutters">';
+        foreach($imgFiles as $files)
+        {
+                $explodeImg = explode('\\', $files);
+                $imgName = end($explodeImg);
+                echo '<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a data-lightbox="mygallery" href="'.Yii::getAlias('@web').$model->folder_img.$imgName.'">
+                <img src="'.Yii::getAlias('@web').$model->folder_img.$imgName.'" class="art img-fluid">
+                </a>
+                </div>';
+            }
+
+            
+
+        ?> 
+        <?php
+        echo '</div>';
+        echo '</div>';
+    }
+?>
 
 </div>

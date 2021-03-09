@@ -37,7 +37,7 @@
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-left h5'],
+        'options' => ['class' => 'navbar-nav mr-auto h5'],
         'items' => [
             ['label' => 'ข่าวประชาสัมพันธ์', 'items' => [
                 ['label' => 'ข่าวทั่วไป', 'url' => ['/news-document']],                 
@@ -70,8 +70,9 @@
     ]);
 
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-left h5'],
-        'items' => [            
+        'options' => ['class' => 'navbar-nav h5'],
+        'items' => [  
+            ['label' => 'ระบบหลังบ้าน', 'url' => ['/backend'], 'visible' => !Yii::$app->user->isGuest],          
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/user/security/login']]
             ) : (

@@ -34,6 +34,12 @@ class KingEventController extends Controller
         ];
     }
 
+    // public function beforeAction($action) {
+    //     if ($action->id == 'actionDeleteItem') {
+    //         $this->enableCsrfValidation = false;
+    //     }    
+    //     return parent::beforeAction($action);
+    // }
     /**
      * Lists all KingEvent models.
      * @return mixed
@@ -73,11 +79,11 @@ class KingEventController extends Controller
 
         if ($model->load(Yii::$app->request->post())){
             $model->img_event = UploadedFile::getInstances($model, 'img_event'); 
-            $model->folder_img = $model::CreateFolderKingEvent();
-            $transaction = Yii::$app->db->beginTransaction();
+            $model->folder_img = $model::CreateFolderKingEvent();  //สร้าง โฟล์เดอร์มาเก็บรูปภาพ 
+            $transaction = Yii::$app->db->beginTransaction(); 
             try{
                 if($model->save(FALSE)){
-                    if($model->upload($model->folder_img)){
+                    if($model->uploads($model->folder_img)){  //ทำการอัพโหลดรูปภาพ
                         $transaction->commit(); 
                         return $this->redirect(['view', 'id' => $model->id]);
                     }else{
@@ -96,11 +102,6 @@ class KingEventController extends Controller
                 throw $e;
             }
         }
-
-       
-        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        //     return $this->redirect(['view', 'id' => $model->id]);
-        // }
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -117,7 +118,11 @@ class KingEventController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->img_event = UploadedFile::getInstances($model, 'img_event');
+            if($model::DelimgInFAll($model->folder_img) && $model->uploads($model->folder_img)){
+                $model->save(FALSE);
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -136,13 +141,13 @@ class KingEventController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if($model::DelImgAll($model->folder_img)){
+        if($model::DelFolder($model->folder_img)){
             $model->delete();
             return $this->redirect(['index']);
         }        
     }
 
-    
+    //ไว้ทำที่หลัง ยังไม่เสร็จ ลบ ออกก็ได้
     public function actionDeleteItem()
     {
        echo $_POST['key'];

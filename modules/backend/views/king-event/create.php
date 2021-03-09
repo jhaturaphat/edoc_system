@@ -9,7 +9,7 @@ $this->title = 'สร้าง กิจกรรมเฉลิมพระเ
 $this->params['breadcrumbs'][] = ['label' => 'กิจกรรมเฉลิมพระเกียรติ', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="king-event-create">
+<div class="king-event-create container">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

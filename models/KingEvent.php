@@ -56,12 +56,13 @@ class KingEvent extends \yii\db\ActiveRecord
         ];
     }
 
-    public function upload($path = null)
+    public function uploads($path = null)
     { 
         if(!empty($this->img_event) && is_dir($path)) {
                 foreach($this->img_event as $file){
                     if(!$file->saveAs($path. $file->baseName . '.'. $file->extension)){
-                        array_map( 'unlink', array_filter((array) glob($path."/*") ) ); //ลบข้อมูลภาพในโฟล์เดอร์นี้ทั้งหมดถ้ามี Error
+                        if($this->isNewRecord)
+                        array_map( 'unlink', array_filter((array) glob($path."/*") ) ); //ลบข้อมูลภาพในโฟล์เดอร์นี้ทั้งหมดถ้ามี Error                        
                         return false;
                     }
                 }
@@ -71,16 +72,20 @@ class KingEvent extends \yii\db\ActiveRecord
         }
     }
 
-    static function DelFolder($path = null){
-        if(is_dir($path)){            
-            return true;
+    public static function DelFolder($path = null){ //Delete folder
+        if(is_dir($path)){ 
+            KingEvent::DelimgInFAll($path);  //การเรียกใช้ method หรือ function ภายใน Class ตัวเอง
+            if(rmdir($path)){
+                return true;
+            }else{
+                return false;
+            }                
         }else{
             return false;
         }
     }
 
-
-    static function DelImgAll($path = null){
+    public static function DelimgInFAll($path = null){ //delete images in folder
         if(is_dir($path)){
             array_map('unlink', array_filter((array) glob($path."/*") ) ); //ลบข้อมูลภาพในโฟล์เดอร์นี้ทั้งหมดถ้ามี
             return true;
@@ -89,7 +94,7 @@ class KingEvent extends \yii\db\ActiveRecord
         }
     }
 
-    static function CreateFolderKingEvent(){ 
+    public static function CreateFolderKingEvent(){ 
         $path = 'images/king-event';
         if(!is_dir($path)) mkdir($path, '0777');  //ถ้ายังไม่ได้สร้างโฟล์เดอร์ ก็สร้าง king-event
         $thumbnail = "img-".date("dmY_His");
@@ -102,7 +107,7 @@ class KingEvent extends \yii\db\ActiveRecord
         }
     }
 
-    static function getThumnail($model){
+    public static function getThumnail($model){
         $imgFiles = \yii\helpers\FileHelper::findFiles(Yii::getAlias('@web').str_replace("/" , "\\" ,$model->folder_img) ,['only'=>['*.*']]);
         $arr = [];
         foreach($imgFiles as $files)
@@ -113,7 +118,7 @@ class KingEvent extends \yii\db\ActiveRecord
         }
         return $arr;
     }
-    static function getPreviews($model){
+    public static function getPreviews($model){
         $imgFiles = \yii\helpers\FileHelper::findFiles(Yii::getAlias('@web').str_replace("/" , "\\" ,$model->folder_img) ,['only'=>['*.*']]);
         $arr = [];        
         foreach($imgFiles as $files)
