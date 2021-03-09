@@ -38,4 +38,4 @@ tests/_support/_generated
 
 /web/images/king-event/*
 
-web_hospital.mwb.*
+web_hospital.mwb*
