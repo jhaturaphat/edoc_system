@@ -61,28 +61,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout = 'layout'; //สั่งให้ rander บน layout.php ใน /views/layout/layout.php
+        //$this->layout = 'layout'; //สั่งให้ rander บน layout.php ใน /views/layout/layout.php
         return $this->render('index');
     }
 
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
 
     /**
      * Displays about page.

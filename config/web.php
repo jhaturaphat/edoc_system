@@ -6,7 +6,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
-    'name' => 'โรงพยาบาลสมเด็จพระยุพราชเดชอุดม',
+    'name' => 'โปรแกรมสารบรรณ รพร.เดชอุดม',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language' => 'th_TH',
