@@ -2,7 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-$hosxp = require __DIR__ . '/hosxp.php';
+
 
 $config = [
     'id' => 'basic',
@@ -85,8 +85,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
-        'hosxp' => $hosxp,
+        'db' => $db,        
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
