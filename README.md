@@ -20,19 +20,19 @@ DIRECTORY STRUCTURE
 -------------------
 
       รายการเมนูอื่นๆ ที่สามารถใช้งานได้
-
-/user/registration/register หน้าสมัครสมาชิก
-/user/registration/resend หน้าส่งอีเมล์ยืนยันใหม่อีกรอบ หากไม่ได้รับ
-/user/registration/confirm หน้า link เมื่อคลิก confirm อีเมล์เพื่อยันยันการสมัครสมาชิก (requires id and token query params)
-/user/security/login หน้าล็อคอิน
-/user/security/logout หน้าล็อกเอาท์ (available only via POST method)
-/user/recovery/request หน้าจอกู้รหัสผ่าน โดยกรอกอีเมล์ที่เคยลงทะเบียนไว้
-/user/recovery/reset หน้าจอเปลี่ยนรหัสผ่านหลังจากได้รับอีเมล์กู้รหัสผ่าน (requires id and token query params)
-/user/settings/profile หน้าจอโปรไฟล์ user
-/user/settings/account หน้าจอตั้งค่า (email, username, password)
-/user/settings/networks หน้าจอแสดงรายการ login ผ่าน social
-/user/profile/show หน้าจอแสดงข้อมูลรายละเอียด user (requires id query param)
-/user/admin/index หน้าจอจัดการข้อมูล user
+#
+/user/registration/register หน้าสมัครสมาชิก <br>
+/user/registration/resend หน้าส่งอีเมล์ยืนยันใหม่อีกรอบ หากไม่ได้รับ <br>
+/user/registration/confirm หน้า link เมื่อคลิก confirm อีเมล์เพื่อยันยันการสมัครสมาชิก (requires id and token query params) <br>
+/user/security/login หน้าล็อคอิน <br>
+/user/security/logout หน้าล็อกเอาท์ (available only via POST method)<br>
+/user/recovery/request หน้าจอกู้รหัสผ่าน โดยกรอกอีเมล์ที่เคยลงทะเบียนไว้ <br>
+/user/recovery/reset หน้าจอเปลี่ยนรหัสผ่านหลังจากได้รับอีเมล์กู้รหัสผ่าน (requires id and token query params)<br>
+/user/settings/profile หน้าจอโปรไฟล์ user<br>
+/user/settings/account หน้าจอตั้งค่า (email, username, password)<br>
+/user/settings/networks หน้าจอแสดงรายการ login ผ่าน social<br>
+/user/profile/show หน้าจอแสดงข้อมูลรายละเอียด user (requires id query param)<br>
+/user/admin/index หน้าจอจัดการข้อมูล user<br>
 
 
 REQUIREMENTS
