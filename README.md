@@ -32,8 +32,17 @@ DIRECTORY STRUCTURE
 /user/settings/account หน้าจอตั้งค่า (email, username, password)<br>
 /user/settings/networks หน้าจอแสดงรายการ login ผ่าน social<br>
 /user/profile/show หน้าจอแสดงข้อมูลรายละเอียด user (requires id query param)<br>
-/user/admin/index หน้าจอจัดการข้อมูล user<br>
+/user/admin/index หน้าจอจัดการข้อมูล user<br>0
 
 
 REQUIREMENTS
 ------------
+<br>
+#Admin Route
+http://localhost/path/to/index.php?r=admin <br>
+http://localhost/path/to/index.php?r=admin/route <br>
+http://localhost/path/to/index.php?r=admin/permission <br>
+http://localhost/path/to/index.php?r=admin/menu <br>
+http://localhost/path/to/index.php?r=admin/role <br>
+http://localhost/path/to/index.php?r=admin/assignment <br>
+http://localhost/path/to/index.php?r=admin/user <br>

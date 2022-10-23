@@ -16,7 +16,7 @@ $config = [
     ],
     'modules' => [
         'backend' => [
-            'class' => 'app\modules\backend\Doctor',
+            'class' => 'app\modules\backend\modules',
         ],
         'user' => [            
             'class' => 'dektrium\user\Module',
