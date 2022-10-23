@@ -20,9 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
+    <?php yii\widgets\Pjax::begin(['id' => 'pjax_edoc_status_id']) ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pager' => ['class' => yii\bootstrap4\LinkPager::className()],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -32,6 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
+    <?php yii\widgets\Pjax::end() ?>
 
 </div>
