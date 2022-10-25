@@ -52,19 +52,19 @@ class EdocSent extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'edoc_id' => 'Edoc ID',
-            'e_id' => 'E ID',
-            'edoc_read_id' => 'Edoc Read ID',
-            'r_date' => 'R Date',
-            'edoc_type_id' => 'Edoc Type ID',
-            'e_id_sent' => 'E Id Sent',
-            'e_id_dud' => 'E Id Dud',
-            'user_get' => 'User Get',
-            'date_get' => 'Date Get',
-            'ip_get' => 'Ip Get',
-            'e_id_radio' => 'E Id Radio',
-            'dep_id' => 'Dep ID',
+            'id' => 'รหัสหนังสือ',
+            'edoc_id' => 'ปีที่รับหนังสือ',
+            'e_id' => 'ลำดับที่ทั่วไปหนังสือรับ',
+            'edoc_read_id' => 'รหัสการอ่าน',
+            'r_date' => 'วันที่รับหนังสือ',
+            'edoc_type_id' => 'รหัสประเภทหนังสือ',
+            'e_id_sent' => 'ลำดับที่ทั่วไปหนังสือส่ง',
+            'e_id_dud' => 'ลำดับที่ทั่วไปหนังสือเวียนภายใน',
+            'user_get' => 'User ที่เปิดอ่าน',
+            'date_get' => 'วันทีเปิดอ่าน',
+            'ip_get' => 'เครื่องที่เปิดอ่าน',
+            'e_id_radio' => 'เลขที่หนังสือเวียนวิทยุ',
+            #'dep_id' => 'Dep ID',
         ];
     }
 }

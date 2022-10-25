@@ -20,6 +20,10 @@ $config = [
         ],
         'user' => [            
             'class' => 'dektrium\user\Module',
+            'modelMap' => [
+                'User' => 'app\models\User',
+                'RegistrationForm' => 'app\models\RegistrationForm'
+            ],
             'enableUnconfirmedLogin' => true,
             'confirmWithin' => 21600,
             'cost' => 12,
@@ -66,6 +70,13 @@ $config = [
             'identityClass' => 'dektrium\user\models\User',
             'enableAutoLogin' => true,
         ],
+        // 'view' => [
+        //     'theme' => [
+        //         'pathMap' => [
+        //             //'@dektrium/user/views' => '@app/views/user'
+        //         ],
+        //     ],
+        // ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

@@ -39,8 +39,8 @@ class EdocType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'edoc_type_id' => 'Edoc Type ID',
-            'edoc_type_name' => 'Edoc Type Name',
+            'edoc_type_id' => 'รหัสประเภทหนังสือ',
+            'edoc_type_name' => 'ชื่อประเภทหนังสือ',
         ];
     }
 }

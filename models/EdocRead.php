@@ -39,8 +39,8 @@ class EdocRead extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'edoc_read_id' => 'Edoc Read ID',
-            'edoc_read_name' => 'Edoc Read Name',
+            'edoc_read_id' => 'รหัสสถานะการอ่าน',
+            'edoc_read_name' => 'ชื่อสถานะการอ่าน',
         ];
     }
 }

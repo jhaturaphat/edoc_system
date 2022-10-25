@@ -39,8 +39,8 @@ class EdocStatus extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'edoc_status_id' => 'Edoc Status ID',
-            'edoc_status_name' => 'Edoc Status Name',
+            'edoc_status_id' => 'รหัสสถานะการดำเนินการของหนังสือ',
+            'edoc_status_name' => 'ชื่อสถานะการดำเนินการของหนังสือ',
         ];
     }
 }

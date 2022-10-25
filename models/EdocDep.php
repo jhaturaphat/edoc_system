@@ -44,11 +44,11 @@ class EdocDep extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'dep_id' => 'Dep ID',
-            'dep_name' => 'Dep Name',
-            'dep_user' => 'Dep User',
-            'dep_pass' => 'Dep Pass',
-            'sent_txt' => 'Sent Txt',
+            'dep_id' => 'รหัสหน่วยงาน',
+            'dep_name' => 'ชื่อหน่วยงาน',
+            'dep_user' => 'USERNAME',
+            'dep_pass' => 'PASSWORD',
+            'sent_txt' => 'เลขลำดับหนังสือส่ง',
         ];
     }
 }
