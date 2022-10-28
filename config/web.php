@@ -24,11 +24,15 @@ $config = [
                 'User' => 'app\models\User',
                 'RegistrationForm' => 'app\models\RegistrationForm'
             ],
+            'controllerMap' => [
+                'registration' => 'app\controllers\user\RegistrationController'
+            ],                    
             'enableUnconfirmedLogin' => true,
             'confirmWithin' => 21600,
             'cost' => 12,
-            'admins' => ['admin'] // ผู้ใช้สูงสุด            
+            'admins' => ['admin'], // ผู้ใช้สูงสุด            
         ],
+        
         'admin' => [
             'class' => 'mdm\admin\Module',
             'layout' => 'left-menu',
@@ -50,6 +54,22 @@ $config = [
         ],
     ],
     'components' => [ 
+        'view' => [            
+            'theme' => [
+                'pathMap' => [
+                    // '@dektrium/user/views' => '@app/modules/backend/views/user'  //ถ้าสร้างไว้ใน Modules ใช้ตัวนี้
+                    '@dektrium/user/views' => '@app/views/user'
+                ],
+            ],
+            // 'class' => 'yii\web\View',
+            // 'theme' => [
+            //     'basePath' => '@app/views/site',
+            //     'baseUrl' => '@app/views/site',
+            //     'pathMap' => [
+            //         '@dektrium/user/views/registration' => '@app/views/user',
+            //     ]
+            // ]
+        ],
         'Utility' => ['class' => 'app\components\Utility'],
         'assetManager' => [
             
@@ -69,14 +89,7 @@ $config = [
             //'identityClass' => 'app\models\User',
             'identityClass' => 'dektrium\user\models\User',
             'enableAutoLogin' => true,
-        ],
-        // 'view' => [
-        //     'theme' => [
-        //         'pathMap' => [
-        //             //'@dektrium/user/views' => '@app/views/user'
-        //         ],
-        //     ],
-        // ],
+        ],        
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

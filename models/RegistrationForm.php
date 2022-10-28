@@ -13,14 +13,14 @@ class RegistrationForm extends BaseRegistrationForm
      * @inheritdoc
      */
 
-    // public function scenarios()
-    // {
-    //     $scenarios = parent::scenarios();
-    //     $scenarios['create'][]      =   'dep_id';
-    //     $scenarios['update'][]      =   'dep_id';
-    //     $scenarios['register'][]    =   'dep_id';
-    //     return $scenarios;
-    // }
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['create'][]      =   'dep_id';
+        $scenarios['update'][]      =   'dep_id';
+        $scenarios['register'][]    =   'dep_id';
+        return $scenarios;
+    }
     public function rules()
     {
         $rules = parent::rules();
