@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\EdocMain */
@@ -12,7 +13,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'edoc_date_get')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'edoc_date_get')->widget(DatePicker::classname(), [
+        'options' => ['placeholder' => 'Enter birth date ...'],
+        'language' => 'th',       
+        'type' => DatePicker::TYPE_COMPONENT_APPEND,  
+        'pluginOptions' => [
+            'autoclose' => true, 
+            'format' => 'mm/dd/yyyy'           
+        ]
+    ]) ?>
 
     <?= $form->field($model, 'edoc_no_get')->textInput(['maxlength' => true]) ?>
 
