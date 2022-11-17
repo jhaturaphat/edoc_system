@@ -20,10 +20,12 @@ $config = [
         ],
         'user' => [            
             'class' => 'dektrium\user\Module',
+            //@Override dektrim Module
             'modelMap' => [
                 'User' => 'app\models\User',
                 'RegistrationForm' => 'app\models\RegistrationForm'
             ],
+            //@Override dektrim Controller
             'controllerMap' => [
                 'registration' => 'app\controllers\user\RegistrationController'
             ],                    
@@ -54,21 +56,14 @@ $config = [
         ],
     ],
     'components' => [ 
-        'view' => [            
+        'view' => [  
+            //@Override views dektrim user         
             'theme' => [
                 'pathMap' => [
                     // '@dektrium/user/views' => '@app/modules/backend/views/user'  //ถ้าสร้างไว้ใน Modules ใช้ตัวนี้
                     '@dektrium/user/views' => '@app/views/user'
                 ],
-            ],
-            // 'class' => 'yii\web\View',
-            // 'theme' => [
-            //     'basePath' => '@app/views/site',
-            //     'baseUrl' => '@app/views/site',
-            //     'pathMap' => [
-            //         '@dektrium/user/views/registration' => '@app/views/user',
-            //     ]
-            // ]
+            ]
         ],
         'Utility' => ['class' => 'app\components\Utility'],
         'assetManager' => [

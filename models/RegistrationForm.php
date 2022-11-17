@@ -25,7 +25,7 @@ class RegistrationForm extends BaseRegistrationForm
     {
         $rules = parent::rules();
         $rules['fieldRequired']     =   ['dep_id','required'];
-        $rules['fieldLength']       =   ['dep_id','string','max'=>4];
+        // $rules['fieldLength']       =   ['dep_id','string','max'=>4];
         return $rules;
     }
 }

@@ -11,7 +11,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
+use app\models\EdocDep;
 /**
  * @var yii\web\View $this
  * @var dektrium\user\models\User $model
@@ -36,13 +38,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'email') ?>
 
-                <?= $form->field($model, 'username') ?>
-                
-                <?= $form->field($model, 'dep_id') ?>
+                <?= $form->field($model, 'username') ?> 
 
                 <?php if ($module->enableGeneratingPassword == false): ?>
                     <?= $form->field($model, 'password')->passwordInput() ?>
                 <?php endif ?>
+
+                <?= $form->field($model, 'dep_id')
+                ->label("หน่วยงาน")
+                ->widget(Select2::classname(), [
+                    'data' => ArrayHelper::map(EdocDep::find()->all(),'dep_id','dep_name'),
+                    //'theme' => Select2::THEME_BOOTSTRAP,
+                    'options' => ['placeholder' => 'เลือกหน่วยงาน'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]) ?>
 
                 <?= Html::submitButton(Yii::t('user', 'Sign up'), ['class' => 'btn btn-success btn-block']) ?>
 

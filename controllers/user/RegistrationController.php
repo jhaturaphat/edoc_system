@@ -11,15 +11,18 @@
 
 namespace app\controllers\user;
 
+use app\models\User;
+use app\models\RegistrationForm;
 use dektrium\user\Finder;
-use dektrium\user\models\RegistrationForm;
 use dektrium\user\models\ResendForm;
-use dektrium\user\models\User;
 use dektrium\user\traits\AjaxValidationTrait;
 use dektrium\user\traits\EventTrait;
+
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+
+use app\models\EdocDep;
 
 /**
  * RegistrationController is responsible for all registration process, which includes registration of a new account,
@@ -129,11 +132,11 @@ class RegistrationController extends Controller
 
         /** @var RegistrationForm $model */
         $model = \Yii::createObject(RegistrationForm::className());
-        $event = $this->getFormEvent($model);
-
+        $event = $this->getFormEvent($model);        
         $this->trigger(self::EVENT_BEFORE_REGISTER, $event);
 
-        $this->performAjaxValidation($model);
+        $this->performAjaxValidation($model);       
+        
 
         if ($model->load(\Yii::$app->request->post()) && $model->register()) {
             $this->trigger(self::EVENT_AFTER_REGISTER, $event);
@@ -145,7 +148,7 @@ class RegistrationController extends Controller
         }
         
         return $this->render('register', [
-            'model'  => $model,
+            'model'  => $model,            
             'module' => $this->module,
         ]);
     }

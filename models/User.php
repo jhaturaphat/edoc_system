@@ -17,8 +17,10 @@ class User extends BaseUser
     public function rules()
     {
         $rules = parent::rules();
-        $rules['fieldRequired']     =   ['dep_id','required'];
-        $rules['fieldLength']       =   ['dep_id','string','max'=>4];
+        $rules['fieldRequired']     =   ['dep_id','required'];        
         return $rules;
     }
+
+    
+
 }
