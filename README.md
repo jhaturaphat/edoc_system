@@ -38,3 +38,7 @@ http://localhost/path/to/index.php?r=admin/user <br>
 
 #ตัวอย่าง <br>
 http://dixonsatit.github.io/2015/06/25/install-dektrium-yii2-user.html <br>
+
+#Application URL <br>
+r=backend/edoc-dep <br>
+
