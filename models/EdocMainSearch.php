@@ -17,7 +17,8 @@ class EdocMainSearch extends EdocMain
     public function rules()
     {
         return [
-            [['edoc_id', 'e_id', 'edoc_no_get', 'edoc_no_sent', 'edoc_no_keep', 'edoc_date_doc', 'edoc_date_get', 'edoc_from', 'edoc_to', 'edoc_name', 'dep_id', 'edoc_type_id', 'edoc_status_id', 'edoc_read_id', 'path', 'edoc_important_id', 'e_id_sent', 'e_id_dud', 'e_id_radio', 'ip_get_sent'], 'safe'],
+            [['e_main_id'], 'integer'],
+            [['edoc_id', 'e_id', 'edoc_no_get', 'edoc_no_sent', 'edoc_no_keep', 'edoc_date_doc', 'edoc_date_get', 'edoc_from', 'edoc_to', 'edoc_name', 'dep_id', 'edoc_type_id', 'edoc_status_id', 'edoc_read_id', 'path', 'edoc_important_id', 'e_id_sent', 'e_id_dud', 'e_id_radio', 'ip_get_sent', 'create_at', 'edoc_date_get_2', 'edoc_date_doc_2'], 'safe'],
         ];
     }
 
@@ -56,6 +57,13 @@ class EdocMainSearch extends EdocMain
         }
 
         // grid filtering conditions
+        $query->andFilterWhere([
+            'e_main_id' => $this->e_main_id,
+            'create_at' => $this->create_at,
+            'edoc_date_get_2' => $this->edoc_date_get_2,
+            'edoc_date_doc_2' => $this->edoc_date_doc_2,
+        ]);
+
         $query->andFilterWhere(['like', 'edoc_id', $this->edoc_id])
             ->andFilterWhere(['like', 'e_id', $this->e_id])
             ->andFilterWhere(['like', 'edoc_no_get', $this->edoc_no_get])

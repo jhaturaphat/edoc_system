@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 24/10/2022 13:48:39
+ Date: 19/11/2022 11:45:58
 */
 
 SET NAMES utf8mb4;
@@ -78,133 +78,76 @@ CREATE TABLE `auth_rule`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `edoc_dep`;
 CREATE TABLE `edoc_dep`  (
-  `dep_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `dep_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `dep_user` varchar(13) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `dep_pass` varchar(13) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `sent_txt` varchar(30) CHARACTER SET tis620 COLLATE tis620_thai_ci NULL DEFAULT NULL,
+  `dep_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสหน่วยงาน',
+  `dep_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL COMMENT 'ชื่อหน่วยงาน',
+  `dep_user` varchar(13) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'username',
+  `dep_pass` varchar(13) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'password',
+  `sent_txt` varchar(30) CHARACTER SET tis620 COLLATE tis620_thai_ci NULL DEFAULT NULL COMMENT 'เลขลำดับหนังสือส่ง',
   PRIMARY KEY (`dep_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for edoc_important
+-- ----------------------------
+DROP TABLE IF EXISTS `edoc_important`;
+CREATE TABLE `edoc_important`  (
+  `edoc_important_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสความสำคัญของหนังสือ',
+  `edoc_important_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL COMMENT 'ชื่อความสำคัญของหนังสือ เช่น ด่วน ด่วนมาก ปกติ',
+  PRIMARY KEY (`edoc_important_id`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of edoc_dep
+-- Records of edoc_important
 -- ----------------------------
-INSERT INTO `edoc_dep` VALUES ('d00001', 'กลุ่มอำนวยการ', '203', '203', 'อบ.0032.301.07/');
-INSERT INTO `edoc_dep` VALUES ('d00002', 'งานธุรการ', '204', '204', 'อบ.0032.301.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00003', 'งานการเงิน', '209', '209', 'อบ.0032.301.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00004', 'งานพัสดุ', '125', '125', 'อบ.0032.301.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00005', 'งานซ่อมบำรุง', '119', '119', 'อบ.0032.301.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00006', 'งานบริการอาหาร', '117', '117', 'อบ.0032.301.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00007', 'ฝ่ายยุทธศาสตร์สาธารณสุขฯ', '679', '679', 'อบ.0032.301.2.07/');
-INSERT INTO `edoc_dep` VALUES ('d00008', 'งานคอมพิวเตอร์', '100', '100', 'อบ.0032.301.2.07/');
-INSERT INTO `edoc_dep` VALUES ('d00009', 'ศูนย์สิทธิฯ', '106', '106', 'อบ.0032.301.2.07/');
-INSERT INTO `edoc_dep` VALUES ('d00010', 'งานเวชระเบียนและสถิติ', '121', '121', 'อบ.0032.301.2.07/');
-INSERT INTO `edoc_dep` VALUES ('d00011', 'องค์กรแพทย์', '202', '202', 'อบ.0032.302.07/');
-INSERT INTO `edoc_dep` VALUES ('d00012', 'ฝ่ายเภสัชกรรมชุมชน', '163', '163', 'อบ.0032.303.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00013', 'ห้องจ่ายยาผู้ป่วยนอก', '243', '243', 'อบ.0032.303.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00014', 'งานแพทย์แผนไทย', '164', '164', 'อบ.0032.303.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00015', 'ห้องจ่ายยาผู้ป่วยใน', '105', '105', 'อบ.0032.303.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00016', 'งานคุ้มครองผู้บริโภค', '163', '163', 'อบ.0032.303.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00017', 'ฝ่ายเทคนิคบริการทางการแพทย์', '238', '238', 'อบ.0032.302.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00018', 'งานรังสีการแพทย์', '136', '136', 'อบ.0032.303.2.07/');
-INSERT INTO `edoc_dep` VALUES ('d00019', 'กายภาพบำบัด', '114', '114', 'อบ.0032.303.2.07/');
-INSERT INTO `edoc_dep` VALUES ('d00020', 'กลุ่มภารกิจด้านบริการปฐมภูมิ', 'fmdetudom', '242', 'อบ.0032.304.07/');
-INSERT INTO `edoc_dep` VALUES ('d00021', 'ศูนย์สุขภาพชุมชนที่ 1', 'pcu1', 'pcu1', 'อบ.0032.304.07/');
-INSERT INTO `edoc_dep` VALUES ('d00022', 'ศูนย์สุขภาพชุมชนที่ 2', 'pcu2', 'pcu2', 'อบ.0032.304.07/');
-INSERT INTO `edoc_dep` VALUES ('d00023', 'ศูนย์สุขภาพชุมชนที่ 3', 'pcu3', 'pcu3', 'อบ.0032.304.07/');
-INSERT INTO `edoc_dep` VALUES ('d00024', 'งานโสตทัศนศึกษา', '289', '289', 'อบ.0032.304.07/');
-INSERT INTO `edoc_dep` VALUES ('d00025', 'งานโรคติดต่อ', '110', '110', 'อบ.0032.304.07/');
-INSERT INTO `edoc_dep` VALUES ('d00026', 'ฝ่ายทันตสาธารณสุข', '236', '236', 'อบ.0032.302.2.07/');
-INSERT INTO `edoc_dep` VALUES ('d00027', 'กลุ่มการพยาบาล', '223', '223', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00028', 'หอผู้ป่วยพิเศษ ทวี-กันยา พาสันต์', '441', '441', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00029', 'งานอุบัติเหตุและฉุกเฉิน', '107', '107', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00030', 'อายุรกรรมหญิง', '411', '411', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00031', 'อายุรกรรมชาย', '421', '421', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00032', 'สูติ-นรี เวชกรรม', '112', '112', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00033', 'ศัลยกรรมกระดูก', '147', '147', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00034', 'ศัลยกรรมทั่วไป', '111', '111', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00035', 'กุมารเวชกรรม', '431', '431', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00036', 'งานห้องคลอด', '115', '115', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00037', 'งานห้องผ่าตัด', '116', '116', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00038', 'งานวิสัญญีพยาบาล', '109', '109', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00039', 'งานจ่ายกลาง', '118', '118', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00040', 'งานผู้ป่วยนอก', '248', '248', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00041', 'งานผู้ป่วยนอก(สูติฯ)', '103', '103', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00042', 'คลินิกเฉพาะโรค', '110', '110', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00043', 'งานสวนและสิ่งแวดล้อม', '195', '195', 'อบ.0032.301.07/');
-INSERT INTO `edoc_dep` VALUES ('d00044', 'งานรักษาความปลอดภ้ย', '191', '191', 'อบ.0032.301.07/');
-INSERT INTO `edoc_dep` VALUES ('d00045', 'งานยานพาหนะ', '130', '130', 'อบ.0032.301.07/');
-INSERT INTO `edoc_dep` VALUES ('d00046', 'ติดประกาศ', 'user', '123', 'อบ.0032.301.07/');
-INSERT INTO `edoc_dep` VALUES ('d00047', 'ยุทธศาสตร์2', 'hrd', 'hrd', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00048', 'ศูนย์คุณภาพ', '219', '219', 'อบ.0032.301.07/');
-INSERT INTO `edoc_dep` VALUES ('d00049', 'ชมรมจริยธรรม', 'moral', 'moral', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00050', 'กรรมการกีฬา', 'sport', 'sport', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00051', 'ผู้อำนวยการ รพร.เดชอุดม', '201', '201', '');
-INSERT INTO `edoc_dep` VALUES ('d00052', 'ห้องสมุด', '133', '133', 'อบ.0032.301.2.07/');
-INSERT INTO `edoc_dep` VALUES ('d00054', 'งานลูกค้าสัมพันธ์', '291', '291', 'อบ.0032.301.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00055', 'คุณทัตชญา แฝงเพ็ชร', '123', '123', 'อบ.0032.301.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00056', 'งานการเจ้าหน้าที่', '205', '205', 'อบ.0032.301.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00057', 'พิเศษศัลยฯ(ชั้น6)', 'moo', 'moo', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00058', 'ตึกพิเศษสูติฯ', '550', '550', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00059', 'ศัลยกรรมทั่วไป(ชาย)', '540', '540', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00060', 'ศัลยกรรมทั่วไป(หญิง)', '530', '530', 'อบ.0032.305.07/');
-INSERT INTO `edoc_dep` VALUES ('d00061', 'รองผู้อำนวยการ รพร.เดชอุดม', '309', '309', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00062', 'ตึกพิเศษศัลยกรรมกระดูก', '520', '520', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00063', 'หน่วยไตเทียม', '2518', '2518', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00064', 'งานระบาดวิทยา', '777', '777', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00065', 'หน่วยไตรเวช(ยกเลิก)', '(ยกเลิก)', '(ยกเลิก)', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00066', 'หอผู้ป่วยหนัก(ICU)', 'icu', 'icu', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00067', 'งานบัญชี', '174', '470', 'อบ.0032.301.1.07/');
-INSERT INTO `edoc_dep` VALUES ('d00068', 'งานสุขภาพจิตและจิตเวช', '601', '609', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00069', 'งานนิติการ', '635', '635', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00070', 'ฝ่ายการแพทย์(ศูนย์จัดเก็บรายได้)', '282', '282', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00071', 'กลุ่มงานอาชีวเวชกรรม', 'occ', 'occ', 'อบ.0032.226.07');
-INSERT INTO `edoc_dep` VALUES ('d00072', 'กลุ่มงานพัฒนาบุคลากร', '678', '678', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00073', 'หอผู้ป่วยพิเศษกุมารเวชกรรม', '747', '747', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00074', 'NICU ทารกแรกเกิดวิกฤต', '830', '830', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00075', 'กลุ่มงานสังคมสงเคราะห์', 'sw', 'sw', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00076', 'กลุ่มงาน IC + วิจัย', '667', '667', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00077', 'งานเพิ่มพูนทักษะ', '2530', '2530', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00078', 'รองผอก.ฝ่ายการแพทย์', '2526', '2526', NULL);
-INSERT INTO `edoc_dep` VALUES ('d00079', 'พิเศษรวม', '715', '715', NULL);
+INSERT INTO `edoc_important` VALUES ('im01', 'ปกติ');
+INSERT INTO `edoc_important` VALUES ('im02', 'ด่วนที่สุด');
+INSERT INTO `edoc_important` VALUES ('im03', 'ด่วนมาก');
+INSERT INTO `edoc_important` VALUES ('im04', 'ด่วน');
 
 -- ----------------------------
 -- Table structure for edoc_main
 -- ----------------------------
 DROP TABLE IF EXISTS `edoc_main`;
 CREATE TABLE `edoc_main`  (
-  `edoc_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `e_id` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'เลขที่รับ',
-  `edoc_no_get` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'เลขที่หนังสือ อบ.',
+  `e_main_id` int(11) NOT NULL AUTO_INCREMENT,
+  `edoc_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ปีที่รับหนังสือ เช่น 2565',
+  `e_id` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ลำดับที่ทั่วไปหนังสือรับ เช่น 05023',
+  `edoc_no_get` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'เลขลำดับหนังสือ เช่น อบ0032.012/ว11',
   `edoc_no_sent` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'เลขที่หนังสือส่ง',
-  `edoc_no_keep` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'เลขที่หนังสือเก็บ',
-  `edoc_date_doc` varchar(10) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_date_get` varchar(10) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_from` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_to` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
+  `edoc_no_keep` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'เลขที่เก็บหนังสือ',
+  `edoc_date_doc` varchar(10) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ลงวันที่ตามเอกสาร',
+  `edoc_date_get` varchar(10) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'วันที่รับหนังสือ',
+  `edoc_from` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'จาก',
+  `edoc_to` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ถึง',
+  `edoc_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'เรื่อง',
   `dep_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_type_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_status_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_read_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `path` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_important_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ประเภทหนังสือ',
-  `e_id_sent` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'หนังสือส่ง',
-  `e_id_dud` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'หนังสือภายใน',
-  `e_id_radio` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'หนังสือรับวิทยุ',
-  `ip_get_sent` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`edoc_id`, `e_id`, `e_id_sent`, `e_id_dud`, `e_id_radio`) USING BTREE,
-  INDEX `fk_edoc_main_idx`(`edoc_status_id`) USING BTREE,
-  INDEX `fk_edoc_type_idx`(`edoc_type_id`) USING BTREE
-) ENGINE = MyISAM CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
+  `edoc_type_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสประเภทหนังสือ',
+  `edoc_status_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสสถานะการดำเนินการของหนังสือ ',
+  `edoc_read_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสสถานะการอ่านของหนังสือ ',
+  `path` text CHARACTER SET tis620 COLLATE tis620_thai_ci NULL DEFAULT NULL COMMENT 'ชื่อไฟล์ที่ upload เช่น 6301.pdf',
+  `edoc_important_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสความสำคัญของหนังสือ',
+  `e_id_sent` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NULL DEFAULT '' COMMENT 'ลำดับที่ทั่วไปหนังสือส่ง เช่น 05023',
+  `e_id_dud` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NULL DEFAULT '' COMMENT 'ลำดับที่ทั่วไปหนังสือเวียนภายใน เช่น 05023',
+  `e_id_radio` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NULL DEFAULT '' COMMENT 'ลำดับที่ทั่วไปหนังสือเวียนวิทยุ เช่น 05023',
+  `ip_get_sent` text CHARACTER SET tis620 COLLATE tis620_thai_ci NULL DEFAULT NULL COMMENT 'ip เครื่องที่เปิดอ่าน',
+  `create_at` timestamp(0) NULL DEFAULT current_timestamp COMMENT 'current_timestamp วันเวลาบันทึก',
+  `edoc_date_get_2` datetime(0) NULL DEFAULT NULL,
+  `edoc_date_doc_2` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`e_main_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of edoc_main
+-- ----------------------------
+INSERT INTO `edoc_main` VALUES (1, '2566', '', 'อบ0032.012/ว11', '', 'TEST', '01/พ.ย./20', '01/พ.ย./20', 'ผอก.รพร.เดชอุดม', 'หัวหน้าฝ่าย/หัวหน้างาน', 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ', '', 'et02', 'st01', '', '', 'im02', '', '', '', NULL, '2022-11-19 11:33:14', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for edoc_read
 -- ----------------------------
 DROP TABLE IF EXISTS `edoc_read`;
 CREATE TABLE `edoc_read`  (
-  `edoc_read_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_read_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
+  `edoc_read_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสสถานะการอ่าน',
+  `edoc_read_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL COMMENT 'ชื่อสถานะการอ่าน เช่น อ่านแล้ว ยังไม่ได้อ่าน',
   PRIMARY KEY (`edoc_read_id`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
 
@@ -219,33 +162,31 @@ INSERT INTO `edoc_read` VALUES ('re02', 'ยังไม่ได้อ่าน
 -- ----------------------------
 DROP TABLE IF EXISTS `edoc_sent`;
 CREATE TABLE `edoc_sent`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `edoc_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `e_id` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_read_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `r_date` varchar(10) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_type_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `e_id_sent` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `e_id_dud` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `user_get` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `date_get` varchar(10) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `ip_get` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `e_id_radio` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `dep_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสหนังสือ',
+  `edoc_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ปีที่รับหนังสือ เช่น 2565',
+  `e_id` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ลำดับที่ทั่วไปหนังสือรับ เช่น 05023',
+  `edoc_read_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสการอ่าน เช่น อ่านแล้ว ยังไม่ได้อ่าน',
+  `r_date` varchar(10) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'วันที่รับหนังสือ',
+  `dep_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสหน่วยงาน',
+  `edoc_type_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสประเภทหนังสือ',
+  `e_id_sent` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ลำดับที่ทั่วไปหนังสือส่ง เช่น 05023',
+  `e_id_dud` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ลำดับที่ทั่วไปหนังสือเวียนภายใน เช่น 05023',
+  `user_get` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL COMMENT 'user ที่เปิดอ่าน',
+  `date_get` varchar(10) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'วันทีเปิดอ่าน',
+  `ip_get` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL COMMENT 'ip เครื่องที่เปิดอ่าน',
+  `e_id_radio` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'เลขที่หนังสือเวียนวิทยุ',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `edoc_id`(`edoc_id`) USING BTREE,
-  INDEX `e_id`(`e_id`) USING BTREE,
-  INDEX `fk_sent_department_idx`(`dep_id`) USING BTREE,
-  INDEX `fk_edoc_read_idx`(`edoc_read_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 391476 CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
+  INDEX `e_id`(`e_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for edoc_status
 -- ----------------------------
 DROP TABLE IF EXISTS `edoc_status`;
 CREATE TABLE `edoc_status`  (
-  `edoc_status_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_status_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
+  `edoc_status_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสสถานะการดำเนินการของหนังสือ',
+  `edoc_status_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL COMMENT 'ชื่อสถานะการดำเนินการของหนังสือ เช่น ดำเนินการแล้ว อยู่ระหว่างดำเนินการ',
   PRIMARY KEY (`edoc_status_id`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
 
@@ -261,8 +202,8 @@ INSERT INTO `edoc_status` VALUES ('st03', 'ดำเนินการแล้�
 -- ----------------------------
 DROP TABLE IF EXISTS `edoc_type`;
 CREATE TABLE `edoc_type`  (
-  `edoc_type_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
-  `edoc_type_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
+  `edoc_type_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสประเภทหนังสือ',
+  `edoc_type_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL COMMENT 'ชื่อประเภทหนังสือ เช่น หนังสือรับ หนังสือส่ง หนังสือเวียน',
   PRIMARY KEY (`edoc_type_id`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
 
@@ -333,6 +274,8 @@ CREATE TABLE `profile`  (
 -- Records of profile
 -- ----------------------------
 INSERT INTO `profile` VALUES (3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `profile` VALUES (9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `profile` VALUES (10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for social_account
@@ -372,6 +315,8 @@ CREATE TABLE `token`  (
 -- Records of token
 -- ----------------------------
 INSERT INTO `token` VALUES (3, '3WzmrYRUsYdid4IGqAWVrsDPW7P0P8LY', 1666067233, 0);
+INSERT INTO `token` VALUES (9, 'HUrwkaBQhCnqaxF63cr5UUZYG6cCNjA1', 1667053019, 0);
+INSERT INTO `token` VALUES (10, 'qmC5thqFSREzM_9_ox-xJHnkwLtwIwXf', 1667053205, 0);
 
 -- ----------------------------
 -- Table structure for user
@@ -392,15 +337,27 @@ CREATE TABLE `user`  (
   `flags` int(11) NOT NULL DEFAULT 0,
   `last_login_at` int(11) NULL DEFAULT NULL,
   `status` enum('0','1') CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '0',
-  `dep_id` varchar(0) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `user_unique_username`(`username`) USING BTREE,
   UNIQUE INDEX `user_unique_email`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (3, 'admin', 'umt.eng52@gmail.com', '$2y$12$0jSBUpSmz7K6c3CJ.Hgh4udW7GrIdtdSh0pmRcDEnTncPYkJEF9ba', 'HTxKEJiNJtRAAmUktgJWUPNdA50xa9_k', 1666067666, NULL, NULL, '::1', 1666067233, 1666067233, 0, 1666526748, '0', NULL);
+INSERT INTO `user` VALUES (3, 'admin', 'umt.eng52@gmail.com', '$2y$12$0jSBUpSmz7K6c3CJ.Hgh4udW7GrIdtdSh0pmRcDEnTncPYkJEF9ba', 'HTxKEJiNJtRAAmUktgJWUPNdA50xa9_k', 1666067666, NULL, NULL, '::1', 1666067233, 1666067233, 0, 1666526748, '0');
+INSERT INTO `user` VALUES (9, 'demo1', 'demo1@mail.com', '$2y$12$ZgFNpTEZ6BgzHkmdISAYvOFkWqUgD0bPtSVOyDLxNhZYC6gdW/lbC', '3X9VamRo2qV89LTNhwSsg8Ocl51ayRSU', NULL, NULL, NULL, '::1', 1667053019, 1667053019, 0, NULL, '0');
+INSERT INTO `user` VALUES (10, 'demo2', 'demo2@mail.com', '$2y$12$t0l/Y0kl891ARVbtMNA1Y.eumCt0WVaxNPlvs2Dzxr3isX2jYvfHe', '7hpx3yrbQhlG-YgSCj1JSlkVVQiC7_hB', NULL, NULL, NULL, '::1', 1667053205, 1667053205, 0, NULL, '0');
+
+-- ----------------------------
+-- Table structure for user_old
+-- ----------------------------
+DROP TABLE IF EXISTS `user_old`;
+CREATE TABLE `user_old`  (
+  `user_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
+  `user_user` varchar(13) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'username',
+  `user_pass` varchar(13) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'password',
+  `user_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL COMMENT 'ชื่อผู้ใช้งาน'
+) ENGINE = MyISAM CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

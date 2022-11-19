@@ -46,18 +46,14 @@ class EdocMainController extends Controller
 
     /**
      * Displays a single EdocMain model.
-     * @param string $edoc_id
-     * @param string $e_id
-     * @param string $e_id_sent
-     * @param string $e_id_dud
-     * @param string $e_id_radio
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($edoc_id, $e_id, $e_id_sent, $e_id_dud, $e_id_radio)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($edoc_id, $e_id, $e_id_sent, $e_id_dud, $e_id_radio),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -71,7 +67,7 @@ class EdocMainController extends Controller
         $model = new EdocMain();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'edoc_id' => $model->edoc_id, 'e_id' => $model->e_id, 'e_id_sent' => $model->e_id_sent, 'e_id_dud' => $model->e_id_dud, 'e_id_radio' => $model->e_id_radio]);
+            return $this->redirect(['view', 'id' => $model->e_main_id]);
         }
 
         return $this->render('create', [
@@ -82,20 +78,16 @@ class EdocMainController extends Controller
     /**
      * Updates an existing EdocMain model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $edoc_id
-     * @param string $e_id
-     * @param string $e_id_sent
-     * @param string $e_id_dud
-     * @param string $e_id_radio
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($edoc_id, $e_id, $e_id_sent, $e_id_dud, $e_id_radio)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($edoc_id, $e_id, $e_id_sent, $e_id_dud, $e_id_radio);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'edoc_id' => $model->edoc_id, 'e_id' => $model->e_id, 'e_id_sent' => $model->e_id_sent, 'e_id_dud' => $model->e_id_dud, 'e_id_radio' => $model->e_id_radio]);
+            return $this->redirect(['view', 'id' => $model->e_main_id]);
         }
 
         return $this->render('update', [
@@ -106,17 +98,13 @@ class EdocMainController extends Controller
     /**
      * Deletes an existing EdocMain model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $edoc_id
-     * @param string $e_id
-     * @param string $e_id_sent
-     * @param string $e_id_dud
-     * @param string $e_id_radio
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($edoc_id, $e_id, $e_id_sent, $e_id_dud, $e_id_radio)
+    public function actionDelete($id)
     {
-        $this->findModel($edoc_id, $e_id, $e_id_sent, $e_id_dud, $e_id_radio)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -124,17 +112,13 @@ class EdocMainController extends Controller
     /**
      * Finds the EdocMain model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $edoc_id
-     * @param string $e_id
-     * @param string $e_id_sent
-     * @param string $e_id_dud
-     * @param string $e_id_radio
+     * @param integer $id
      * @return EdocMain the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($edoc_id, $e_id, $e_id_sent, $e_id_dud, $e_id_radio)
+    protected function findModel($id)
     {
-        if (($model = EdocMain::findOne(['edoc_id' => $edoc_id, 'e_id' => $e_id, 'e_id_sent' => $e_id_sent, 'e_id_dud' => $e_id_dud, 'e_id_radio' => $e_id_radio])) !== null) {
+        if (($model = EdocMain::findOne($id)) !== null) {
             return $model;
         }
 

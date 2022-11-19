@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EdocMainSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,21 +18,21 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Edoc Main', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    
-    <?php yii\widgets\Pjax::begin(['id' => 'pjax_edoc_main_id']) ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'pager' => ['class' => yii\bootstrap4\LinkPager::className()],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'e_main_id',
             'edoc_id',
             'e_id',
             'edoc_no_get',
             'edoc_no_sent',
-            'edoc_no_keep',
+            //'edoc_no_keep',
             //'edoc_date_doc',
             //'edoc_date_get',
             //'edoc_from',
@@ -48,10 +48,14 @@ $this->params['breadcrumbs'][] = $this->title;
             //'e_id_dud',
             //'e_id_radio',
             //'ip_get_sent:ntext',
+            //'create_at',
+            //'edoc_date_get_2',
+            //'edoc_date_doc_2',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    <?php yii\widgets\Pjax::end() ?>
+
+    <?php Pjax::end(); ?>
 
 </div>

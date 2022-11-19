@@ -13,7 +13,12 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => [
+            'data-pjax' => 1
+        ],
     ]); ?>
+
+    <?= $form->field($model, 'e_main_id') ?>
 
     <?= $form->field($model, 'edoc_id') ?>
 
@@ -23,7 +28,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'edoc_no_sent') ?>
 
-    <?= $form->field($model, 'edoc_no_keep') ?>
+    <?php // echo $form->field($model, 'edoc_no_keep') ?>
 
     <?php // echo $form->field($model, 'edoc_date_doc') ?>
 
@@ -54,6 +59,12 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'e_id_radio') ?>
 
     <?php // echo $form->field($model, 'ip_get_sent') ?>
+
+    <?php // echo $form->field($model, 'create_at') ?>
+
+    <?php // echo $form->field($model, 'edoc_date_get_2') ?>
+
+    <?php // echo $form->field($model, 'edoc_date_doc_2') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

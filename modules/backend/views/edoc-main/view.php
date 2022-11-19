@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\EdocMain */
 
-$this->title = $model->edoc_id;
+$this->title = $model->e_main_id;
 $this->params['breadcrumbs'][] = ['label' => 'Edoc Mains', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'edoc_id' => $model->edoc_id, 'e_id' => $model->e_id, 'e_id_sent' => $model->e_id_sent, 'e_id_dud' => $model->e_id_dud, 'e_id_radio' => $model->e_id_radio], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'edoc_id' => $model->edoc_id, 'e_id' => $model->e_id, 'e_id_sent' => $model->e_id_sent, 'e_id_dud' => $model->e_id_dud, 'e_id_radio' => $model->e_id_radio], [
+        <?= Html::a('Update', ['update', 'id' => $model->e_main_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->e_main_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'e_main_id',
             'edoc_id',
             'e_id',
             'edoc_no_get',
@@ -49,6 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'e_id_dud',
             'e_id_radio',
             'ip_get_sent:ntext',
+            'create_at',
+            'edoc_date_get_2',
+            'edoc_date_doc_2',
         ],
     ]) ?>
 
