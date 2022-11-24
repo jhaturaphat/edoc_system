@@ -5,10 +5,11 @@ namespace app\modules\backend\controllers;
 use Yii;
 use app\models\EdocMain;
 use app\models\EdocMainSearch;
+use yii\base\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
 /**
  * EdocMainController implements the CRUD actions for EdocMain model.
  */
@@ -66,7 +67,9 @@ class EdocMainController extends Controller
     {
         $model = new EdocMain();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->path = $model->upload($model,'path');
+            $model->save();               
             return $this->redirect(['view', 'id' => $model->e_main_id]);
         }
 
@@ -86,7 +89,18 @@ class EdocMainController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $old_path = $model->path;
+            $Upfile = UploadedFile::getInstance($model, 'path');
+            if(!empty($Upfile)){ 
+                if($model->removeFile($old_path)){
+                    $model->path = $model->upload($model,'path');
+                    $model->save();
+                }            
+            }else{
+                $model->save();
+            }
+            
             return $this->redirect(['view', 'id' => $model->e_main_id]);
         }
 

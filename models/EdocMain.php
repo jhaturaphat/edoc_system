@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "{{%edoc_main}}".
@@ -34,7 +35,7 @@ use Yii;
  */
 class EdocMain extends \yii\db\ActiveRecord
 {
-    public $edocFile;
+    public $upload_foler ='uploads';
 
     /**
      * {@inheritdoc}
@@ -50,14 +51,14 @@ class EdocMain extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['edoc_name', 'path', 'ip_get_sent'], 'string'],
+            [['edoc_name', 'ip_get_sent'], 'string'],
             [['create_at', 'edoc_date_get_2', 'edoc_date_doc_2'], 'safe'],
             [['edoc_id', 'dep_id'], 'string'],
             [['e_id', 'e_id_sent', 'e_id_dud', 'e_id_radio'], 'string'],
             [['edoc_no_get', 'edoc_no_sent', 'edoc_no_keep', 'edoc_from', 'edoc_to'], 'string'],
             [['edoc_date_doc', 'edoc_date_get'], 'string'],
             [['edoc_type_id', 'edoc_status_id', 'edoc_read_id', 'edoc_important_id'], 'string'],
-            [['edocFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf'],
+            [['path'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf'],
         ];
     }
 
@@ -94,13 +95,33 @@ class EdocMain extends \yii\db\ActiveRecord
         ];
     }
 
-    public function upload()
+public function upload($model,$attribute)
     {
-        if ($this->validate()) {
-            $this->edocFile->saveAs('uploads/documents/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            return true;
-        } else {
-            return false;
+        $photo  = UploadedFile::getInstance($model, $attribute);
+        $path = $this->getUploadPath();
+        if ($this->validate() && $photo !== null) {
+
+            $fileName = $model->edoc_id.'-'.md5($photo->baseName.time()) . '.' . $photo->extension;
+            //$fileName = $photo->baseName . '.' . $photo->extension;
+            if($photo->saveAs($path.$fileName)){
+            return $fileName;
+            }
         }
+        return $model->isNewRecord ? false : $model->getOldAttribute($attribute);
+    }
+public function getUploadPath(){
+    return Yii::getAlias('@webroot').'/'.$this->upload_foler.'/';
+    }
+    
+public function getUploadUrl(){
+    return Yii::getAlias('@web').'/'.$this->upload_foler.'/';
+    }
+    
+public function getPhotoViewer(){
+    return empty($this->photo) ? Yii::getAlias('@web').'/img/none.png' : $this->getUploadUrl().$this->photo;
+    }
+public function removeFile($path = null){    
+        @unlink($this->getUploadPath().$path);
+        return true;
     }
 }

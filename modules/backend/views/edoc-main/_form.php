@@ -60,7 +60,7 @@ use kartik\file\FileInput;
     </div>
 
     <?php
-    echo $form->field($model, 'edocFile')->widget(FileInput::classname(), [
+    echo $form->field($model, 'path')->widget(FileInput::classname(), [
         'options' => ['multiple' => false],
         'pluginOptions' => [
             'previewFileType' => 'any',
