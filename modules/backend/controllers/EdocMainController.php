@@ -3,6 +3,7 @@
 namespace app\modules\backend\controllers;
 
 use Yii;
+use app\models\EdocDep;
 use app\models\EdocMain;
 use app\models\EdocMainSearch;
 use yii\base\Model;
@@ -106,6 +107,15 @@ class EdocMainController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionSend($id){
+        $dep = EdocDep::find()->asArray()->all();
+        $model = EdocMain::find()->where(['e_main_id'=>$id])->asArray()->one(); 
+        return $this->render('send',[
+            'model'=>$model,
+            'dep'=> $dep
         ]);
     }
 

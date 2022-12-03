@@ -18,7 +18,10 @@ use kartik\file\FileInput;
 
     <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'edoc_id')->textInput(['maxlength' => true, 'value'=>'2566']) ?>
+    <?php $y =  Date("Y")+543 ?>
+    <?php echo $form->field($model, 'edoc_id')->textInput(['maxlength' => true, 'value'=>$y]) ?>
+
+    <?= $form->field($model, 'e_id')->textInput(['maxlength' => true, 'value'=>'12345']) ?>
 
     <?= $form->field($model, 'edoc_date_get')->widget(DatePicker::classname(), [
         'options' => ['placeholder' => 'Enter birth date ...'],

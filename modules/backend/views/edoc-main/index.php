@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
@@ -27,17 +28,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'e_main_id',
-            'edoc_id',
+            //'e_main_id',
+            //'edoc_id',
             'e_id',
-            'edoc_no_get',
-            'edoc_no_sent',
+            //'edoc_no_get',
+            //'edoc_no_sent',
             //'edoc_no_keep',
             //'edoc_date_doc',
             //'edoc_date_get',
-            //'edoc_from',
-            //'edoc_to',
-            //'edoc_name:ntext',
+            'edoc_name:ntext',
+            'edoc_from',
+            'edoc_to',            
             //'dep_id',
             //'edoc_type_id',
             //'edoc_status_id',
@@ -52,7 +53,18 @@ $this->params['breadcrumbs'][] = $this->title;
             //'edoc_date_get_2',
             //'edoc_date_doc_2',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            'template'=>'{send} {view} {update} {delete}',
+            'contentOptions'=>[
+                'noWrap' => true
+              ],
+            'buttons'=>[                
+                'send' => function($url,$model,$key){ 
+                    return Html::a('<i class="fas fa-paper-plane"></i>',Url::to(['/backend/edoc-main/send','model'=>$model]), ['title'=>'ส่ง']);
+                }
+            ]
+        
+        ],
         ],
     ]); ?>
 
