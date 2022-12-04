@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\bootstrap4\Modal;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EdocMainSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -19,7 +20,20 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Edoc Main', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php Pjax::begin(); ?>
+    <?php
+        Modal::begin([
+            'id'=> 'modal_send',
+            'title' => 'Hello world',
+            'size'=> 'modal-lg' ,
+            'toggleButton' => ['label' => 'click me'],
+        ]);
+        
+        echo '<div id="modal_content" class="col-md-12"></div>';
+        
+        Modal::end();
+    ?>
+
+    <?php Pjax::begin(['id'=>'e_main_id']); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -60,7 +74,13 @@ $this->params['breadcrumbs'][] = $this->title;
               ],
             'buttons'=>[                
                 'send' => function($url,$model,$key){ 
-                    return Html::a('<i class="fas fa-paper-plane"></i>',Url::to(['/backend/edoc-main/send','model'=>$model]), ['title'=>'ส่ง']);
+                    return Html::button('<i class="fas fa-paper-plane"></i>', 
+                    [
+                        'title'=>'ส่ง', 
+                        'id'=>'send_button', 
+                        'class'=>"btn",
+                        'value'=>Url::to(['/backend/edoc-main/send','id'=>$model->e_main_id])
+                    ]);
                 }
             ]
         
@@ -71,3 +91,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::end(); ?>
 
 </div>
+
+
+<?php
+$script = <<< JS
+    $("#send_button").click(function(){
+        $("#modal_send").modal('show').find("#modal_content").load($(this).attr('value'));
+    });
+          
+
+JS;
+$this->registerJs($script);
+?>

@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = 'index';
   <div class="card-header">
   <?= Html::encode($this->title) ?>
 </div>
-  <div class="card-body col-12">
+  <div class="card-body ">
     <!--  -->
     <div class="custom-control custom-radio custom-control-inline">
     <input type="radio" class="custom-control-input" id="check" name="RadiosExample">
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = 'index';
         <input type="hidden" id="e_main_id" value="<?= $model['e_main_id'] ?>">
     <?php    
     foreach($dep as $val){ 
-        echo '<div class="custom-control custom-checkbox custom-control-inline col-3">';
+        echo '<div class="custom-control custom-checkbox custom-control-inline col-5">';
         echo '<input type="checkbox" class="custom-control-input" name="dep[]" id="'.$val["dep_id"].'" value="'.$val["dep_id"].'">';
         echo '<label class="custom-control-label" for="'.$val["dep_id"].'">'.$val["dep_name"].'</label>';
         echo '</div>';

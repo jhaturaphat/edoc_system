@@ -113,7 +113,7 @@ class EdocMainController extends Controller
     public function actionSend($id){
         $dep = EdocDep::find()->asArray()->all();
         $model = EdocMain::find()->where(['e_main_id'=>$id])->asArray()->one(); 
-        return $this->render('send',[
+        return $this->renderAjax('send',[
             'model'=>$model,
             'dep'=> $dep
         ]);
