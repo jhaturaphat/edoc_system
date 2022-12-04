@@ -23,9 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
         Modal::begin([
             'id'=> 'modal_send',
-            'title' => 'Hello world',
-            'size'=> 'modal-lg' ,
-            'toggleButton' => ['label' => 'click me'],
+            'title' => 'แจ้งเวียนเอกสารในระบบ',
+            'size'=> 'modal-lg'
         ]);
         
         echo '<div id="modal_content" class="col-md-12"></div>';
@@ -74,9 +73,9 @@ $this->params['breadcrumbs'][] = $this->title;
               ],
             'buttons'=>[                
                 'send' => function($url,$model,$key){ 
-                    return Html::button('<i class="fas fa-paper-plane"></i>', 
+                    return Html::button('<i class="fas fa-paper-plane text-primary"></i>', 
                     [
-                        'title'=>'ส่ง', 
+                        'title'=>'แจ้งเวียน', 
                         'id'=>'send_button', 
                         'class'=>"btn",
                         'value'=>Url::to(['/backend/edoc-main/send','id'=>$model->e_main_id])
@@ -102,4 +101,5 @@ $script = <<< JS
 
 JS;
 $this->registerJs($script);
+$this->registerCss(".modal-lg { max-width: 100%; }");
 ?>

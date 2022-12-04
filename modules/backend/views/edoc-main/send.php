@@ -32,9 +32,11 @@ $this->params['breadcrumbs'][] = 'index';
 
     <form action="<?= Url::to(['/backend/edoc-sent/sends']) ?>">
         <input type="hidden" id="e_main_id" value="<?= $model['e_main_id'] ?>">
+        <input type="hidden" id="edoc_id" value="<?= $model['edoc_id'] ?>">
+        <input type="hidden" id="e_id" value="<?= $model['e_id'] ?>">        
     <?php    
     foreach($dep as $val){ 
-        echo '<div class="custom-control custom-checkbox custom-control-inline col-5">';
+        echo '<div class="custom-control custom-checkbox custom-control-inline col-2">';
         echo '<input type="checkbox" class="custom-control-input" name="dep[]" id="'.$val["dep_id"].'" value="'.$val["dep_id"].'">';
         echo '<label class="custom-control-label" for="'.$val["dep_id"].'">'.$val["dep_name"].'</label>';
         echo '</div>';
@@ -57,19 +59,21 @@ $script = <<< JS
                 ward.push($(this).val());
             }
         });
+        if(ward.length === 0) return;
         console.log(ward);
         $.ajax({
-        url: $('form').attr('action'),
-        type: "POST",
-        data: {
-            ward: ward,
-            id: id           
-        },
-        success: function (data, textStatus, jqXHR) {
-            
-        }
+            url: $('form').attr('action'),
+            type: "POST",
+            data: {
+                ward: ward,
+                id: id           
+            },
+            success: function (data, textStatus, jqXHR) {
+                
+            }
+        });
     });
-    });
+
     $("input[type=radio]").on("change", function(){        
         if(document.getElementById('check').checked) {
             $("input[type=checkbox]").prop('checked', true)
