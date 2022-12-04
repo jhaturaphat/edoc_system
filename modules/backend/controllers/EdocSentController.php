@@ -109,6 +109,14 @@ class EdocSentController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionSave(){
+        $request = Yii::$app->request;        
+        if($request->isAjax){
+            $data = Yii::$app->request->post();
+            print_r($data);
+        }
+    }
+
     /**
      * Finds the EdocSent model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

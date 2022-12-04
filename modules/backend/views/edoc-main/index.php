@@ -1,10 +1,12 @@
 <?php
 
 use yii\helpers\Html;
+use yii\web\JsExpression;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\bootstrap4\Modal;
+use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EdocMainSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -78,6 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'title'=>'แจ้งเวียน', 
                         'id'=>'send_button', 
                         'class'=>"btn",
+                        'onclick'=>'loadModal(this)',
                         'value'=>Url::to(['/backend/edoc-main/send','id'=>$model->e_main_id])
                     ]);
                 }
@@ -93,13 +96,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?php
-$script = <<< JS
-    $("#send_button").click(function(){
-        $("#modal_send").modal('show').find("#modal_content").load($(this).attr('value'));
-    });
-          
 
-JS;
-$this->registerJs($script);
+$this->registerJs('
+    function loadModal(ele){  
+        $("#modal_send").modal("show").find("#modal_content").load($(ele).attr("value"));
+    } 
+',View::POS_END, 'my-script');
 $this->registerCss(".modal-lg { max-width: 100%; }");
 ?>

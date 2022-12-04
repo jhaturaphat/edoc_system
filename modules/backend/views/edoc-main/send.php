@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = 'index';
     <hr>
     
 
-    <form action="<?= Url::to(['/backend/edoc-sent/sends']) ?>">
+    <form action="<?= Url::to(['/backend/edoc-sent/save']) ?>">
         <input type="hidden" id="e_main_id" value="<?= $model['e_main_id'] ?>">
         <input type="hidden" id="edoc_id" value="<?= $model['edoc_id'] ?>">
         <input type="hidden" id="e_id" value="<?= $model['e_id'] ?>">        
@@ -52,8 +52,7 @@ $this->params['breadcrumbs'][] = 'index';
 <?php
 $script = <<< JS
     $("#sendd").click(function(){
-        var ward = [];
-        var id = $("#e_main_id").val();
+        var ward = [];        
         $('input[name="dep[]"]').each(function () {
             if ($(this).is(':checked')) {
                 ward.push($(this).val());
@@ -66,10 +65,24 @@ $script = <<< JS
             type: "POST",
             data: {
                 ward: ward,
-                id: id           
+                id: $("#e_main_id").val(),
+                e_id: $("#e_id").val(),         
+                edoc_id: $("#edoc_id").val()         
             },
             success: function (data, textStatus, jqXHR) {
-                
+                if(jqXHR.status === 200){
+                    Swal.fire({                    
+                    icon: 'success',
+                    title: 'บันทึกสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 1500
+                    });
+                    setTimeout(() => {
+                        $("input[type=checkbox]").prop('checked', false);
+                        $("#modal_send").modal("hide");
+                    }, 1500);
+                    
+                }
             }
         });
     });

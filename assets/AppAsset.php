@@ -23,7 +23,7 @@ class AppAsset extends AssetBundle
         'css/backend/site.css',
     ];
     public $js = [
-        
+        'js/lib/sweetalert2.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
