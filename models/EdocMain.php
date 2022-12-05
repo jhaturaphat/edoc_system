@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\web\UploadedFile;
-
+use app\models\EdocSent;
 /**
  * This is the model class for table "{{%edoc_main}}".
  *
@@ -93,6 +93,15 @@ class EdocMain extends \yii\db\ActiveRecord
             'edoc_date_get_2' => 'Edoc Date Get 2',
             'edoc_date_doc_2' => 'Edoc Date Doc 2',
         ];
+    }
+
+    public function checkSent($id){        
+        $data =  EdocSent::find()->where(['e_main_id' => $id])->all();
+        if($data){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 public function upload($model,$attribute)

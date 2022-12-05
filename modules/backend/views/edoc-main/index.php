@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         echo '<div id="modal_content" class="col-md-12"></div>';
         
         Modal::end();
+        
     ?>
 
     <?php Pjax::begin(['id'=>'e_main_id']); ?>
@@ -53,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'edoc_date_get',
             'edoc_name:ntext',
             'edoc_from',
-            'edoc_to',            
+            'edoc_to',                      
             //'dep_id',
             //'edoc_type_id',
             //'edoc_status_id',
@@ -74,15 +75,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'noWrap' => true
               ],
             'buttons'=>[                
-                'send' => function($url,$model,$key){ 
-                    return Html::button('<i class="fas fa-paper-plane text-primary"></i>', 
-                    [
-                        'title'=>'แจ้งเวียน', 
-                        'id'=>'send_button', 
-                        'class'=>"btn",
-                        'onclick'=>'loadModal(this)',
-                        'value'=>Url::to(['/backend/edoc-main/send','id'=>$model->e_main_id])
-                    ]);
+                'send' => function($url,$model,$key){   
+                   if(!$model->checkSent($model->e_main_id)){
+                    return Html::a('<i class="fas fa-paper-plane text-primary"></i>', 
+                    'javascript:void(0)',
+                        [
+                            'title'=>'แจ้งเวียน', 
+                            'id'=>'send_button',                             
+                            'onclick'=>'loadModal(this)',
+                            'value'=> Url::to(['/backend/edoc-main/send','id'=>$model->e_main_id])
+                        ]);
+                   }else{
+                    return Html::a('<i class="fas fa-check-circle text-info"></i>');
+                   }
                 }
             ]
         
@@ -99,6 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJs('
     function loadModal(ele){  
+        
         $("#modal_send").modal("show").find("#modal_content").load($(ele).attr("value"));
     } 
 ',View::POS_END, 'my-script');

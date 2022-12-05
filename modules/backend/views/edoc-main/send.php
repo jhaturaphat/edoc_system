@@ -59,15 +59,15 @@ $script = <<< JS
             }
         });
         if(ward.length === 0) return;
-        console.log(ward);
+        //console.log(ward);
         $.ajax({
             url: $('form').attr('action'),
             type: "POST",
-            data: {
-                ward: ward,
-                id: $("#e_main_id").val(),
+            data: {                
+                ward: ward,                
                 e_id: $("#e_id").val(),         
-                edoc_id: $("#edoc_id").val()         
+                edoc_id: $("#edoc_id").val(),         
+                e_main_id: $("#e_main_id").val()         
             },
             success: function (data, textStatus, jqXHR) {
                 if(jqXHR.status === 200){
@@ -76,13 +76,22 @@ $script = <<< JS
                     title: 'บันทึกสำเร็จ',
                     showConfirmButton: false,
                     timer: 1500
-                    });
+                    }); 
                     setTimeout(() => {
                         $("input[type=checkbox]").prop('checked', false);
                         $("#modal_send").modal("hide");
-                    }, 1500);
-                    
-                }
+                    }, 1500); 
+                }                
+            },
+            error: function(jqXHR,textStatus,error){  
+                Swal.fire({                    
+                    icon: 'error',
+                    title: jqXHR.status,
+                    text: error,
+                    showConfirmButton: true
+                });
+                $("input[type=checkbox]").prop('checked', false);
+                $("#modal_send").modal("hide");
             }
         });
     });
