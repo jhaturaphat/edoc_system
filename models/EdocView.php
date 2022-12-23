@@ -3,6 +3,10 @@
 namespace app\models;
 
 use Yii;
+use app\models\EdocMain;
+use app\models\EdocStatus;
+use app\models\EdocRead;
+use app\models\EdocDep;
 
 /**
  * This is the model class for table "{{%edoc_sent}}".
@@ -67,7 +71,17 @@ class EdocView extends \yii\db\ActiveRecord
             'date_get' => 'วันทีเปิดอ่าน',
             'ip_get' => 'ip เครื่องที่เปิดอ่าน',
             'e_id_radio' => 'เลขที่หนังสือเวียนวิทยุ',
-            'e_main_id' => 'E Main ID',
+            'e_main_id' => 'E Main ID'            
         ];
+    }
+
+    public function getEdoc(){
+        return $this->hasOne(EdocMain::className(), ['e_main_id' => 'e_main_id']);
+    }    
+    public function getEdocRead(){
+        return $this->hasOne(EdocRead::className(), ['edoc_read_id' => 'edoc_read_id']);
+    }
+    public function getEdocDep(){
+        return $this->hasOne(EdocDep::className(), ['dep_id' => 'dep_id']);
     }
 }

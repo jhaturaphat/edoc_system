@@ -84,6 +84,9 @@ $script = <<< JS
                 }                
             },
             error: function(jqXHR,textStatus,error){  
+                console.log(error);
+                console.log(jqXHR);
+                console.log(textStatus);
                 Swal.fire({                    
                     icon: 'error',
                     title: jqXHR.status,

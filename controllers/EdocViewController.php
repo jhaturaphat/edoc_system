@@ -36,7 +36,7 @@ class EdocViewController extends Controller
     public function actionIndex()
     {        
         $searchModel = new EdocViewSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 'd00003');
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, Yii::$app->user->identity->dep_id);
         $dataProvider->sort = ['defaultOrder' => ['id'=>SORT_DESC]];
 
         return $this->render('index', [

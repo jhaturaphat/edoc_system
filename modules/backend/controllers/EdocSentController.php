@@ -119,7 +119,7 @@ class EdocSentController extends Controller
                 $row[$i] = [$data['edoc_id'],$data['e_id'], $val, $data['e_main_id']];
                 $i++;
             }
-            Yii::$app->db->createCommand()->batchInsert('edoc_sent', ['edoc_id', 'e_id', 'dep_id', 'Pe_main_id'], $row)->execute();
+            Yii::$app->db->createCommand()->batchInsert('edoc_sent', ['edoc_id', 'e_id', 'dep_id', 'e_main_id'], $row)->execute();
         }
     }
 

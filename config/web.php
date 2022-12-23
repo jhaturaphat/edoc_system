@@ -27,9 +27,9 @@ $config = [
                 'RegistrationForm' => 'app\models\RegistrationForm'
             ],
             //@Override dektrim Controller
-            'controllerMap' => [
-                'registration' => 'app\controllers\user\RegistrationController'
-            ],                    
+            // 'controllerMap' => [
+            //     'registration' => 'app\controllers\user\RegistrationController'
+            // ],                    
             'enableUnconfirmedLogin' => true,
             'confirmWithin' => 21600,
             'cost' => 12,

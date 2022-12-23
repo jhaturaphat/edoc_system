@@ -39,19 +39,21 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'หน้าหลัก', 'url' => ['/edoc-view']],
+            ['label' => 'เกี่ยวกับเรา', 'url' => ['/site/about']],
+            ['label' => 'ติดต่อเรา', 'url' => ['/site/contact']],
             ['label' => 'อัพโหลดเอกสาร', 'url' => ['/backend/edoc-main']],
+            ['label' => 'ลงทะเบียน', 'url' => ['/user/registration/register'], 'visible'=>Yii::$app->user->isGuest],
+            
             Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/user/security/login']]
+                ? ['label' => 'ล็อกอิน', 'url' => ['/user/security/login']] 
                 : '<li class="nav-item">'
                     . Html::beginForm(['/user/security/logout'])
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        'ออก (' . Yii::$app->user->identity->username .'และ'.Yii::$app->user->identity->dep_id. ')',
                         ['class' => 'nav-link btn btn-link logout']
                     )
-                    . Html::endForm()
+                    . Html::endForm()                    
                     . '</li>'
         ]
     ]);

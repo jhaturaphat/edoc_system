@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use app\models\Resume;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EdocViewSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -27,13 +28,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
+            //'e_main_id',
             // 'id',
             // 'edoc_id',
-            'e_id',
-            'edoc_read_id',
+            //'e_id',            
+            [
+                'attribute'=>'ชื่อหนังสือ',
+                //'filter'=>Resume::itemsAlias('education'),
+                'value'=> 'edoc.edoc_name'
+            ],            
+            [
+                'attribute'=>'หนังสือจาก',
+                //'filter'=>Resume::itemsAlias('education'),
+                'value'=> 'edoc.edoc_from'
+            ],
+            [
+                'attribute'=>'สถานะการอ่าน',
+                //'filter'=>Resume::itemsAlias('education'),
+                'value'=> 'edocRead.edoc_read_name'
+            ],
+            //'edoc_read_id',
             'r_date',
-            'dep_id',
+            //'dep_id',
             //'edoc_type_id',
             //'e_id_sent',
             //'e_id_dud',
@@ -41,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'date_get',
             //'ip_get:ntext',
             //'e_id_radio',
-            //'e_main_id',
+            
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
@@ -50,3 +66,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::end(); ?>
 
 </div>
+
+<!-- http://dixonsatit.github.io/2015/07/21/item-alias.html -->
