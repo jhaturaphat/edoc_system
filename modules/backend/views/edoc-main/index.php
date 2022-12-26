@@ -22,6 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Edoc Main', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php 
+
+print_r($param);
+?>
     <?php
         Modal::begin([
             'id'=> 'modal_send',
@@ -44,7 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'pager' => ['class' => yii\bootstrap4\LinkPager::className()],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             //'e_main_id',
             //'edoc_id',
             'e_id',

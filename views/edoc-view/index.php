@@ -34,8 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'edoc_id',
             //'e_id',            
             [
-                'attribute'=>'ชื่อหนังสือ',
-                //'filter'=>Resume::itemsAlias('education'),
+                'label'=> 'ชื่อหนังสือ',
+                'format' => 'ntext',
+                'attribute'=>'edoc.edoc_name',
+                // 'filter'=>'edoc.edoc_name',
                 'value'=> 'edoc.edoc_name'
             ],            
             [
@@ -61,7 +63,8 @@ $this->params['breadcrumbs'][] = $this->title;
             
 
             ['class' => 'yii\grid\ActionColumn',
-            'template'=>'{download} {view} {update} {delete}',
+            // 'template'=>'{download} {view} {update} {delete}',
+            'template'=>'{download}',
             'contentOptions'=>[
                 'noWrap' => true
               ],
@@ -80,3 +83,4 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <!-- http://dixonsatit.github.io/2015/07/21/item-alias.html -->
+<!-- https://www.youtube.com/watch?v=OUUQNbQ3TS8 -->
