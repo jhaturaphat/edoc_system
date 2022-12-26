@@ -29,15 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'pager' => ['class' => yii\bootstrap4\LinkPager::className()],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            //'e_main_id',
+            // 'e_main_id',
             // 'id',
             // 'edoc_id',
             //'e_id',            
             [
                 'label'=> 'ชื่อหนังสือ',
                 'format' => 'ntext',
-                'attribute'=>'edoc.edoc_name',
-                // 'filter'=>'edoc.edoc_name',
+                'attribute'=>'e_main_id',
+                'filter'=> function($model){
+                    return print_r($model);
+                },
                 'value'=> 'edoc.edoc_name'
             ],            
             [
