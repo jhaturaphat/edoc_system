@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pager' => ['class' => yii\bootstrap4\LinkPager::className()],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             //'e_main_id',
@@ -59,7 +60,18 @@ $this->params['breadcrumbs'][] = $this->title;
             //'e_id_radio',
             
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            'template'=>'{download} {view} {update} {delete}',
+            'contentOptions'=>[
+                'noWrap' => true
+              ],
+              'buttons'=>[                
+                'download' => function($url,$model,$key){   
+                    return Html::a('<i class="fas fa-download text-primary"></i>',$url,['class'=>'btn btn-default', 'title'=>'ดาวน์โหลด']);
+                }                  
+            ]
+        
+            ],
         ],
     ]); ?>
 

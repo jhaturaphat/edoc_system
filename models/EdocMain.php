@@ -51,6 +51,7 @@ class EdocMain extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['e_id','edoc_name','edoc_date_get','dep_id','edoc_from','edoc_to','edoc_type_id','edoc_important_id','edoc_status_id'], 'required'],
             [['edoc_name', 'ip_get_sent'], 'string'],
             [['create_at', 'edoc_date_get_2', 'edoc_date_doc_2'], 'safe'],
             [['edoc_id', 'dep_id'], 'string'],

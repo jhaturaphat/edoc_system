@@ -41,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pager' => ['class' => yii\bootstrap4\LinkPager::className()],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -104,7 +105,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJs('
     function loadModal(ele){  
-        
         $("#modal_send").modal("show").find("#modal_content").load($(ele).attr("value"));
     } 
 ',View::POS_END, 'my-script');

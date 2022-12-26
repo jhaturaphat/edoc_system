@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\EdocView;
 use app\models\EdocViewSearch;
+use app\models\EdocMain;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -111,6 +112,20 @@ class EdocViewController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionDownload($id){
+
+        $model = EdocMain::findOne($id);   
+        // print_r($model->edoc_name);     exit;   
+        // $path = Yii::getAlias('@webroot').'/uploads/'.$model->path;           
+        $path = Yii::getAlias('@webroot').'/uploads/13ec700d026aa9c4554389220e996fd2.pdf';           
+        
+        if(file_exists($path)){                
+            return Yii::$app->response->sendFile($path, $model->edoc_name);                
+        }else{
+            return $this->redirect(['index']);
+        } 
+    }
+
     /**
      * Finds the EdocView model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -123,7 +138,6 @@ class EdocViewController extends Controller
         if (($model = EdocView::findOne($id)) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
