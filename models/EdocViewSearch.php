@@ -40,7 +40,9 @@ class EdocViewSearch extends EdocView
      */
     public function search($params, $dep_id)
     {
-        $query = EdocView::find()->where(['dep_id'=>$dep_id]);
+        $query = EdocView::find()
+        ->leftJoin('edoc_main','edoc_sent.e_main_id = edoc_main.e_main_id')
+        ->where(['edoc_sent.dep_id'=>$dep_id]);
 
         // add conditions that should always apply here
 

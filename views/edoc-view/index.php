@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Edoc View', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
- <?= print_r($param) ?>
+ <?= print_r($dataProvider) ?>
  
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -33,19 +33,19 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'id',
             // 'edoc_id',
             //'e_id',            
-            [
-                'label'=> 'ชื่อหนังสือ',
-                'format' => 'ntext',
-                'attribute'=>'e_main_id',
-                'filter'=> function($model){
-                    return print_r($model);
-                },
-                'value'=> 'edoc.edoc_name'
-            ],            
+            // [
+            //     'label'=> 'ชื่อหนังสือ',
+            //     'format' => 'ntext',
+            //     'attribute'=>'e_main_id',
+            //     'filter'=> function($model){
+            //         return print_r($model);
+            //     },
+            //     'value'=> 'edoc.edoc_name'
+            // ],            
             [
                 'attribute'=>'หนังสือจาก',
                 //'filter'=>Resume::itemsAlias('education'),
-                'value'=> 'edoc.edoc_from'
+                'value'=> 'edoc_from'
             ],
             [
                 'attribute'=>'สถานะการอ่าน',
