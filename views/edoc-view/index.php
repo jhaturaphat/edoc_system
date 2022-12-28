@@ -33,23 +33,22 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'id',
             // 'edoc_id',
             //'e_id',            
-            // [
-            //     'label'=> 'ชื่อหนังสือ',
-            //     'format' => 'ntext',
-            //     'attribute'=>'e_main_id',
-            //     'filter'=> function($model){
-            //         return print_r($model);
-            //     },
-            //     'value'=> 'edoc.edoc_name'
-            // ],            
             [
-                'attribute'=>'หนังสือจาก',
-                //'filter'=>Resume::itemsAlias('education'),
-                'value'=> 'edoc_from'
+                'label'=> 'ชื่อหนังสือ',
+                'format' => 'ntext',
+                'attribute'=>'e_main_id',                
+                'value'=> 'edocMain.edoc_name'
+            ],            
+            [
+                'label'=> 'หนังสือจาก',
+                'format' => 'ntext',
+                'attribute'=>'หนังสือจาก',                
+                'value'=> 'edocMain.edoc_from'
             ],
             [
-                'attribute'=>'สถานะการอ่าน',
-                //'filter'=>Resume::itemsAlias('education'),
+                'label'=> 'สถานะการอ่าน',
+                'format' => 'ntext',
+                'attribute'=>'สถานะการอ่าน',                
                 'value'=> 'edocRead.edoc_read_name'
             ],
             //'edoc_read_id',

@@ -75,7 +75,7 @@ class EdocView extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getEdoc(){
+    public function getEdocMain(){
         return $this->hasOne(EdocMain::className(), ['e_main_id' => 'e_main_id']);
     }    
     public function getEdocRead(){
