@@ -41,7 +41,7 @@ class EdocViewSearch extends EdocView
     public function search($params, $dep_id)
     {
         $query = EdocView::find()
-        ->joinWith(['edocMain','edocRead']);
+        ->joinWith(['edocMain','edocRead','edocType']);
 
         // add conditions that should always apply here
 
@@ -69,14 +69,15 @@ class EdocViewSearch extends EdocView
             ->andFilterWhere(['like', 'edoc_sent.edoc_read_id', $this->edoc_read_id])
             ->andFilterWhere(['like', 'edoc_sent.r_date', $this->r_date])
             // ->andFilterWhere(['like', 'dep_id', $this->dep_id])
-            ->andFilterWhere(['like', 'edoc_sent.edoc_type_id', $this->edoc_type_id])
+            // ->andFilterWhere(['like', 'edoc_sent.edoc_type_id', $this->edoc_type_id])
             ->andFilterWhere(['like', 'edoc_sent.e_id_sent', $this->e_id_sent])
             ->andFilterWhere(['like', 'edoc_sent.e_id_dud', $this->e_id_dud])
             ->andFilterWhere(['like', 'edoc_sent.user_get', $this->user_get])
             ->andFilterWhere(['like', 'edoc_sent.date_get', $this->date_get])
             ->andFilterWhere(['like', 'edoc_sent.ip_get', $this->ip_get])
             ->andFilterWhere(['like', 'edoc_sent.e_id_radio', $this->e_id_radio])
-            ->andFilterWhere(['like', 'edoc_main.edoc_name', $this->e_main_id]);
+            ->andFilterWhere(['like', 'edoc_main.edoc_name', $this->e_main_id])
+            ->andFilterWhere(['like', 'edoc_type.edoc_type_id', $this->edoc_type_id]);
 
         return $dataProvider;
     }

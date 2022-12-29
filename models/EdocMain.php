@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\web\UploadedFile;
 use app\models\EdocSent;
+use app\models\EdocType;
 /**
  * This is the model class for table "{{%edoc_main}}".
  *
@@ -81,11 +82,11 @@ class EdocMain extends \yii\db\ActiveRecord
             'edoc_to' => 'ถึง',
             'edoc_name' => 'เรื่อง',
             'dep_id' => 'Dep ID',
-            'edoc_type_id' => 'รหัสประเภทหนังสือ',
-            'edoc_status_id' => 'รหัสสถานะการดำเนินการของหนังสือ ',
-            'edoc_read_id' => 'รหัสสถานะการอ่านของหนังสือ ',
+            'edoc_type_id' => 'ประเภทหนังสือ',
+            'edoc_status_id' => 'สถานะการดำเนินการของหนังสือ ',
+            'edoc_read_id' => 'สถานะการอ่านของหนังสือ ',
             'path' => 'ชื่อไฟล์ที่ upload เช่น 6301.pdf',
-            'edoc_important_id' => 'รหัสความสำคัญของหนังสือ',
+            'edoc_important_id' => 'ความสำคัญของหนังสือ',
             'e_id_sent' => 'ลำดับที่ทั่วไปหนังสือส่ง เช่น 05023',
             'e_id_dud' => 'ลำดับที่ทั่วไปหนังสือเวียนภายใน เช่น 05023',
             'e_id_radio' => 'ลำดับที่ทั่วไปหนังสือเวียนวิทยุ เช่น 05023',
@@ -94,6 +95,10 @@ class EdocMain extends \yii\db\ActiveRecord
             'edoc_date_get_2' => 'Edoc Date Get 2',
             'edoc_date_doc_2' => 'Edoc Date Doc 2',
         ];
+    }
+
+    public function getEdocType(){
+        return $this->hasOne(EdocType::className(), ['edoc_type_id' => 'edoc_type_id']);
     }
 
     public function checkSent($id){        

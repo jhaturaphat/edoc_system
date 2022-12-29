@@ -7,6 +7,7 @@ use app\models\EdocMain;
 use app\models\EdocStatus;
 use app\models\EdocRead;
 use app\models\EdocDep;
+use app\models\EdocType;
 
 /**
  * This is the model class for table "{{%edoc_sent}}".
@@ -84,4 +85,8 @@ class EdocView extends \yii\db\ActiveRecord
     public function getEdocDep(){
         return $this->hasOne(EdocDep::className(), ['dep_id' => 'dep_id']);
     }
+    public function getEdocType(){
+        return $this->hasOne(EdocType::className(), ['edoc_type_id' => 'edoc_type_id'])
+        ->viaTable('edoc_main AS e_doc_main',['e_main_id' => 'e_main_id']);
+    }    
 }

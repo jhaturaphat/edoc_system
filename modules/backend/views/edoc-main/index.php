@@ -7,11 +7,13 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\bootstrap4\Modal;
 use yii\web\View;
+use yii\helpers\ArrayHelper;
+use app\models\EdocType;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EdocMainSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Edoc Mains';
+$this->title = 'คลังหนังสือหลัก';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="edoc-main-index">
@@ -19,12 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Edoc Main', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('สร้างหนังสือ', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php 
-
-print_r($param);
 ?>
     <?php
         Modal::begin([
@@ -51,6 +51,13 @@ print_r($param);
             //'e_main_id',
             //'edoc_id',
             'e_id',
+            [
+                'label'=> 'ประเภทหนังสือ',
+                'format' => 'ntext',
+                'filter' => ArrayHelper::map(EdocType::find()->all(), 'edoc_type_id', 'edoc_type_name'),
+                'attribute'=>'edoc_type_id',                
+                'value'=> 'edocType.edoc_type_name'
+            ], 
             //'edoc_no_get',
             //'edoc_no_sent',
             //'edoc_no_keep',
@@ -60,7 +67,7 @@ print_r($param);
             'edoc_from',
             'edoc_to',                      
             //'dep_id',
-            //'edoc_type_id',
+            // 'edoc_type_id',            
             //'edoc_status_id',
             //'edoc_read_id',
             //'path:ntext',

@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Edoc Main: ' . $model['edoc_name'];
+$this->title = 'Edoc Main: ' . $xmodel['edoc_name'];
 $this->params['breadcrumbs'][] = ['label' => 'Edoc Mains', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'index';
 
@@ -31,9 +31,9 @@ $this->params['breadcrumbs'][] = 'index';
     
 
     <form action="<?= Url::to(['/backend/edoc-sent/save']) ?>">
-        <input type="hidden" id="e_main_id" value="<?= $model['e_main_id'] ?>">
-        <input type="hidden" id="edoc_id" value="<?= $model['edoc_id'] ?>">
-        <input type="hidden" id="e_id" value="<?= $model['e_id'] ?>">        
+        <input type="hidden" id="e_main_id" value="<?= $xmodel['e_main_id'] ?>">
+        <input type="hidden" id="edoc_id" value="<?= $xmodel['edoc_id'] ?>">
+        <input type="hidden" id="e_id" value="<?= $xmodel['e_id'] ?>">        
     <?php    
     foreach($dep as $val){ 
         echo '<div class="custom-control custom-checkbox custom-control-inline col-2">';

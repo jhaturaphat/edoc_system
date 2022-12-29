@@ -10,6 +10,7 @@ $config = [
     'name' => 'โปรแกรมสารบรรณ รพร.เดชอุดม',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'timeZone' => 'Asia/Bangkok',
     'language' => 'th_TH',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',

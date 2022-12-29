@@ -69,8 +69,9 @@ class EdocMainController extends Controller
     {
         $model = new EdocMain();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {            
             $model->path = $model->upload($model,'path');
+            $model->edoc_id = (date("Y") + 543);
             $model->save();               
             return $this->redirect(['view', 'id' => $model->e_main_id]);
         }
@@ -78,6 +79,15 @@ class EdocMainController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    public function actionGetEdocType(){
+        if(Yii::$app->request->isAjax){
+            $data = Yii::$app->request->post();
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return  EdocMain::find()->where(['edoc_type_id'=>$data['e_id'], 'edoc_id'=>(date("Y") + 543)])->max('e_id');
+           
+        }
     }
 
     /**
@@ -115,7 +125,7 @@ class EdocMainController extends Controller
             $dep = EdocDep::find()->asArray()->all();
             $model = EdocMain::find()->where(['e_main_id'=>$id])->asArray()->one(); 
             return $this->renderAjax('send',[
-                'model'=>$model,
+                'xmodel'=>$model,
                 'dep'=> $dep
             ]);
     }

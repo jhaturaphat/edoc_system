@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\EdocMain */
 
-$this->title = 'Create Edoc Main';
-$this->params['breadcrumbs'][] = ['label' => 'Edoc Mains', 'url' => ['index']];
+$this->title = 'สร้างหนังสือ';
+$this->params['breadcrumbs'][] = ['label' => 'คลังหนังสือหลัก', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="edoc-main-create">

@@ -4,22 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use app\models\Resume;
+use yii\helpers\ArrayHelper;
+use app\models\EdocRead;
+use app\models\EdocType;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EdocViewSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Edoc Views';
+$this->title = 'คลังหนังสือ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="edoc-view-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Edoc View', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
- <?= print_r($dataProvider) ?>
- 
+    <h1><?= Html::encode($this->title) ?></h1>   
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -32,7 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'e_main_id',
             // 'id',
             // 'edoc_id',
-            //'e_id',            
+            //'e_id',   
+            [
+                'label'=> 'ประเภทหนังสือ',
+                'format' => 'ntext',
+                'filter' => ArrayHelper::map(EdocType::find()->all(), 'edoc_type_id', 'edoc_type_name'),
+                'attribute'=>'edoc_type_id',                
+                'value'=> 'edocType.edoc_type_name'
+            ],         
             [
                 'label'=> 'ชื่อหนังสือ',
                 'format' => 'ntext',
@@ -48,7 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label'=> 'สถานะการอ่าน',
                 'format' => 'ntext',
-                'attribute'=>'สถานะการอ่าน',                
+                'filter' => ArrayHelper::map(EdocRead::find()->all(), 'edoc_read_id', 'edoc_read_name'),
+                'attribute'=>'edoc_read_id',                
                 'value'=> 'edocRead.edoc_read_name'
             ],
             //'edoc_read_id',

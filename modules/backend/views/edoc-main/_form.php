@@ -8,6 +8,8 @@ use app\models\EdocStatus;
 use app\models\EdocImportant;
 use app\models\EdocType;
 use kartik\file\FileInput;
+use yii\web\View;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\EdocMain */
@@ -19,9 +21,9 @@ use kartik\file\FileInput;
     <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
 
     <?php $y =  Date("Y")+543 ?>
-    <?php echo $form->field($model, 'edoc_id')->textInput(['maxlength' => true, 'value'=>$y]) ?>
+    <?php echo $form->field($model, 'edoc_id')->hiddenInput(['maxlength' => true, 'value'=>$y])->label(false) ?>
 
-    <?= $form->field($model, 'e_id')->textInput(['maxlength' => true, 'value'=>'12345']) ?>
+    <?php echo $form->field($model, 'e_id')->hiddenInput(['maxlength' => true])->label(false) ?>                                                                                                                                           
 
     <?= $form->field($model, 'edoc_date_get')->widget(DatePicker::classname(), [
         'options' => ['placeholder' => 'Enter birth date ...'],
@@ -76,7 +78,11 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'edoc_type_id')->dropdownList(
                 ArrayHelper::map(EdocType::find()->all(), 'edoc_type_id', 'edoc_type_name'),                 
-                ['prompt' => '-- Select Tag --']) ?>
+                [
+                    'prompt' => '-- Select Tag --',
+                    'onchange' => 'edocTypeChange(this)'
+                ]) 
+    ?>
 
     <?= $form->field($model, 'edoc_important_id')->dropdownList(
                 ArrayHelper::map(EdocImportant::find()->all(), 'edoc_important_id', 'edoc_important_name'),                 
@@ -94,3 +100,30 @@ use kartik\file\FileInput;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+$this->registerJs('
+function edocTypeChange(ele){  
+    $.ajax({
+        url:"'.Url::to(['/backend/edoc-main/get-edoc-type']).'",
+        data: {e_id:ele.value},
+        type:"POST",
+        success: function (data, textStatus, jqXHR) {
+            if(data){
+                $("#edocmain-e_id").val(data);
+            }else{
+                $("#edocmain-e_id").val("00001");
+            }
+        },
+        error: function(jqXHR, textStatus, error){
+            $("#edocmain-e_id").removeAttr("value");
+            Swal.fire({                    
+                icon: "error",
+                title: jqXHR.status,
+                text: error,
+                showConfirmButton: true
+            });
+        }
+    });
+} 
+',View::POS_END, 'edoc_main_script');
