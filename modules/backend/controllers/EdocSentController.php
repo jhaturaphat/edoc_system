@@ -109,19 +109,7 @@ class EdocSentController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionSave(){
-        $request = Yii::$app->request;        
-        if($request->isAjax){
-            $data = Yii::$app->request->post();
-            $row = array();
-            $i = 0;
-            foreach($data['ward'] as $val){
-                $row[$i] = [$data['edoc_id'],$data['e_id'], $val, $data['e_main_id']];
-                $i++;
-            }
-            Yii::$app->db->createCommand()->batchInsert('edoc_sent', ['edoc_id', 'e_id', 'dep_id', 'e_main_id'], $row)->execute();
-        }
-    }
+   
 
     /**
      * Finds the EdocSent model based on its primary key value.

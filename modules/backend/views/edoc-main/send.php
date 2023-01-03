@@ -30,7 +30,8 @@ $this->params['breadcrumbs'][] = 'index';
     <hr>
     
 
-    <form action="<?= Url::to(['/backend/edoc-sent/save']) ?>">
+    <form id="form_share" action="<?= Url::to(['/backend/edoc-main/share']) ?>"> 
+        <input type="hidden" name="_csrf" id="_csrf" value="<?=\Yii::$app->request->getCsrfToken()?>" />   
         <input type="hidden" id="e_main_id" value="<?= $xmodel['e_main_id'] ?>">
         <input type="hidden" id="edoc_id" value="<?= $xmodel['edoc_id'] ?>">
         <input type="hidden" id="e_id" value="<?= $xmodel['e_id'] ?>">        
@@ -45,13 +46,13 @@ $this->params['breadcrumbs'][] = 'index';
     </form>
     <br>
     <hr>
-    <a  class="btn btn-primary" id="sendd">แจ้งเวียน</a>
+    <a  class="btn btn-primary" id="btn_share">แจ้งเวียน</a>
   </div>
 </div>
 
 <?php
 $script = <<< JS
-    $("#sendd").click(function(){
+    $("#btn_share").click(function(){        
         var ward = [];        
         $('input[name="dep[]"]').each(function () {
             if ($(this).is(':checked')) {
@@ -61,9 +62,10 @@ $script = <<< JS
         if(ward.length === 0) return;
         //console.log(ward);
         $.ajax({
-            url: $('form').attr('action'),
+            url: $('#form_share').attr('action'),
             type: "POST",
-            data: {                
+            data: { 
+                _csrf : $("#_csrf").val(),            
                 ward: ward,                
                 e_id: $("#e_id").val(),         
                 edoc_id: $("#edoc_id").val(),         
@@ -84,6 +86,7 @@ $script = <<< JS
                 }                
             },
             error: function(jqXHR,textStatus,error){  
+                
                 console.log(error);
                 console.log(jqXHR);
                 console.log(textStatus);
@@ -93,6 +96,7 @@ $script = <<< JS
                     text: error,
                     showConfirmButton: true
                 });
+                alert();
                 $("input[type=checkbox]").prop('checked', false);
                 $("#modal_send").modal("hide");
             }

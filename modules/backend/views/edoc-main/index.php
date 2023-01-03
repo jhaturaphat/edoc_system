@@ -39,13 +39,13 @@ $this->params['breadcrumbs'][] = $this->title;
         
     ?>
 
-    <?php Pjax::begin(['id'=>'e_main_id']); ?>
+    <?php Pjax::begin(['id'=>'e_main_id_pjax_id']); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'pager' => ['class' => yii\bootstrap4\LinkPager::className()],
+        'pager' => ['class' => yii\bootstrap4\LinkPager::className()],        
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             //'e_main_id',

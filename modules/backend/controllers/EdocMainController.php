@@ -10,12 +10,13 @@ use yii\base\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\web\UploadedFile;
 /**
  * EdocMainController implements the CRUD actions for EdocMain model.
  */
 class EdocMainController extends Controller
-{
+{    
     /**
      * {@inheritdoc}
      */
@@ -28,8 +29,32 @@ class EdocMainController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>[
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete'],
+                'rules' => [
+                  [
+                    'actions' => ['create', 'update','delete','view','index','save'],
+                    'allow' => true,
+                    'roles' => ['@']
+                  ],
+                  [
+                    'actions' => ['index'],
+                    'allow' => true,
+                    'roles' => ['@']
+                  ]
+                ]
+              ]
         ];
     }
+
+    // public function beforeAction($action)
+    // {
+    //     if (in_array($action->id, ['save'])) {
+    //         $this->enableCsrfValidation = false;
+    //     }
+    //     return parent::beforeAction($action);
+    // }
 
     /**
      * Lists all EdocMain models.
@@ -128,6 +153,24 @@ class EdocMainController extends Controller
                 'xmodel'=>$model,
                 'dep'=> $dep
             ]);
+    }
+
+    public function actionShare(){  
+        echo "<script>alert()</acript>";
+        // $this->enableCsrfValidation = false;     
+        // $request = Yii::$app->request;        
+        // if($request->isAjax){
+
+        //     print_r(Yii::$app->request->post()); exit;
+        //     $data = Yii::$app->request->post();
+        //     $row = array();
+        //     $i = 0;
+        //     foreach($data['ward'] as $val){
+        //         $row[$i] = [$data['edoc_id'],$data['e_id'], $val, $data['e_main_id']];
+        //         $i++;
+        //     }
+        //     \Yii::$app->db->createCommand()->batchInsert('edoc_sent', ['edoc_id', 'e_id', 'dep_id', 'e_main_id'], $row)->execute();
+        // }
     }
 
     /**
