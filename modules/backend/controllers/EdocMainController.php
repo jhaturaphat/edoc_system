@@ -146,31 +146,27 @@ class EdocMainController extends Controller
         ]);
     }
 
-    public function actionSend($id = null){  
+    public function actionShare($id = null){  
             $dep = EdocDep::find()->asArray()->all();
             $model = EdocMain::find()->where(['e_main_id'=>$id])->asArray()->one(); 
-            return $this->renderAjax('send',[
+            return $this->renderAjax('share',[
                 'xmodel'=>$model,
                 'dep'=> $dep
             ]);
     }
 
-    public function actionShare(){  
-        echo "<script>alert()</acript>";
-        // $this->enableCsrfValidation = false;     
-        // $request = Yii::$app->request;        
-        // if($request->isAjax){
-
-        //     print_r(Yii::$app->request->post()); exit;
-        //     $data = Yii::$app->request->post();
-        //     $row = array();
-        //     $i = 0;
-        //     foreach($data['ward'] as $val){
-        //         $row[$i] = [$data['edoc_id'],$data['e_id'], $val, $data['e_main_id']];
-        //         $i++;
-        //     }
-        //     \Yii::$app->db->createCommand()->batchInsert('edoc_sent', ['edoc_id', 'e_id', 'dep_id', 'e_main_id'], $row)->execute();
-        // }
+    public function actionShareTo(){     
+        $request = Yii::$app->request;        
+        if($request->isAjax){            
+            $data = Yii::$app->request->post();
+            $row = array();
+            $i = 0;
+            foreach($data['ward'] as $val){
+                $row[$i] = [$data['edoc_id'],$data['e_id'], $val, $data['e_main_id']];
+                $i++;
+            }
+            \Yii::$app->db->createCommand()->batchInsert('edoc_sent', ['edoc_id', 'e_id', 'dep_id', 'e_main_id'], $row)->execute();
+        }
     }
 
     /**

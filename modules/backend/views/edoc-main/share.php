@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = 'index';
     <hr>
     
 
-    <form id="form_share" action="<?= Url::to(['/backend/edoc-main/share']) ?>"> 
+    <form id="form_share" action="<?= Url::to(['/backend/edoc-main/share-to']) ?>"> 
         <input type="hidden" name="_csrf" id="_csrf" value="<?=\Yii::$app->request->getCsrfToken()?>" />   
         <input type="hidden" id="e_main_id" value="<?= $xmodel['e_main_id'] ?>">
         <input type="hidden" id="edoc_id" value="<?= $xmodel['edoc_id'] ?>">
@@ -95,8 +95,7 @@ $script = <<< JS
                     title: jqXHR.status,
                     text: error,
                     showConfirmButton: true
-                });
-                alert();
+                });                
                 $("input[type=checkbox]").prop('checked', false);
                 $("#modal_send").modal("hide");
             }
