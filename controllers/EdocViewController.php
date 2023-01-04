@@ -84,6 +84,7 @@ class EdocViewController extends Controller
      */
     public function actionCreate()
     {
+        exit;
         $model = new EdocView();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -104,6 +105,7 @@ class EdocViewController extends Controller
      */
     public function actionUpdate($id)
     {
+        exit;
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -124,6 +126,7 @@ class EdocViewController extends Controller
      */
     public function actionDelete($id)
     {
+        exit;
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -132,12 +135,13 @@ class EdocViewController extends Controller
     public function actionDownload($id){
 
         $model = EdocMain::findOne($id);   
-        // print_r($model->edoc_name);     exit;   
+        // print_r($model);     exit;   
         // $path = Yii::getAlias('@webroot').'/uploads/'.$model->path;           
-        $path = Yii::getAlias('@webroot').'/uploads/13ec700d026aa9c4554389220e996fd2.pdf';           
-        
+        $path = Yii::getAlias('@webroot').'/uploads/2566-78bc92ce8bfa4d72fe8fceb9f6078f6f.pdf'; 
+
+        $fileName = (!empty($model->edoc_name)? $model->edoc_name : 'หนังสือเวียนรหัส-'.$model->e_main_id); 
         if(file_exists($path)){                
-            return Yii::$app->response->sendFile($path, $model->edoc_name);                
+            return Yii::$app->response->sendFile($path, $fileName);                
         }else{
             return $this->redirect(['index']);
         } 

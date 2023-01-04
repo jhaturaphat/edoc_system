@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use app\models\Resume;
+use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use app\models\EdocRead;
 use app\models\EdocType;
@@ -76,7 +76,9 @@ $this->params['breadcrumbs'][] = $this->title;
               ],
               'buttons'=>[                
                 'download' => function($url,$model,$key){   
-                    return Html::a('<i class="fas fa-download text-primary"></i>',$url,['class'=>'btn btn-default', 'title'=>'ดาวน์โหลด']);
+                    return Html::a('<i class="fas fa-download text-primary"></i>',
+                    Url::to(['edoc-view/download', 'id' => $model->e_main_id]),
+                    ['class'=>'btn btn-default', 'title'=>'ดาวน์โหลด']);
                 }                  
             ]
         
