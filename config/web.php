@@ -78,7 +78,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'QIXz6QTIUhQO_klnPMuksO2O4rzm1bAB',
-            'enableCsrfValidation'=>false,
+            // 'enableCsrfValidation'=>false,
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -120,7 +120,8 @@ $config = [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            '*'        
+            'edoc-view/*',     
+            '*'
         ]
         ],
     'params' => $params,

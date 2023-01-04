@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label'=> 'ประเภทหนังสือ',
                 'format' => 'ntext',
-                'filter' => ArrayHelper::map(EdocType::find()->all(), 'edoc_type_id', 'edoc_type_name'),
+                'filter' => ArrayHelper::map(EdocType::find()->all(), 'edoc_type_id', 'edoc_type_name'),                
                 'attribute'=>'edoc_type_id',                
                 'value'=> 'edocType.edoc_type_name'
             ], 

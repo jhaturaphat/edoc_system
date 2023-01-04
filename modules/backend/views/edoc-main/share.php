@@ -83,6 +83,7 @@ $script = <<< JS
                         $("input[type=checkbox]").prop('checked', false);
                         $("#modal_send").modal("hide");
                     }, 1500); 
+                    $.pjax.reload({container: '#e_main_id_pjax_id', async: false}); //รีโหลดข้อมูลใหม่
                 }                
             },
             error: function(jqXHR,textStatus,error){  

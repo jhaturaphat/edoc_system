@@ -52,14 +52,8 @@ class EdocMain extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['e_id','edoc_name','edoc_date_get','dep_id','edoc_from','edoc_to','edoc_type_id','edoc_important_id','edoc_status_id'], 'required'],
-            [['edoc_name', 'ip_get_sent'], 'string'],
-            [['create_at', 'edoc_date_get_2', 'edoc_date_doc_2'], 'safe'],
-            [['edoc_id', 'dep_id'], 'string'],
-            [['e_id', 'e_id_sent', 'e_id_dud', 'e_id_radio'], 'string'],
-            [['edoc_no_get', 'edoc_no_sent', 'edoc_no_keep', 'edoc_from', 'edoc_to'], 'string'],
-            [['edoc_date_doc', 'edoc_date_get'], 'string'],
-            [['edoc_type_id', 'edoc_status_id', 'edoc_read_id', 'edoc_important_id'], 'string'],
+            [['edoc_id','e_id','edoc_no_get','edoc_date_get','edoc_date_doc','edoc_from','edoc_to','edoc_name','edoc_type_id','edoc_status_id','edoc_important_id'], 'required'],      
+            [['edoc_to','edoc_from','edoc_name','edoc_no_keep'],'string'],      
             [['path'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf'],
         ];
     }

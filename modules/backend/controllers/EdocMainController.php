@@ -93,8 +93,8 @@ class EdocMainController extends Controller
     public function actionCreate()
     {
         $model = new EdocMain();
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {            
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) { 
+            exit("<script>alert()</script>");
             $model->path = $model->upload($model,'path');
             $model->edoc_id = (date("Y") + 543);
             $model->save();               
@@ -126,18 +126,29 @@ class EdocMainController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $old_path = $model->path;
-            $Upfile = UploadedFile::getInstance($model, 'path');
-            if(!empty($Upfile)){ 
-                if($model->removeFile($old_path)){
-                    $model->path = $model->upload($model,'path');
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->validate()){
+                $old_path = $model->path;
+                $Upfile = UploadedFile::getInstance($model, 'path');
+                if(!empty($Upfile)){ 
+                    if($model->removeFile($old_path)){
+                        $model->path = $model->upload($model,'path');
+                        $model->save();
+                    }            
+                }else{
                     $model->save();
-                }            
-            }else{
-                $model->save();
-            }
-            
+                } 
+            }else{                
+                $errors = $model->errors;
+                Yii::$app->session->setFlash('warning', array_keys($errors)[0] . " => ".$errors[array_keys($errors)[0]][0]);  
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+                // print_r(array_keys($errors)[0]);
+                // print_r($errors[array_keys($errors)[0]][0]); ;
+                //  exit;
+            }           
+                       
             return $this->redirect(['view', 'id' => $model->e_main_id]);
         }
 

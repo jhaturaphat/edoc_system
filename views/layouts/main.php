@@ -9,6 +9,7 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use app\models\User;
 
 AppAsset::register($this);
 
@@ -42,11 +43,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
             ['label' => 'หน้าหลัก', 'url' => ['/edoc-view']],
             ['label' => 'เกี่ยวกับเรา', 'url' => ['/site/about']],
             ['label' => 'ติดต่อเรา', 'url' => ['/site/contact']],
-            ['label' => 'อัพโหลดเอกสาร', 'url' => ['/backend/edoc-main']],
+            ['label' => 'อัพโหลดเอกสาร', 'url' => ['/backend/edoc-main'],'visible'=>User::IsAdmin()],
             ['label' => 'ลงทะเบียน', 'url' => ['/user/registration/register'], 'visible'=>Yii::$app->user->isGuest],
             
             Yii::$app->user->isGuest
-                ? ['label' => 'ล็อกอิน', 'url' => ['/user/security/login']] 
+                ? ['label' => 'ล็อกอิน', 'url' => ['/edoc-view']] 
                 : '<li class="nav-item">'
                     . Html::beginForm(['/user/security/logout'])
                     . Html::submitButton(
