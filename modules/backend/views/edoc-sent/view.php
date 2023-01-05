@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\EdocSent */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Edoc Sents', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'คลังหนังสือเวียน', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

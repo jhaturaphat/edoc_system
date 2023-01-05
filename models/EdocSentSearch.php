@@ -40,7 +40,8 @@ class EdocSentSearch extends EdocSent
      */
     public function search($params)
     {
-        $query = EdocSent::find();
+        $query = EdocSent::find()
+        ->joinWith(['edocMain','edocRead','edocDep']);
 
         // add conditions that should always apply here
 
@@ -63,7 +64,7 @@ class EdocSentSearch extends EdocSent
 
         $query->andFilterWhere(['like', 'edoc_id', $this->edoc_id])
             ->andFilterWhere(['like', 'e_id', $this->e_id])
-            ->andFilterWhere(['like', 'edoc_read_id', $this->edoc_read_id])
+            ->andFilterWhere(['like', 'edoc_read.edoc_read_id', $this->edoc_read_id])
             ->andFilterWhere(['like', 'r_date', $this->r_date])
             ->andFilterWhere(['like', 'edoc_type_id', $this->edoc_type_id])
             ->andFilterWhere(['like', 'e_id_sent', $this->e_id_sent])
@@ -72,7 +73,7 @@ class EdocSentSearch extends EdocSent
             ->andFilterWhere(['like', 'date_get', $this->date_get])
             ->andFilterWhere(['like', 'ip_get', $this->ip_get])
             ->andFilterWhere(['like', 'e_id_radio', $this->e_id_radio])
-            ->andFilterWhere(['like', 'dep_id', $this->dep_id]);
+            ->andFilterWhere(['like', 'edoc_dep.dep_id', $this->dep_id]);
 
         return $dataProvider;
     }

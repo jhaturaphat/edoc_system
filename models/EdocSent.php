@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\models\EdocMain;
+use app\models\EdocDep;
 
 /**
  * This is the model class for table "{{%edoc_sent}}".
@@ -67,6 +68,16 @@ class EdocSent extends \yii\db\ActiveRecord
             'e_id_radio' => 'เลขที่หนังสือเวียนวิทยุ',
             #'dep_id' => 'Dep ID',
         ];
+    }
+
+    public function getEdocDep(){
+        return $this->hasOne(EdocDep::className(), ['dep_id' => 'dep_id']);
+    }
+    public function getEdocMain(){
+        return $this->hasOne(EdocMain::className(), ['e_main_id' => 'e_main_id']);
+    }
+    public function getEdocRead(){
+        return $this->hasOne(EdocRead::className(), ['edoc_read_id' => 'edoc_read_id']);
     }
 
     public function getEdocName($id){

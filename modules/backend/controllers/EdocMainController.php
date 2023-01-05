@@ -5,8 +5,8 @@ namespace app\modules\backend\controllers;
 use Yii;
 use app\models\EdocDep;
 use app\models\EdocMain;
+use app\models\EdocSent;
 use app\models\EdocMainSearch;
-use yii\base\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -171,15 +171,36 @@ class EdocMainController extends Controller
         if($request->isAjax){            
             $data = Yii::$app->request->post();
 
-            $esent = EdocSent:find()->where(['e_main_id'=>$data['ward']['e_main_id']]);
-
-            $row = array();
-            $i = 0;
-            foreach($data['ward'] as $val){
-                $row[$i] = [$data['edoc_id'],$data['e_id'], $val, $data['e_main_id']];
-                $i++;
+            
+            
+            $EdocSentModel = EdocSent::find()->where(['e_main_id'=>$data['e_main_id']])->asArray()->all();
+            if( sizeof($EdocSentModel) == 0 ){   
+                $rowInsert = array();
+                $i = 0;
+                foreach($data['ward'] as $val){
+                    $rowInsert[$i] = [$data['edoc_id'],$data['e_id'], $val, $data['e_main_id']];
+                    $i++;
+                }            
+                \Yii::$app->db->createCommand()->batchInsert('edoc_sent', ['edoc_id', 'e_id', 'dep_id', 'e_main_id'], $rowInsert)->execute();
+            }else{
+                // /*EdocSent::deleteAll(['e_main_id'=>$data['e_main_id']]); */ 
+                // print_r($data['ward']); 
+                $row2 = array(); 
+                $ii = 0;
+                foreach($EdocSentModel as $value){
+                    $row2[$ii] = $value['dep_id'];
+                    $ii++;
+                } 
+                $result=array_diff($data['ward'],$row2);   
+                $rowUpdate = array();
+                $i = 0;
+                foreach($result as $val){
+                    $rowUpdate[$i] = array($data['edoc_id'],$data['e_id'], $val, $data['e_main_id']);
+                    $i++;
+                }
+                \Yii::$app->db->createCommand()->batchInsert('edoc_sent', ['edoc_id', 'e_id', 'dep_id', 'e_main_id'], $rowUpdate)->execute();
+                // print_r($result);         
             }
-            \Yii::$app->db->createCommand()->batchInsert('edoc_sent', ['edoc_id', 'e_id', 'dep_id', 'e_main_id'], $row)->execute();
         }
     }
 

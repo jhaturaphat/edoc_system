@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\EdocSent */
 
-$this->title = 'Update Edoc Sent: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Edoc Sents', 'url' => ['index']];
+$this->title = 'แก้ไข คลังหนังสือเวียน: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'คลังหนังสือเวียน', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

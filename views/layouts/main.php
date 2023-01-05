@@ -43,6 +43,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
             ['label' => 'หนังสือ', 'url' => ['/edoc-view']],
             // ['label' => 'เกี่ยวกับเรา', 'url' => ['/site/about']],
             // ['label' => 'ติดต่อเรา', 'url' => ['/site/contact']],
+            ['label' => 'คลังหนังสือเวียน', 'url' => ['/backend/edoc-sent'],'visible'=>User::IsAdmin()],
             ['label' => 'อัพโหลดเอกสาร', 'url' => ['/backend/edoc-main'],'visible'=>User::IsAdmin()],
             ['label' => 'ลงทะเบียน', 'url' => ['/user/registration/register'], 'visible'=>Yii::$app->user->isGuest],
             ['label' => 'โปรไฟล์', 'url' => ['/user/settings/profile'], 'visible'=>!Yii::$app->user->isGuest],

@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\EdocSentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Edoc Sents';
+$this->title = 'คลังหนังสือเวียน';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="edoc-sent-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Edoc Sent', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('เวียนเอกสาร', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,10 +27,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'edoc_id',
-            'e_id',
-            'edoc_read_id',
+            // 'id',
+            // 'edoc_id',
+            // 'e_id',
+            'edocMain.edoc_name',
+            'edocRead.edoc_read_name',
+            [
+                'label'=> 'สถานะการอ่าน',
+                'format' => 'ntext',
+                'filter' => yii\helpers\ArrayHelper::map(app\models\EdocRead::find()->all(), 'edoc_read_id', 'edoc_read_name'),
+                'attribute'=>'edoc_read_id',                
+                'value'=> 'edocRead.edoc_read_name'
+            ],
             'r_date',
             //'edoc_type_id',
             //'e_id_sent',
@@ -40,6 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'ip_get:ntext',
             //'e_id_radio',
             //'dep_id',
+            [
+                'label'=> 'สถานะการอ่าน',
+                'format' => 'ntext',
+                'filter' => yii\helpers\ArrayHelper::map(app\models\EdocDep::find()->all(), 'dep_id', 'dep_name'),
+                'attribute'=>'dep_id',                
+                'value'=> 'edocDep.dep_name'
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
