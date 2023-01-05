@@ -170,6 +170,9 @@ class EdocMainController extends Controller
         $request = Yii::$app->request;        
         if($request->isAjax){            
             $data = Yii::$app->request->post();
+
+            $esent = EdocSent:find()->where(['e_main_id'=>$data['ward']['e_main_id']]);
+
             $row = array();
             $i = 0;
             foreach($data['ward'] as $val){

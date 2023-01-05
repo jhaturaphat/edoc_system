@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="edoc-view-index">
 
     <h1><?= Html::encode($this->title) ?></h1>   
-    <?php Pjax::begin(); ?>
+    <?php Pjax::begin(['id'=>'edoc_view_pjax_id']); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -26,10 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'pager' => ['class' => yii\bootstrap4\LinkPager::className()],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            // 'e_main_id',
+            //'edocSent.id',
+            //'e_main_id',
             // 'id',
             // 'edoc_id',
-            //'e_id',   
+            //'e_id',               
             [
                 'label'=> 'ประเภทหนังสือ',
                 'format' => 'ntext',
@@ -48,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'ntext',
                 'attribute'=>'หนังสือจาก',                
                 'value'=> 'edocMain.edoc_from'
-            ],
+            ],            
             [
                 'label'=> 'สถานะการอ่าน',
                 'format' => 'ntext',
@@ -56,13 +57,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'edoc_read_id',                
                 'value'=> 'edocRead.edoc_read_name'
             ],
-            //'edoc_read_id',
+            // 'edoc_read_id',
             'r_date',
             //'dep_id',
             //'edoc_type_id',
             //'e_id_sent',
             //'e_id_dud',
-            //'user_get:ntext',
+            'user_get:ntext',
             //'date_get',
             //'ip_get:ntext',
             //'e_id_radio',
@@ -75,10 +76,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'noWrap' => true
               ],
               'buttons'=>[                
-                'download' => function($url,$model,$key){   
+                'download' => function($url,$model,$key){                     
+                    // print_r($model->id);
                     return Html::a('<i class="fas fa-download text-primary"></i>',
-                    Url::to(['edoc-view/download', 'id' => $model->e_main_id]),
-                    ['class'=>'btn btn-default', 'title'=>'ดาวน์โหลด']);
+                    Url::to(['edoc-view/download', 'id' => $model->e_main_id,'edoc_sent_id'=>$model->edocSent->id]),
+                    ['class'=>'btn btn-default', 'title'=>'ดาวน์โหลด','data-pjax' => 0,'target' => '_blank','onclick'=>'reload()']);
                 }                  
             ]
         
@@ -89,6 +91,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::end(); ?>
 
 </div>
+
+<?php
+
+$this->registerJs('
+    function reload(){
+        setTimeout(function(){
+            $.pjax.reload({container: "#edoc_view_pjax_id", async: false}); //รีโหลดข้อมูลใหม่
+        }, 1000);
+    }
+',yii\web\View::POS_END, 'edoc_view_script');
+?>
 
 <!-- http://dixonsatit.github.io/2015/07/21/item-alias.html -->
 <!-- https://www.youtube.com/watch?v=OUUQNbQ3TS8 -->

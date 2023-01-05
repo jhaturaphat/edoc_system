@@ -85,6 +85,9 @@ class EdocView extends \yii\db\ActiveRecord
     public function getEdocDep(){
         return $this->hasOne(EdocDep::className(), ['dep_id' => 'dep_id']);
     }
+     public function getEdocSent(){
+        return $this->hasOne(EdocSent::className(), ['e_main_id' => 'e_main_id'])->andOnCondition(['dep_id' => \Yii::$app->user->identity->dep_id]);
+    }
     public function getEdocType(){
         return $this->hasOne(EdocType::className(), ['edoc_type_id' => 'edoc_type_id'])
         ->viaTable('edoc_main AS e_doc_main',['e_main_id' => 'e_main_id']);

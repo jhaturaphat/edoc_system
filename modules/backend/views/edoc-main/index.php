@@ -97,7 +97,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             'value'=> Url::to(['/backend/edoc-main/share','id'=>$model->e_main_id])
                         ]);
                    }else{
-                    return Html::a('<i class="fas fa-check-circle text-info"></i>');
+                    return Html::a('<i class="fas fa-check-circle text-info"></i>',
+                    'javascript:void(0)',
+                    [
+                        'title'=>'แจ้งเวียน', 
+                        'id'=>'send_button',                             
+                        'onclick'=>'loadModal(this)',
+                        'value'=> Url::to(['/backend/edoc-main/share','id'=>$model->e_main_id])
+                    ]);
                    }
                 }
             ]

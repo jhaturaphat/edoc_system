@@ -132,16 +132,23 @@ class EdocViewController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionDownload($id){
+    public function actionDownload($id, $edoc_sent_id){
 
-        $model = EdocMain::findOne($id);   
+        $EdocMain = EdocMain::findOne($id);   
         // print_r($model);     exit;   
         // $path = Yii::getAlias('@webroot').'/uploads/'.$model->path;           
         $path = Yii::getAlias('@webroot').'/uploads/2566-78bc92ce8bfa4d72fe8fceb9f6078f6f.pdf'; 
 
-        $fileName = (!empty($model->edoc_name)? $model->edoc_name : 'หนังสือเวียนรหัส-'.$model->e_main_id); 
-        if(file_exists($path)){                
-            return Yii::$app->response->sendFile($path, $fileName);                
+        @$fileName = (!empty($EdocMain->edoc_name)? $EdocMain->edoc_name : 'หนังสือเวียนรหัส-'.$EdocMain->e_main_id); 
+        if(file_exists($path)){ 
+           $old_id = $this->findModel($edoc_sent_id);    
+             \Yii::$app->db->createCommand("UPDATE edoc_sent SET edoc_read_id=:edoc_read_id, r_date=:r_date, user_get=:user_get WHERE id=:id")
+            ->bindValue(':id', $edoc_sent_id)
+            ->bindValue(':edoc_read_id', 're01')
+            ->bindValue(':r_date', Date('Y-m-d h:i:s'))
+            ->bindValue(':user_get', \Yii::$app->user->identity->username.','.$old_id->user_get)
+            ->execute();
+            return Yii::$app->response->sendFile($path,$fileName.'.pdf',['inline' => true, 'mimeType' => 'application/pdf']);                
         }else{
             return $this->redirect(['index']);
         } 
