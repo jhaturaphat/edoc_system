@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\EdocMain */
 
-$this->title = $model->e_main_id;
-$this->params['breadcrumbs'][] = ['label' => 'Edoc Mains', 'url' => ['index']];
+$this->title = $model->edoc_name;
+$this->params['breadcrumbs'][] = ['label' => 'คลังหนังสือหลัก', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

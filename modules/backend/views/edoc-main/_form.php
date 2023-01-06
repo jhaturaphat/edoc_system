@@ -113,10 +113,10 @@ use yii\helpers\Url;
 
 <?php
 $this->registerJs('
-$(function(){
-    $("#edocmain-e_id").val($("#edocmain-edoc_type_id).val());
+$(function(){    
+    $("#edocmain-e_id").val($("#edocmain-edoc_type_id").val());
 });
-function edocTypeChange(ele){  
+function edocTypeChange(ele){ 
     $.ajax({
         url:"'.Url::to(['/backend/edoc-main/get-edoc-type']).'",
         data: {e_id:ele.value},

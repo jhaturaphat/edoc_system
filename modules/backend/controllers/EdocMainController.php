@@ -63,7 +63,8 @@ class EdocMainController extends Controller
     public function actionIndex()
     {
         $searchModel = new EdocMainSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);        
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = ['defaultOrder' => ['create_at'=>SORT_DESC]];        
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -93,8 +94,7 @@ class EdocMainController extends Controller
     public function actionCreate()
     {
         $model = new EdocMain();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) { 
-            exit("<script>alert()</script>");
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->path = $model->upload($model,'path');
             $model->edoc_id = (date("Y") + 543);
             $model->save();               
@@ -170,8 +170,6 @@ class EdocMainController extends Controller
         $request = Yii::$app->request;        
         if($request->isAjax){            
             $data = Yii::$app->request->post();
-
-            
             
             $EdocSentModel = EdocSent::find()->where(['e_main_id'=>$data['e_main_id']])->asArray()->all();
             if( sizeof($EdocSentModel) == 0 ){   

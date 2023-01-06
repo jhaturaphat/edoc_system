@@ -37,6 +37,7 @@ class EdocSentController extends Controller
     {
         $searchModel = new EdocSentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort = ['defaultOrder' => ['id'=>SORT_DESC]];  
 
         return $this->render('index', [
             'searchModel' => $searchModel,
