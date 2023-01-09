@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_nopass
+ Source Server         : localhost_123456
  Source Server Type    : MariaDB
- Source Server Version : 100424
+ Source Server Version : 100500
  Source Host           : localhost:3306
  Source Schema         : edoc_system
 
  Target Server Type    : MariaDB
- Target Server Version : 100424
+ Target Server Version : 100500
  File Encoding         : 65001
 
- Date: 19/11/2022 11:45:58
+ Date: 09/01/2023 11:14:42
 */
 
 SET NAMES utf8mb4;
@@ -87,6 +87,16 @@ CREATE TABLE `edoc_dep`  (
 ) ENGINE = InnoDB CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
+-- Table structure for edoc_dep_group
+-- ----------------------------
+DROP TABLE IF EXISTS `edoc_dep_group`;
+CREATE TABLE `edoc_dep_group`  (
+  `dep_group_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสกลุ่มงาน',
+  `dep_group_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ชื่อกลุ่มงาน',
+  PRIMARY KEY (`dep_group_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for edoc_important
 -- ----------------------------
 DROP TABLE IF EXISTS `edoc_important`;
@@ -95,14 +105,6 @@ CREATE TABLE `edoc_important`  (
   `edoc_important_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL COMMENT 'ชื่อความสำคัญของหนังสือ เช่น ด่วน ด่วนมาก ปกติ',
   PRIMARY KEY (`edoc_important_id`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of edoc_important
--- ----------------------------
-INSERT INTO `edoc_important` VALUES ('im01', 'ปกติ');
-INSERT INTO `edoc_important` VALUES ('im02', 'ด่วนที่สุด');
-INSERT INTO `edoc_important` VALUES ('im03', 'ด่วนมาก');
-INSERT INTO `edoc_important` VALUES ('im04', 'ด่วน');
 
 -- ----------------------------
 -- Table structure for edoc_main
@@ -119,7 +121,7 @@ CREATE TABLE `edoc_main`  (
   `edoc_date_get` varchar(10) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'วันที่รับหนังสือ',
   `edoc_from` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'จาก',
   `edoc_to` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ถึง',
-  `edoc_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'เรื่อง',
+  `edoc_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '\'\'' COMMENT 'เรื่อง',
   `dep_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '',
   `edoc_type_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสประเภทหนังสือ',
   `edoc_status_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสสถานะการดำเนินการของหนังสือ ',
@@ -130,16 +132,11 @@ CREATE TABLE `edoc_main`  (
   `e_id_dud` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NULL DEFAULT '' COMMENT 'ลำดับที่ทั่วไปหนังสือเวียนภายใน เช่น 05023',
   `e_id_radio` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NULL DEFAULT '' COMMENT 'ลำดับที่ทั่วไปหนังสือเวียนวิทยุ เช่น 05023',
   `ip_get_sent` text CHARACTER SET tis620 COLLATE tis620_thai_ci NULL DEFAULT NULL COMMENT 'ip เครื่องที่เปิดอ่าน',
-  `create_at` timestamp(0) NULL DEFAULT current_timestamp COMMENT 'current_timestamp วันเวลาบันทึก',
+  `create_at` timestamp(0) NULL DEFAULT current_timestamp() COMMENT 'current_timestamp วันเวลาบันทึก',
   `edoc_date_get_2` datetime(0) NULL DEFAULT NULL,
   `edoc_date_doc_2` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`e_main_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of edoc_main
--- ----------------------------
-INSERT INTO `edoc_main` VALUES (1, '2566', '', 'อบ0032.012/ว11', '', 'TEST', '01/พ.ย./20', '01/พ.ย./20', 'ผอก.รพร.เดชอุดม', 'หัวหน้าฝ่าย/หัวหน้างาน', 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ', '', 'et02', 'st01', '', '', 'im02', '', '', '', NULL, '2022-11-19 11:33:14', NULL, NULL);
+) ENGINE = MyISAM AUTO_INCREMENT = 1017 CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for edoc_read
@@ -152,12 +149,6 @@ CREATE TABLE `edoc_read`  (
 ) ENGINE = MyISAM CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of edoc_read
--- ----------------------------
-INSERT INTO `edoc_read` VALUES ('re01', 'อ่านแล้ว');
-INSERT INTO `edoc_read` VALUES ('re02', 'ยังไม่ได้อ่าน');
-
--- ----------------------------
 -- Table structure for edoc_sent
 -- ----------------------------
 DROP TABLE IF EXISTS `edoc_sent`;
@@ -165,8 +156,8 @@ CREATE TABLE `edoc_sent`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสหนังสือ',
   `edoc_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ปีที่รับหนังสือ เช่น 2565',
   `e_id` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ลำดับที่ทั่วไปหนังสือรับ เช่น 05023',
-  `edoc_read_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสการอ่าน เช่น อ่านแล้ว ยังไม่ได้อ่าน',
-  `r_date` varchar(10) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'วันที่รับหนังสือ',
+  `edoc_read_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT 're02' COMMENT 'รหัสการอ่าน เช่น อ่านแล้ว ยังไม่ได้อ่าน',
+  `r_date` varchar(50) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'วันที่รับหนังสือ',
   `dep_id` varchar(7) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสหน่วยงาน',
   `edoc_type_id` varchar(4) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'รหัสประเภทหนังสือ',
   `e_id_sent` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'ลำดับที่ทั่วไปหนังสือส่ง เช่น 05023',
@@ -175,10 +166,12 @@ CREATE TABLE `edoc_sent`  (
   `date_get` varchar(10) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'วันทีเปิดอ่าน',
   `ip_get` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL COMMENT 'ip เครื่องที่เปิดอ่าน',
   `e_id_radio` varchar(6) CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL DEFAULT '' COMMENT 'เลขที่หนังสือเวียนวิทยุ',
+  `e_main_id` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `edoc_id`(`edoc_id`) USING BTREE,
-  INDEX `e_id`(`e_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
+  INDEX `e_id`(`e_id`) USING BTREE,
+  INDEX `fk_edoc_sent_edoc_main1_idx`(`e_main_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 948 CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for edoc_status
@@ -191,13 +184,6 @@ CREATE TABLE `edoc_status`  (
 ) ENGINE = MyISAM CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of edoc_status
--- ----------------------------
-INSERT INTO `edoc_status` VALUES ('st01', 'ยังไม่ดำเนินการ');
-INSERT INTO `edoc_status` VALUES ('st02', 'อยู่ระหว่างดำเนินการ');
-INSERT INTO `edoc_status` VALUES ('st03', 'ดำเนินการแล้ว');
-
--- ----------------------------
 -- Table structure for edoc_type
 -- ----------------------------
 DROP TABLE IF EXISTS `edoc_type`;
@@ -206,14 +192,6 @@ CREATE TABLE `edoc_type`  (
   `edoc_type_name` text CHARACTER SET tis620 COLLATE tis620_thai_ci NOT NULL COMMENT 'ชื่อประเภทหนังสือ เช่น หนังสือรับ หนังสือส่ง หนังสือเวียน',
   PRIMARY KEY (`edoc_type_id`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = tis620 COLLATE = tis620_thai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of edoc_type
--- ----------------------------
-INSERT INTO `edoc_type` VALUES ('et01', 'หนังสือรับ');
-INSERT INTO `edoc_type` VALUES ('et02', 'หนังสือส่ง');
-INSERT INTO `edoc_type` VALUES ('et03', 'หนังสือแจ้งเวียน');
-INSERT INTO `edoc_type` VALUES ('et04', 'หนังสือแจ้งเวียนวิทยุ');
 
 -- ----------------------------
 -- Table structure for menu
@@ -271,13 +249,6 @@ CREATE TABLE `profile`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of profile
--- ----------------------------
-INSERT INTO `profile` VALUES (3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `profile` VALUES (9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `profile` VALUES (10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
--- ----------------------------
 -- Table structure for social_account
 -- ----------------------------
 DROP TABLE IF EXISTS `social_account`;
@@ -312,13 +283,6 @@ CREATE TABLE `token`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of token
--- ----------------------------
-INSERT INTO `token` VALUES (3, '3WzmrYRUsYdid4IGqAWVrsDPW7P0P8LY', 1666067233, 0);
-INSERT INTO `token` VALUES (9, 'HUrwkaBQhCnqaxF63cr5UUZYG6cCNjA1', 1667053019, 0);
-INSERT INTO `token` VALUES (10, 'qmC5thqFSREzM_9_ox-xJHnkwLtwIwXf', 1667053205, 0);
-
--- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -337,17 +301,12 @@ CREATE TABLE `user`  (
   `flags` int(11) NOT NULL DEFAULT 0,
   `last_login_at` int(11) NULL DEFAULT NULL,
   `status` enum('0','1') CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '0',
+  `dep_id` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `role` int(11) NULL DEFAULT 30,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `user_unique_username`(`username`) USING BTREE,
   UNIQUE INDEX `user_unique_email`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES (3, 'admin', 'umt.eng52@gmail.com', '$2y$12$0jSBUpSmz7K6c3CJ.Hgh4udW7GrIdtdSh0pmRcDEnTncPYkJEF9ba', 'HTxKEJiNJtRAAmUktgJWUPNdA50xa9_k', 1666067666, NULL, NULL, '::1', 1666067233, 1666067233, 0, 1666526748, '0');
-INSERT INTO `user` VALUES (9, 'demo1', 'demo1@mail.com', '$2y$12$ZgFNpTEZ6BgzHkmdISAYvOFkWqUgD0bPtSVOyDLxNhZYC6gdW/lbC', '3X9VamRo2qV89LTNhwSsg8Ocl51ayRSU', NULL, NULL, NULL, '::1', 1667053019, 1667053019, 0, NULL, '0');
-INSERT INTO `user` VALUES (10, 'demo2', 'demo2@mail.com', '$2y$12$t0l/Y0kl891ARVbtMNA1Y.eumCt0WVaxNPlvs2Dzxr3isX2jYvfHe', '7hpx3yrbQhlG-YgSCj1JSlkVVQiC7_hB', NULL, NULL, NULL, '::1', 1667053205, 1667053205, 0, NULL, '0');
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user_old

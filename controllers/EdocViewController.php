@@ -136,8 +136,8 @@ class EdocViewController extends Controller
 
         $EdocMain = EdocMain::findOne($id);   
         // print_r($model);     exit;   
-        // $path = Yii::getAlias('@webroot').'/uploads/'.$model->path;           
-        $path = Yii::getAlias('@webroot').'/uploads/2566-78bc92ce8bfa4d72fe8fceb9f6078f6f.pdf'; 
+        $path = Yii::getAlias('@webroot').'/uploads/'.$model->path;           
+        // $path = Yii::getAlias('@webroot').'/uploads/2566-78bc92ce8bfa4d72fe8fceb9f6078f6f.pdf'; 
 
         @$fileName = (!empty($EdocMain->edoc_name)? $EdocMain->edoc_name : 'หนังสือเวียนรหัส-'.$EdocMain->e_main_id); 
         if(file_exists($path)){ 

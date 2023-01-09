@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\EdocMain */
 
-$this->title = 'แก้ไข คลังหนังสือหลัก: ' . $model->e_main_id;
-$this->params['breadcrumbs'][] = ['label' => 'คลังหนังสือหลัก', 'url' => ['index']];
+$this->title = 'แก้ไขหนังสือ: ' . $model->e_main_id;
+$this->params['breadcrumbs'][] = ['label' => 'หนังสือ', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->e_main_id, 'url' => ['view', 'id' => $model->e_main_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'แก้ไขหนังสือ';
 ?>
 <div class="edoc-main-update">
 

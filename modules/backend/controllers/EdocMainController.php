@@ -64,7 +64,7 @@ class EdocMainController extends Controller
     {
         $searchModel = new EdocMainSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->sort = ['defaultOrder' => ['create_at'=>SORT_DESC]];        
+        $dataProvider->sort = ['defaultOrder' => ['create_at'=>SORT_DESC, 'edoc_id'=>SORT_DESC]];        
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -110,7 +110,19 @@ class EdocMainController extends Controller
         if(Yii::$app->request->isAjax){
             $data = Yii::$app->request->post();
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return  EdocMain::find()->where(['edoc_type_id'=>$data['e_id'], 'edoc_id'=>(date("Y") + 543)])->max('e_id');
+             $model = EdocMain::find()->where(['edoc_type_id'=>$data['e_id'], 'edoc_id'=>(date("Y") + 543)])->max('e_id');
+             if(!empty($model)){
+                return [
+                    'message' => 'success',
+                    'e_id' => sprintf("%05d",intval($model)+1)  //data = 2 แปลงให้เป็น String 00002
+                ];
+             }else{
+                return [
+                    'message' => 'success',
+                    'e_id' => '00001'
+                ];
+             }
+             
            
         }
     }

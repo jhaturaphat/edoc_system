@@ -122,10 +122,8 @@ function edocTypeChange(ele){
         data: {e_id:ele.value},
         type:"POST",
         success: function (data, textStatus, jqXHR) {
-            if(data){
-                $("#edocmain-e_id").val(data);
-            }else{
-                $("#edocmain-e_id").val("00001");
+            if(data){                
+                $("#edocmain-e_id").val(data.e_id);
             }
         },
         error: function(jqXHR, textStatus, error){

@@ -13,7 +13,7 @@ use app\models\EdocType;
 /* @var $searchModel app\models\EdocMainSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'คลังหนังสือหลัก';
+$this->title = 'จัดการเอกสาร';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="edoc-main-index">
@@ -59,8 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=> 'edocType.edoc_type_name'
             ], 
             //'edoc_no_get',
-            //'edoc_no_sent',
-            //'edoc_no_keep',
+            //'edoc_no_sent',            
             //'edoc_date_doc',
             //'edoc_date_get',
             'edoc_name:ntext',
@@ -79,6 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'create_at',
             //'edoc_date_get_2',
             //'edoc_date_doc_2',
+            'edoc_no_keep',
 
             ['class' => 'yii\grid\ActionColumn',
             'template'=>'{send} {view} {update} {delete}',

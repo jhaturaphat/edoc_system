@@ -40,11 +40,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'หนังสือ', 'url' => ['/edoc-view']],
+            ['label' => 'คลังหนังสือ', 'url' => ['/edoc-view']],
             // ['label' => 'เกี่ยวกับเรา', 'url' => ['/site/about']],
             // ['label' => 'ติดต่อเรา', 'url' => ['/site/contact']],
-            ['label' => 'คลังหนังสือเวียน', 'url' => ['/backend/edoc-sent'],'visible'=>User::IsAdmin()],
-            ['label' => 'อัพโหลดเอกสาร', 'url' => ['/backend/edoc-main'],'visible'=>User::IsAdmin()],
+            ['label' => 'สถานะการอ่าน', 'url' => ['/backend/edoc-sent'],'visible'=>User::IsAdmin()],
+            ['label' => 'จัดการเอกสาร', 'url' => ['/backend/edoc-main'],'visible'=>User::IsAdmin()],
             ['label' => 'ลงทะเบียน', 'url' => ['/user/registration/register'], 'visible'=>Yii::$app->user->isGuest],
             ['label' => 'โปรไฟล์', 'url' => ['/user/settings/profile'], 'visible'=>!Yii::$app->user->isGuest],
             
