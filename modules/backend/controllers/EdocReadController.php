@@ -8,6 +8,7 @@ use app\models\EdocReadSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * EdocReadController implements the CRUD actions for EdocRead model.
@@ -26,6 +27,22 @@ class EdocReadController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>[
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete'],
+                'rules' => [
+                  [
+                    'actions' => ['create', 'update','delete','view','index','save'],
+                    'allow' => true,
+                    'roles' => ['@']
+                  ],
+                  [
+                    'actions' => ['index'],
+                    'allow' => true,
+                    'roles' => ['@']
+                  ]
+                ]
+              ]
         ];
     }
 

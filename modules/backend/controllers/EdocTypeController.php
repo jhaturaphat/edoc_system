@@ -8,6 +8,7 @@ use app\models\EdocTypeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * EdocTypeController implements the CRUD actions for EdocType model.
@@ -26,6 +27,22 @@ class EdocTypeController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' =>[
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete'],
+                'rules' => [
+                  [
+                    'actions' => ['create', 'update','delete','view','index'],
+                    'allow' => true,
+                    'roles' => ['@']
+                  ],
+                  [
+                    'actions' => ['index'],
+                    'allow' => true,
+                    'roles' => ['@']
+                  ]
+                ]
+              ]
         ];
     }
 
