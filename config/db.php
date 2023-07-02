@@ -2,8 +2,8 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=edoc_system',
-    'username' => 'root',
+    'dsn' => 'mysql:host=192.168.1.227;dbname=edoc_system',
+    'username' => 'remote',
     'password' => '123456',
     'charset' => 'utf8',
 

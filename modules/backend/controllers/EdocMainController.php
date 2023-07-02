@@ -223,7 +223,10 @@ class EdocMainController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        
+        if($this->findModel($id)->delete()){
+            EdocSent::deleteAll(['e_main_id'=> $id]); //ลบหนังที่แจ้งเวียนออกด้วย
+        }
 
         return $this->redirect(['index']);
     }

@@ -135,7 +135,9 @@ class EdocViewController extends Controller
     public function actionDownload($id, $edoc_sent_id){
 
         $EdocMain = EdocMain::findOne($id);   
-        // print_r($model);     exit;   
+        // print_r($EdocMain); exit;   
+        if(empty($EdocMain)) return $this->actionIndex();
+        
         $path = Yii::getAlias('@webroot').'/uploads/'.$EdocMain->path;           
         // $path = Yii::getAlias('@webroot').'/uploads/2566-78bc92ce8bfa4d72fe8fceb9f6078f6f.pdf'; 
 

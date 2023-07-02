@@ -26,11 +26,8 @@ class User extends BaseUser
     }
 
     public static function IsAdmin(){
-        if(!\Yii::$app->user->isGuest){
-            if(\Yii::$app->user->identity->role == User::ROLE_ADMIN){
-                return true;
-            }
-            return false;
+        if(!\Yii::$app->user->isGuest && (\Yii::$app->user->identity->role == User::ROLE_ADMIN)){
+           return true;
         }else{
             return false;
         }

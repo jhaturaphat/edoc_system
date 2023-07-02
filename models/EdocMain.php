@@ -97,7 +97,7 @@ class EdocMain extends \yii\db\ActiveRecord
 
     public function checkSent($id){        
         $data =  EdocSent::find()->where(['e_main_id' => $id])->all();
-        if($data){
+        if($data){ //ถ้าแจ้งแจ้งเวียนแล้ว
             return true;
         }else{
             return false;
